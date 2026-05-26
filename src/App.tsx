@@ -72,9 +72,26 @@ const navItems = [
   { id: "contato", label: "Contato" },
 ]
 
+function keepLastWordsTogether(text: string) {
+  return text.replace(/\s+([^\s]+)$/, "\u00a0$1")
+}
+
 function ScrollRevealText({ text }: { text: string }) {
   const ref = useRef<HTMLParagraphElement>(null)
   const words = text.split(" ")
+  const mainWords = words.slice(0, -2)
+  const tailWords = words.slice(-2)
+
+  const renderRevealWord = (word: string, index: number, isLast = false) => (
+    <span
+      key={`${word}-${index}`}
+      className="about-reveal-word"
+      style={{ opacity: 0.22, transform: "translateY(14px)" } as CSSProperties}
+    >
+      {word}
+      {isLast ? "" : " "}
+    </span>
+  )
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -115,18 +132,10 @@ function ScrollRevealText({ text }: { text: string }) {
 
   return (
     <p ref={ref} className="text-3xl font-medium leading-tight text-primary md:text-5xl lg:col-span-6" aria-label={text}>
-      {words.map((word, index) => {
-        return (
-          <span
-            key={`${word}-${index}`}
-            className="about-reveal-word"
-            style={{ opacity: 0.22, transform: "translateY(14px)" } as CSSProperties}
-          >
-            {word}
-            {index < words.length - 1 ? " " : ""}
-          </span>
-        )
-      })}
+      {mainWords.map((word, index) => renderRevealWord(word, index))}
+      <span className="about-reveal-tail">
+        {tailWords.map((word, index) => renderRevealWord(word, mainWords.length + index, index === tailWords.length - 1))}
+      </span>
     </p>
   )
 }
@@ -252,7 +261,7 @@ function Hero() {
           </span>
         </h1>
         <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-          Criação de interfaces, sites e experiências digitais pensadas para unir estética, usabilidade e conversão. Minimalismo com propósito.
+          {keepLastWordsTogether("Criação de interfaces, sites e experiências digitais pensadas para unir estética, usabilidade e conversão. Minimalismo com propósito.")}
         </p>
         <a href="#projetos" className="mt-12 inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-primary">
           <span className="grid h-12 w-12 place-items-center border border-border">
@@ -300,7 +309,7 @@ function Projects() {
                 ))}
               </div>
               <h3 className="mb-4 text-2xl font-medium text-primary">{project.title}</h3>
-              <p className="text-sm leading-6 text-muted-foreground">{project.summary}</p>
+              <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
             </div>
           </button>
         ))}
@@ -386,15 +395,15 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
           <div className="flex min-h-[420px] flex-col p-6 md:p-8">
             <p className="mb-4 text-xs font-semibold uppercase text-muted-foreground">{project.category}</p>
             <h2 id={titleId} className="mb-6 text-3xl font-medium leading-tight text-primary md:text-4xl">{project.title}</h2>
-            <p className="mb-8 text-base leading-7 text-muted-foreground">{project.summary}</p>
+            <p className="mb-8 text-base leading-7 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
             <div className="mb-8 space-y-6 border-y border-border py-6">
               <div>
                 <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">Desafio</p>
-                <p className="text-sm leading-6 text-muted-foreground">{project.challenge}</p>
+                <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.challenge)}</p>
               </div>
               <div>
                 <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">Resultado</p>
-                <p className="text-sm leading-6 text-muted-foreground">{project.result}</p>
+                <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.result)}</p>
               </div>
             </div>
             <div className="mt-auto flex flex-col gap-3 sm:flex-row">
@@ -419,8 +428,8 @@ function About() {
         <p className="text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</p>
         <ScrollRevealText text="Desenho páginas e produtos digitais com direção visual precisa, estrutura clara e atenção aos detalhes que fazem a interface parecer inevitável." />
         <div className="space-y-6 text-base leading-7 text-muted-foreground lg:col-span-3">
-          <p>Atuo nos pontos onde marca, produto e conversão precisam falar a mesma língua.</p>
-          <p>O resultado é uma presença digital com hierarquia, acabamento e intenção.</p>
+          <p>{keepLastWordsTogether("Atuo nos pontos onde marca, produto e conversão precisam falar a mesma língua.")}</p>
+          <p>{keepLastWordsTogether("O resultado é uma presença digital com hierarquia, acabamento e intenção.")}</p>
         </div>
       </div>
     </section>
@@ -436,7 +445,7 @@ function Services() {
           <div key={title} className="border border-border bg-card p-7">
             <p className="mb-10 text-xs font-semibold text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
             <h3 className="mb-5 text-2xl font-medium text-primary">{title}</h3>
-            <p className="text-sm leading-6 text-muted-foreground">{text}</p>
+            <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(text)}</p>
           </div>
         ))}
       </div>
@@ -457,7 +466,7 @@ function Process() {
             <div key={title} className="grid gap-4 py-6 first:pt-0 last:pb-0 sm:grid-cols-[4rem_0.72fr_1.28fr] sm:items-start">
               <p className="text-xs font-semibold text-secondary">{number}</p>
               <h3 className="text-xl font-medium text-primary">{title}</h3>
-              <p className="max-w-xl text-sm leading-6 text-muted-foreground">{text}</p>
+              <p className="max-w-xl text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(text)}</p>
             </div>
           ))}
         </div>
@@ -476,10 +485,10 @@ function Contact() {
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Contato</p>
           <h2 className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
           <p className="max-w-md text-base leading-7 text-muted-foreground">
-            Conte o que você quer construir. Eu retorno com próximos passos, escopo inicial e uma direção clara para começarmos sem chute de preço.
+            {keepLastWordsTogether("Conte o que você quer construir. Eu retorno com próximos passos, escopo inicial e uma direção clara para começarmos sem chute de preço.")}
           </p>
           <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
-            O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade desde a primeira resposta.
+            {keepLastWordsTogether("O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade desde a primeira resposta.")}
           </p>
           <div className="mt-10 space-y-6">
             <div>

@@ -117,6 +117,16 @@ body {
   text-rendering: geometricPrecision;
 }
 
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 
 ::selection {
   background: var(--primary);
@@ -160,6 +170,11 @@ textarea {
     color 180ms linear,
     transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+}
+
+.about-reveal-tail {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .scroll-polish {
