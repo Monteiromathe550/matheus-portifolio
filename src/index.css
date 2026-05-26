@@ -166,51 +166,115 @@ textarea {
   animation: reveal-up 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.hero-canvas {
-  width: 100% !important;
-  height: 100% !important;
-  opacity: 1;
-  mix-blend-mode: screen;
-  filter: saturate(1.05) contrast(1.22);
-}
-
-.hero-canvas,
-.hero-canvas > div,
-.hero-canvas canvas {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.hero-canvas canvas {
-  display: block;
-}
-
 .paper-shader-field {
   position: absolute;
-  inset: -24%;
-  opacity: 0.78;
+  inset: -28%;
+  opacity: 0.58;
   mix-blend-mode: screen;
-  filter: blur(22px) saturate(0.98);
+  filter: blur(42px) saturate(0.95);
   background:
-    radial-gradient(circle at 38% 42%, rgb(198 186 142 / 0.34), transparent 25%),
-    radial-gradient(circle at 64% 38%, rgb(246 244 238 / 0.24), transparent 23%),
-    radial-gradient(circle at 52% 58%, rgb(198 186 142 / 0.18), transparent 30%),
-    conic-gradient(from 18deg at 50% 44%, transparent 0deg, rgb(198 186 142 / 0.36) 46deg, transparent 118deg, rgb(246 244 238 / 0.18) 184deg, transparent 280deg);
-  mask-image: radial-gradient(ellipse at 50% 42%, black 0%, black 42%, transparent 76%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 42%, black 0%, black 42%, transparent 76%);
-  animation: paper-shader-drift 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+    radial-gradient(ellipse at 45% 42%, rgb(198 186 142 / 0.42), transparent 28%),
+    radial-gradient(ellipse at 61% 39%, rgb(246 244 238 / 0.26), transparent 26%),
+    radial-gradient(ellipse at 54% 58%, rgb(198 186 142 / 0.18), transparent 34%);
+  mask-image: radial-gradient(ellipse at 50% 43%, black 0%, black 48%, transparent 76%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 43%, black 0%, black 48%, transparent 76%);
+  animation: paper-shader-drift 7s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+}
+
+.paper-shader-field::before,
+.paper-shader-field::after {
+  content: "";
+  position: absolute;
+  inset: 10% 15%;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at 50% 50%, rgb(246 244 238 / 0.2), transparent 68%);
+  filter: blur(54px);
+  opacity: 0.6;
+  animation: paper-shader-breathe 5.8s ease-in-out infinite alternate;
+}
+
+.paper-shader-field::after {
+  inset: 22% 20% 8%;
+  background: radial-gradient(circle at 50% 50%, rgb(198 186 142 / 0.26), transparent 66%);
+  animation-delay: -1.8s;
+}
+
+.hero-smoke {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(78vw, 860px);
+  height: min(46vw, 430px);
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at 34% 45%, rgb(246 244 238 / 0.34), transparent 28%),
+    radial-gradient(ellipse at 52% 50%, rgb(198 186 142 / 0.38), transparent 36%),
+    radial-gradient(ellipse at 70% 43%, rgb(246 244 238 / 0.2), transparent 30%);
+  filter: blur(52px);
+  mix-blend-mode: screen;
+  opacity: 0.48;
+  transform: translate3d(-50%, -50%, 0) rotate(-6deg);
+  animation: hero-smoke-drift 6.5s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.hero-smoke-primary {
+  box-shadow: 0 0 120px rgb(198 186 142 / 0.22);
+}
+
+.hero-smoke-secondary {
+  top: 39%;
+  width: min(62vw, 620px);
+  height: min(32vw, 310px);
+  background:
+    radial-gradient(ellipse at 42% 54%, rgb(246 244 238 / 0.2), transparent 32%),
+    radial-gradient(ellipse at 60% 42%, rgb(198 186 142 / 0.26), transparent 40%);
+  filter: blur(72px);
+  opacity: 0.36;
+  animation-delay: -2.4s;
+}
+
+.hero-smoke-tertiary {
+  top: 52%;
+  width: min(54vw, 560px);
+  height: min(26vw, 260px);
+  background: radial-gradient(ellipse at 50% 50%, rgb(246 244 238 / 0.16), transparent 64%);
+  filter: blur(88px);
+  opacity: 0.24;
+  animation-duration: 8.2s;
+  animation-delay: -4s;
 }
 
 @keyframes paper-shader-drift {
   from {
-    transform: translate3d(-4%, -2%, 0) rotate(-4deg) scale(1);
-    opacity: 0.58;
+    transform: translate3d(-3%, -2%, 0) rotate(-3deg) scale(1);
+    opacity: 0.46;
   }
   to {
-    transform: translate3d(4%, 2%, 0) rotate(4deg) scale(1.08);
-    opacity: 0.86;
+    transform: translate3d(3%, 2%, 0) rotate(3deg) scale(1.08);
+    opacity: 0.66;
+  }
+}
+
+@keyframes paper-shader-breathe {
+  from {
+    transform: translate3d(-3%, 2%, 0) scale(0.9);
+    opacity: 0.36;
+  }
+  to {
+    transform: translate3d(3%, -2%, 0) scale(1.14);
+    opacity: 0.82;
+  }
+}
+
+@keyframes hero-smoke-drift {
+  from {
+    transform: translate3d(-54%, -51%, 0) rotate(-8deg) scale(0.94);
+    opacity: 0.34;
+  }
+  to {
+    transform: translate3d(-47%, -48%, 0) rotate(7deg) scale(1.1);
+    opacity: 0.58;
   }
 }
 
@@ -235,5 +299,36 @@ textarea {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .about-reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-smoke,
+  .paper-shader-field {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-smoke {
+    top: 43%;
+    width: 118vw;
+    height: 66vw;
+    filter: blur(42px);
+  }
+
+  .hero-smoke-secondary {
+    width: 92vw;
+    height: 52vw;
+    filter: blur(58px);
+  }
+
+  .hero-smoke-tertiary {
+    width: 78vw;
+    height: 44vw;
+    filter: blur(68px);
   }
 }

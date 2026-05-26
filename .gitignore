@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .agents/
+.impeccable/
 code.html
 screen.png
 skills-lock.json

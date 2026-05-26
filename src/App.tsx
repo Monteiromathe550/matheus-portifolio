@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react"
+import { useEffect, useId, useRef, useState, type CSSProperties, type KeyboardEvent } from "react"
 import { useForm, ValidationError } from "@formspree/react"
 import { ArrowDown, Check, ExternalLink, Menu, Send, X } from "lucide-react"
 import { HeroShaderBackground } from "@/components/ui/hero-shader-background"
 
-import archstudioImage from "../assets/archstudio.png"
-import importBrzImage from "../assets/import-brz.png"
-import renovaImage from "../assets/renova-aesthetics.png"
+import archstudioImage from "../assets/archstudio.jpg"
+import importBrzImage from "../assets/import-brz.jpg"
+import renovaImage from "../assets/renova-aesthetics.jpg"
 
 type Project = {
   title: string
@@ -70,8 +70,18 @@ function ScrollRevealText({ text }: { text: string }) {
   const words = text.split(" ")
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
     const update = () => {
       if (!ref.current) return
+
+      if (reduceMotion) {
+        ref.current.querySelectorAll<HTMLElement>(".about-reveal-word").forEach((word) => {
+          word.style.opacity = "1"
+          word.style.transform = "none"
+        })
+        return
+      }
 
       const viewport = window.innerHeight || 1
       const rect = ref.current.getBoundingClientRect()
@@ -94,7 +104,7 @@ function ScrollRevealText({ text }: { text: string }) {
       window.removeEventListener("scroll", update)
       window.removeEventListener("resize", update)
     }
-  }, [])
+  }, [words.length])
 
   return (
     <p ref={ref} className="text-3xl font-medium leading-tight text-primary md:text-5xl lg:col-span-6" aria-label={text}>
@@ -224,11 +234,11 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="inicio" className="relative grid min-h-screen place-items-center overflow-hidden px-6 pb-24 pt-36 md:px-20 md:pt-40">
+    <section id="inicio" className="relative grid min-h-[100svh] place-items-center overflow-hidden px-5 pb-24 pt-32 sm:px-6 md:px-20 md:pt-40">
       <HeroShaderBackground />
-      <div className="relative z-10 mx-auto mt-6 flex max-w-5xl flex-col items-center text-center md:mt-8">
+      <div className="relative z-10 mx-auto mt-6 flex w-full max-w-5xl flex-col items-center text-center md:mt-8">
         <p className="mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
-        <h1 className="mb-8 text-[3rem] font-normal leading-[0.98] tracking-normal text-primary md:text-[4.45rem] lg:text-[5.2rem]" aria-label="Web Designer e UX/UI Designer">
+        <h1 className="mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[0.98] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
           <span className="block">Web Designer</span>
           <span className="block font-display italic text-primary/75">
             <span className="text-secondary">&amp;</span> UX/UI Designer
@@ -293,12 +303,65 @@ function Projects() {
 }
 
 function ProjectDialog({ project, onClose }: { project: Project; onClose: () => void }) {
+  const titleId = useId()
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const previousActiveElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const previousOverflow = document.body.style.overflow
+
+    document.body.style.overflow = "hidden"
+    closeButtonRef.current?.focus()
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      previousActiveElement?.focus()
+    }
+  }, [])
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
+      event.preventDefault()
+      onClose()
+      return
+    }
+
+    if (event.key !== "Tab" || !dialogRef.current) return
+
+    const focusableElements = dialogRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+    )
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+
+    if (!firstElement || !lastElement) return
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault()
+      lastElement.focus()
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault()
+      firstElement.focus()
+    }
+  }
+
   return (
-    <div className="fixed inset-0 z-[80] overflow-y-auto bg-background/92 px-6 py-6 backdrop-blur-md md:px-10" role="dialog" aria-modal="true">
+    <div
+      ref={dialogRef}
+      className="fixed inset-0 z-[80] overflow-y-auto bg-background/92 px-6 py-6 backdrop-blur-md md:px-10"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
+      onKeyDown={handleKeyDown}
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose()
+      }}
+    >
       <div className="mx-auto max-w-[1280px] border border-border bg-background">
         <div className="flex items-center justify-between border-b border-border px-6 py-5">
           <p className="text-xs font-semibold uppercase text-muted-foreground">Preview do projeto</p>
-          <button className="grid h-11 w-11 place-items-center border border-border text-primary" onClick={onClose} aria-label="Fechar preview">
+          <button ref={closeButtonRef} className="grid h-11 w-11 place-items-center border border-border text-primary" onClick={onClose} aria-label="Fechar preview">
             <X size={18} />
           </button>
         </div>
@@ -314,7 +377,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
           </div>
           <div className="flex min-h-[420px] flex-col p-6 md:p-8">
             <p className="mb-4 text-xs font-semibold uppercase text-muted-foreground">{project.category}</p>
-            <h2 className="mb-6 text-3xl font-medium leading-tight text-primary md:text-4xl">{project.title}</h2>
+            <h2 id={titleId} className="mb-6 text-3xl font-medium leading-tight text-primary md:text-4xl">{project.title}</h2>
             <p className="mb-8 text-base leading-7 text-muted-foreground">{project.summary}</p>
             <div className="mb-8 space-y-6 border-y border-border py-6">
               <div>
@@ -388,7 +451,7 @@ function Contact() {
           <div className="mt-10 space-y-6">
             <div>
               <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">E-mail</p>
-              <a href="mailto:matheusapm550@gmail.com" className="text-2xl font-medium text-primary transition-colors hover:text-secondary md:text-3xl">
+              <a href="mailto:matheusapm550@gmail.com" className="text-xl font-medium leading-tight text-primary transition-colors hover:text-secondary sm:text-2xl md:text-3xl">
                 matheusapm550@gmail.com
               </a>
             </div>
