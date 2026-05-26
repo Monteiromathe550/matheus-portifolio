@@ -57,6 +57,13 @@ const specialties = [
   ["Design Branding", "Direção visual para marcas digitais, com identidade consistente, presença premium e comunicação memorável."],
 ]
 
+const processSteps = [
+  ["01", "Diagnóstico", "Entendo objetivo, público, referência visual e o que precisa converter para definir a direção certa."],
+  ["02", "Direção", "Transformo o briefing em estrutura, hierarquia, estilo visual e primeira rota de experiência."],
+  ["03", "Interface", "Desenho telas com atenção a ritmo, responsividade, clareza de ação e detalhes de acabamento."],
+  ["04", "Entrega", "Organizo próximos passos, ajustes finais e arquivos ou publicação para a presença digital ficar pronta."],
+]
+
 const navItems = [
   { id: "inicio", label: "Início" },
   { id: "sobre", label: "Sobre" },
@@ -278,9 +285,10 @@ function Projects() {
             key={project.title}
             className="group border border-border bg-card text-left transition duration-300 hover:-translate-y-1 hover:border-primary/35"
             onClick={() => setActive(project)}
+            aria-label={`Abrir preview do projeto ${project.title}`}
           >
             <div className="relative aspect-[4/3] overflow-hidden border-b border-border">
-              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} className="h-full w-full object-cover opacity-80 grayscale transition duration-700 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0" />
+              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-80 grayscale transition duration-700 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0" />
               <span className="absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
             </div>
             <div className="p-6">
@@ -372,7 +380,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
                 <span>Preview visual</span>
                 <span>{project.category}</span>
               </div>
-              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} className="h-full w-full object-cover" />
+              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} decoding="async" className="h-full w-full object-cover" />
             </div>
           </div>
           <div className="flex min-h-[420px] flex-col p-6 md:p-8">
@@ -436,6 +444,28 @@ function Services() {
   )
 }
 
+function Process() {
+  return (
+    <section className="mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
+      <div className="grid gap-10 border-y border-border py-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+        <div>
+          <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Processo</p>
+          <h2 id="process-title" className="max-w-md text-4xl font-medium leading-tight text-primary md:text-5xl">Clareza antes de construir</h2>
+        </div>
+        <div className="divide-y divide-border">
+          {processSteps.map(([number, title, text]) => (
+            <div key={title} className="grid gap-4 py-6 first:pt-0 last:pb-0 sm:grid-cols-[4rem_0.72fr_1.28fr] sm:items-start">
+              <p className="text-xs font-semibold text-secondary">{number}</p>
+              <h3 className="text-xl font-medium text-primary">{title}</h3>
+              <p className="max-w-xl text-sm leading-6 text-muted-foreground">{text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Contact() {
   const [state, handleSubmit] = useForm("mbdbpdlb")
 
@@ -446,7 +476,10 @@ function Contact() {
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Contato</p>
           <h2 className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
           <p className="max-w-md text-base leading-7 text-muted-foreground">
-            Conte o que você quer construir. Eu retorno com próximos passos, escopo inicial e uma direção clara para começarmos.
+            Conte o que você quer construir. Eu retorno com próximos passos, escopo inicial e uma direção clara para começarmos sem chute de preço.
+          </p>
+          <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
+            O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade desde a primeira resposta.
           </p>
           <div className="mt-10 space-y-6">
             <div>
@@ -462,7 +495,7 @@ function Contact() {
             </div>
           </div>
         </div>
-        <form className="grid gap-8" onSubmit={handleSubmit}>
+        <form className="grid gap-8" onSubmit={handleSubmit} aria-busy={state.submitting}>
           <input type="hidden" name="_subject" value="Novo briefing pelo site Matheus Monteiro" />
           <div className="grid gap-6 md:grid-cols-2">
             <label className="group grid gap-3">
@@ -550,10 +583,10 @@ function Contact() {
             >
               {state.submitting ? "Enviando" : "Enviar briefing"} <Send size={15} />
             </button>
-            <p className="min-h-6 text-xs font-semibold uppercase text-muted-foreground" aria-live="polite">
+            <p className="min-h-6 text-sm leading-5 text-muted-foreground" aria-live="polite" role="status">
               {state.succeeded ? (
-                <span className="inline-flex items-center gap-2 text-primary">
-                  <Check size={14} /> Briefing enviado. Obrigado, retorno em breve.
+                <span className="inline-flex items-center gap-2 text-primary sm:max-w-md">
+                  <Check size={14} /> Briefing recebido. Retorno com o melhor caminho em até 1 dia útil.
                 </span>
               ) : (
                 "Resposta em até 1 dia útil"
@@ -575,10 +608,11 @@ export default function App() {
         <About />
         <Projects />
         <Services />
+        <Process />
         <Contact />
       </main>
       <footer className="border-t border-border px-6 py-10 text-xs font-semibold uppercase text-muted-foreground md:px-20">
-        Matheus Monteiro. All rights reserved.
+        Matheus Monteiro. Todos os direitos reservados.
       </footer>
     </div>
   )
