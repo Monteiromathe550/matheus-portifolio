@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type CSSProperties, type KeyboardEvent } from "react"
+import { useEffect, useId, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent } from "react"
 import { useForm, ValidationError } from "@formspree/react"
 import { ArrowDown, Check, ExternalLink, Menu, Send, X } from "lucide-react"
 import { HeroShaderBackground } from "@/components/ui/hero-shader-background"
@@ -76,6 +76,14 @@ function keepLastWordsTogether(text: string) {
   return text.replace(/\s+([^\s]+)$/, "\u00a0$1")
 }
 
+function clamp(value: number, min = 0, max = 1) {
+  return Math.min(max, Math.max(min, value))
+}
+
+function easeOutCubic(value: number) {
+  return 1 - Math.pow(1 - clamp(value), 3)
+}
+
 function ScrollRevealText({ text }: { text: string }) {
   const ref = useRef<HTMLParagraphElement>(null)
   const words = text.split(" ")
@@ -86,7 +94,7 @@ function ScrollRevealText({ text }: { text: string }) {
     <span
       key={`${word}-${index}`}
       className="about-reveal-word"
-      style={{ opacity: 0.22, transform: "translateY(14px)" } as CSSProperties}
+      style={{ opacity: 0.3, transform: "translateY(10px)" } as CSSProperties}
     >
       {word}
       {isLast ? "" : " "}
@@ -94,39 +102,52 @@ function ScrollRevealText({ text }: { text: string }) {
   )
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const wordNodes = () => ref.current?.querySelectorAll<HTMLElement>(".about-reveal-word") ?? []
+    let animationFrame = 0
 
     const update = () => {
+      animationFrame = 0
       if (!ref.current) return
-
-      if (reduceMotion) {
-        ref.current.querySelectorAll<HTMLElement>(".about-reveal-word").forEach((word) => {
-          word.style.opacity = "1"
-          word.style.transform = "none"
-        })
-        return
-      }
 
       const viewport = window.innerHeight || 1
       const rect = ref.current.getBoundingClientRect()
       const start = viewport * 0.82
       const end = viewport * 0.26
-      const nextProgress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)))
+      const nextProgress = clamp((start - rect.top) / (start - end))
+      const revealProgress = 0.5 - Math.cos(nextProgress * Math.PI) / 2
 
-      ref.current.querySelectorAll<HTMLElement>(".about-reveal-word").forEach((word, index) => {
-        const wordProgress = Math.min(1, Math.max(0, nextProgress * (words.length + 5) - index))
-        word.style.opacity = String(0.22 + wordProgress * 0.78)
-        word.style.transform = `translateY(${(1 - wordProgress) * 14}px)`
+      wordNodes().forEach((word, index) => {
+        const wordStart = index / (words.length + 6)
+        const wordProgress = easeOutCubic((revealProgress - wordStart) / 0.18)
+        word.style.opacity = String(0.3 + wordProgress * 0.7)
+        word.style.transform = motionQuery.matches ? "none" : `translateY(${(1 - wordProgress) * 10}px)`
       })
     }
 
+    const requestUpdate = () => {
+      if (animationFrame) return
+      animationFrame = window.requestAnimationFrame(update)
+    }
+
     update()
-    window.addEventListener("scroll", update, { passive: true })
-    window.addEventListener("resize", update)
+    window.addEventListener("scroll", requestUpdate, { passive: true })
+    window.addEventListener("resize", requestUpdate)
+    if (typeof motionQuery.addEventListener === "function") {
+      motionQuery.addEventListener("change", requestUpdate)
+    } else if (typeof motionQuery.addListener === "function") {
+      motionQuery.addListener(requestUpdate)
+    }
 
     return () => {
-      window.removeEventListener("scroll", update)
-      window.removeEventListener("resize", update)
+      if (animationFrame) window.cancelAnimationFrame(animationFrame)
+      window.removeEventListener("scroll", requestUpdate)
+      window.removeEventListener("resize", requestUpdate)
+      if (typeof motionQuery.removeEventListener === "function") {
+        motionQuery.removeEventListener("change", requestUpdate)
+      } else if (typeof motionQuery.removeListener === "function") {
+        motionQuery.removeListener(requestUpdate)
+      }
     }
   }, [words.length])
 
@@ -143,10 +164,14 @@ function ScrollRevealText({ text }: { text: string }) {
 function Header() {
   const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("inicio")
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [navProgress, setNavProgress] = useState(0)
+  const mobileMenuId = useId()
 
   useEffect(() => {
+    let animationFrame = 0
+
     const updateNavState = () => {
+      animationFrame = 0
       const scrollY = window.scrollY || document.documentElement.scrollTop
       const viewportAnchor = window.innerHeight * 0.36
       let current = "inicio"
@@ -162,27 +187,59 @@ function Header() {
       })
 
       setActiveSection(current)
-      setIsScrolled(scrollY > 28)
+      setNavProgress(Math.round(clamp(scrollY / 120) * 1000) / 1000)
+    }
+
+    const requestUpdate = () => {
+      if (animationFrame) return
+      animationFrame = window.requestAnimationFrame(updateNavState)
     }
 
     updateNavState()
-    window.addEventListener("scroll", updateNavState, { passive: true })
-    window.addEventListener("resize", updateNavState)
+    window.addEventListener("scroll", requestUpdate, { passive: true })
+    window.addEventListener("resize", requestUpdate)
 
     return () => {
-      window.removeEventListener("scroll", updateNavState)
-      window.removeEventListener("resize", updateNavState)
+      if (animationFrame) window.cancelAnimationFrame(animationFrame)
+      window.removeEventListener("scroll", requestUpdate)
+      window.removeEventListener("resize", requestUpdate)
     }
   }, [])
+
+  useEffect(() => {
+    if (!open) return
+
+    const closeMenu = () => setOpen(false)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu()
+    }
+
+    window.addEventListener("hashchange", closeMenu)
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("hashchange", closeMenu)
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [open])
+
+  const easedNavProgress = easeOutCubic(navProgress)
+  const navStyle = {
+    maxWidth: `calc(1040px - ${easedNavProgress * 180}px)`,
+    padding: `${12 - easedNavProgress * 4}px ${20 - easedNavProgress * 4}px`,
+    backgroundColor: `oklch(0.055 0.004 95 / ${0.58 + easedNavProgress * 0.24})`,
+    boxShadow: `0 ${18 + easedNavProgress * 4}px ${60 + easedNavProgress * 12}px rgb(0 0 0 / ${0.22 + easedNavProgress * 0.08})`,
+    transform: `translate3d(0, ${easedNavProgress * -2}px, 0)`,
+    "--nav-progress": String(easedNavProgress),
+  } as CSSProperties & Record<string, string>
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-8 md:py-6">
       <div
         className={[
-          "pointer-events-auto mx-auto flex max-w-[1040px] items-center justify-between border border-border/80 transition-all duration-500 ease-out",
-          "bg-background/58 shadow-[0_18px_60px_rgb(0_0_0/0.22)] backdrop-blur-xl",
-          isScrolled ? "px-3 py-2 md:max-w-[860px] md:px-4" : "px-4 py-3 md:px-5",
+          "site-nav-shell pointer-events-auto mx-auto flex items-center justify-between border border-border/80 backdrop-blur-xl",
         ].join(" ")}
+        style={navStyle}
       >
         <a
           href="#inicio"
@@ -198,13 +255,13 @@ function Header() {
               href={`#${item.id}`}
               aria-current={activeSection === item.id ? "page" : undefined}
               className={[
-                "relative px-4 py-3 text-[11px] font-semibold uppercase transition-all duration-300",
+                "relative px-4 py-3 text-[11px] font-semibold uppercase transition-colors duration-500",
                 activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-primary",
               ].join(" ")}
             >
               <span
                 className={[
-                  "absolute inset-x-3 bottom-2 h-px origin-left bg-secondary transition-transform duration-300",
+                  "absolute inset-x-3 bottom-2 h-px origin-left bg-secondary transition-transform duration-500 ease-out",
                   activeSection === item.id ? "scale-x-100" : "scale-x-0",
                 ].join(" ")}
               />
@@ -223,19 +280,20 @@ function Header() {
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
+          aria-controls={mobileMenuId}
         >
           {open ? <X size={18} /> : <Menu size={20} />}
         </button>
       </div>
       {open && (
-        <nav className="pointer-events-auto mx-auto mt-3 grid max-w-[1040px] gap-2 border border-border bg-background/88 p-3 backdrop-blur-xl md:hidden">
+        <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 grid max-w-[1040px] gap-2 border border-border bg-background/88 p-3 backdrop-blur-xl md:hidden">
           {navItems.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
               onClick={() => setOpen(false)}
               className={[
-                "px-3 py-3 text-xs font-semibold uppercase transition-colors",
+                "flex min-h-11 items-center px-3 text-xs font-semibold uppercase transition-colors duration-300",
                 activeSection === item.id ? "bg-primary text-primary-foreground" : "text-muted-foreground",
               ].join(" ")}
             >
@@ -253,18 +311,18 @@ function Hero() {
     <section id="inicio" className="relative grid min-h-[100svh] place-items-center overflow-hidden px-5 pb-24 pt-32 sm:px-6 md:px-20 md:pt-40">
       <HeroShaderBackground />
       <div className="relative z-10 mx-auto mt-6 flex w-full max-w-5xl flex-col items-center text-center md:mt-8">
-        <p className="mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
-        <h1 className="mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[0.98] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
-          <span className="block">Web Designer</span>
-          <span className="block font-display italic text-primary/75">
+        <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
+        <h1 className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[0.98] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
+          <span className="hero-title-line block">Web Designer</span>
+          <span className="hero-title-line block font-display italic text-primary/75">
             <span className="text-secondary">&amp;</span> UX/UI Designer
           </span>
         </h1>
-        <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
+        <p className="hero-copy max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
           {keepLastWordsTogether("Criação de interfaces, sites e experiências digitais pensadas para unir estética, usabilidade e conversão. Minimalismo com propósito.")}
         </p>
-        <a href="#projetos" className="mt-12 inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-primary">
-          <span className="grid h-12 w-12 place-items-center border border-border">
+        <a href="#projetos" className="hero-cta mt-12 inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors duration-500 hover:text-primary">
+          <span className="hero-cta-icon grid h-12 w-12 place-items-center border border-border">
             <ArrowDown size={17} />
           </span>
           Ver projetos
@@ -292,12 +350,12 @@ function Projects() {
         {projects.map((project, index) => (
           <button
             key={project.title}
-            className="group border border-border bg-card text-left transition duration-300 hover:-translate-y-1 hover:border-primary/35"
+            className="group border border-border bg-card text-left transition-[border-color,transform,background-color] duration-500 ease-out hover:-translate-y-0.5 hover:border-primary/35 hover:bg-card/90"
             onClick={() => setActive(project)}
             aria-label={`Abrir preview do projeto ${project.title}`}
           >
             <div className="relative aspect-[4/3] overflow-hidden border-b border-border">
-              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-80 grayscale transition duration-700 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0" />
+              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-80 grayscale transition-[filter,opacity] duration-700 ease-out group-hover:opacity-95 group-hover:grayscale-0" />
               <span className="absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
             </div>
             <div className="p-6">
@@ -337,7 +395,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
     }
   }, [])
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Escape") {
       event.preventDefault()
       onClose()
@@ -366,7 +424,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
   return (
     <div
       ref={dialogRef}
-      className="fixed inset-0 z-[80] overflow-y-auto bg-background/92 px-6 py-6 backdrop-blur-md md:px-10"
+      className="project-dialog-backdrop fixed inset-0 z-[80] overflow-y-auto bg-background/92 px-6 py-6 backdrop-blur-md md:px-10"
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
@@ -375,7 +433,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <div className="mx-auto max-w-[1280px] border border-border bg-background">
+      <div className="project-dialog-panel mx-auto max-w-[1280px] border border-border bg-background">
         <div className="flex items-center justify-between border-b border-border px-6 py-5">
           <p className="text-xs font-semibold uppercase text-muted-foreground">Preview do projeto</p>
           <button ref={closeButtonRef} className="grid h-11 w-11 place-items-center border border-border text-primary" onClick={onClose} aria-label="Fechar preview">
