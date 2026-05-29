@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent } from "react"
 import { useForm, ValidationError } from "@formspree/react"
-import { ArrowDown, Check, ExternalLink, Menu, Send, X } from "lucide-react"
+import { ArrowDown, Check, ExternalLink, Menu, MessageCircle, Send, X } from "lucide-react"
 import { HeroShaderBackground } from "@/components/ui/hero-shader-background"
 
 import archstudioImage from "../assets/archstudio.jpg"
@@ -71,6 +71,8 @@ const navItems = [
   { id: "servicos", label: "Serviços" },
   { id: "contato", label: "Contato" },
 ]
+
+const whatsappUrl = "https://wa.me/5548984380803?text=Ol%C3%A1%2C%20Matheus!%20Vim%20pelo%20site%20e%20quero%20falar%20sobre%20um%20projeto."
 
 function keepLastWordsTogether(text: string) {
   return text.replace(/\s+([^\s]+)$/, "\u00a0$1")
@@ -270,10 +272,13 @@ function Header() {
           ))}
         </nav>
         <a
-          href="#contato"
-          className="hidden min-h-11 items-center justify-center border border-primary/80 bg-primary px-4 text-[11px] font-semibold uppercase text-primary-foreground transition-colors hover:bg-transparent hover:text-primary md:inline-flex"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Falar no WhatsApp com Matheus Monteiro"
+          className="hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-4 text-[11px] font-semibold uppercase text-primary-foreground transition-colors hover:bg-transparent hover:text-primary md:inline-flex"
         >
-          Orçamento
+          WhatsApp <MessageCircle size={14} />
         </a>
         <button
           className="grid h-11 w-11 place-items-center border border-border md:hidden"
@@ -300,6 +305,16 @@ function Header() {
               {item.label}
             </a>
           ))}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+            aria-label="Falar no WhatsApp com Matheus Monteiro"
+            className="flex min-h-11 items-center gap-2 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
+          >
+            WhatsApp <MessageCircle size={14} />
+          </a>
         </nav>
       )}
     </header>
@@ -553,6 +568,12 @@ function Contact() {
               <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">E-mail</p>
               <a href="mailto:matheusapm550@gmail.com" className="text-xl font-medium leading-tight text-primary transition-colors hover:text-secondary sm:text-2xl md:text-3xl">
                 matheusapm550@gmail.com
+              </a>
+            </div>
+            <div>
+              <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">WhatsApp</p>
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 text-xl font-medium leading-tight text-primary transition-colors hover:text-secondary sm:text-2xl md:text-3xl" aria-label="Falar no WhatsApp com Matheus Monteiro">
+                +55 48 98438-0803 <MessageCircle size={20} />
               </a>
             </div>
             <div className="flex flex-wrap gap-3 text-[10px] font-semibold uppercase text-muted-foreground">
