@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
@@ -417,6 +416,7 @@ textarea {
 .paper-shader-field {
   position: absolute;
   inset: -28%;
+  contain: paint;
   opacity: 0.72;
   mix-blend-mode: screen;
   filter: blur(34px) saturate(1.12) contrast(1.05);
@@ -451,6 +451,7 @@ textarea {
 .hero-flow {
   position: absolute;
   inset: -22%;
+  contain: paint;
   opacity: 0.38;
   mix-blend-mode: screen;
   filter: blur(32px) saturate(1.08);
@@ -467,6 +468,7 @@ textarea {
   position: absolute;
   left: 50%;
   top: 44%;
+  contain: paint;
   width: min(84vw, 940px);
   height: min(50vw, 480px);
   border-radius: 999px;
@@ -498,18 +500,6 @@ textarea {
   animation-name: hero-smoke-cross;
   animation-duration: 5.2s;
   animation-delay: -1.8s;
-}
-
-.hero-smoke-tertiary {
-  top: 52%;
-  width: min(54vw, 560px);
-  height: min(26vw, 260px);
-  background: radial-gradient(ellipse at 50% 50%, rgb(246 244 238 / 0.16), transparent 64%);
-  filter: blur(88px);
-  opacity: 0.32;
-  animation-name: hero-smoke-rise;
-  animation-duration: 6.2s;
-  animation-delay: -3s;
 }
 
 @keyframes paper-shader-drift {
@@ -583,21 +573,6 @@ textarea {
   100% {
     transform: translate3d(-48%, -43%, 0) rotate(4deg) scale(1.05);
     opacity: 0.38;
-  }
-}
-
-@keyframes hero-smoke-rise {
-  0% {
-    transform: translate3d(-53%, -43%, 0) rotate(-4deg) scale(0.92);
-    opacity: 0.18;
-  }
-  54% {
-    transform: translate3d(-46%, -55%, 0) rotate(10deg) scale(1.2);
-    opacity: 0.42;
-  }
-  100% {
-    transform: translate3d(-56%, -50%, 0) rotate(-8deg) scale(1.02);
-    opacity: 0.3;
   }
 }
 
@@ -752,12 +727,6 @@ textarea {
     width: 92vw;
     height: 52vw;
     filter: blur(58px);
-  }
-
-  .hero-smoke-tertiary {
-    width: 78vw;
-    height: 44vw;
-    filter: blur(68px);
   }
 
   .hero-flow {
