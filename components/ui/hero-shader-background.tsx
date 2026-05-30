@@ -4,6 +4,7 @@ export function HeroShaderBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       <div className="paper-shader-field" />
+      <div className="hero-flow" />
       <div className="hero-smoke hero-smoke-primary" />
       <div className="hero-smoke hero-smoke-secondary" />
       <div className="hero-smoke hero-smoke-tertiary" />
