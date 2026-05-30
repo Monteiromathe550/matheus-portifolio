@@ -276,9 +276,9 @@ function Header() {
           target="_blank"
           rel="noreferrer"
           aria-label="Falar no WhatsApp com Matheus Monteiro"
-          className="hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-4 text-[11px] font-semibold uppercase text-primary-foreground transition-colors hover:bg-transparent hover:text-primary md:inline-flex"
+          className="hidden min-h-10 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[10px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
         >
-          WhatsApp <MessageCircle size={14} />
+          Vamos criar <MessageCircle size={13} />
         </a>
         <button
           className="grid h-11 w-11 place-items-center border border-border md:hidden"
@@ -313,7 +313,7 @@ function Header() {
             aria-label="Falar no WhatsApp com Matheus Monteiro"
             className="flex min-h-11 items-center gap-2 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
           >
-            WhatsApp <MessageCircle size={14} />
+            Vamos criar algo <MessageCircle size={14} />
           </a>
         </nav>
       )}
@@ -563,24 +563,24 @@ function Contact() {
           <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
             {keepLastWordsTogether("O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade desde a primeira resposta.")}
           </p>
-          <div className="mt-10 space-y-6">
-            <div>
-              <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">E-mail</p>
-              <a href="mailto:matheusapm550@gmail.com" className="text-xl font-medium leading-tight text-primary transition-colors hover:text-secondary sm:text-2xl md:text-3xl">
-                matheusapm550@gmail.com
-              </a>
-            </div>
-            <div>
-              <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">WhatsApp</p>
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 text-xl font-medium leading-tight text-primary transition-colors hover:text-secondary sm:text-2xl md:text-3xl" aria-label="Falar no WhatsApp com Matheus Monteiro">
-                +55 48 98438-0803 <MessageCircle size={20} />
-              </a>
-            </div>
-            <div className="flex flex-wrap gap-3 text-[10px] font-semibold uppercase text-muted-foreground">
-              <a className="border border-border px-3 py-2 transition-colors hover:border-primary hover:text-primary" href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-            </div>
+          <div className="contact-channels mt-10">
+            <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
+              <span>
+                <span className="contact-channel-label">E-mail</span>
+                <span className="contact-channel-value">matheusapm550@gmail.com</span>
+              </span>
+              <ExternalLink className="contact-channel-icon" size={15} />
+            </a>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="contact-channel group" aria-label="Falar no WhatsApp com Matheus Monteiro">
+              <span>
+                <span className="contact-channel-label">WhatsApp</span>
+                <span className="contact-channel-value">+55 48 98438-0803</span>
+              </span>
+              <MessageCircle className="contact-channel-icon" size={16} />
+            </a>
+            <a className="contact-social-link" href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noreferrer">
+              LinkedIn <ExternalLink size={13} />
+            </a>
           </div>
         </div>
         <form className="grid gap-8" onSubmit={handleSubmit} aria-busy={state.submitting}>
