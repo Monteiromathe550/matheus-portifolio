@@ -563,23 +563,29 @@ function Contact() {
           <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
             {keepLastWordsTogether("O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade desde a primeira resposta.")}
           </p>
-          <div className="contact-channels mt-10">
+          <div className="contact-channels mt-9" aria-label="Canais de contato">
             <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
-              <span>
+              <span className="contact-channel-copy">
                 <span className="contact-channel-label">E-mail</span>
                 <span className="contact-channel-value">matheusapm550@gmail.com</span>
               </span>
-              <ExternalLink className="contact-channel-icon" size={15} />
+              <span className="contact-channel-action" aria-hidden="true">
+                <span>Escrever</span>
+                <ExternalLink className="contact-channel-icon" size={13} />
+              </span>
             </a>
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className="contact-channel group" aria-label="Falar no WhatsApp com Matheus Monteiro">
-              <span>
+              <span className="contact-channel-copy">
                 <span className="contact-channel-label">WhatsApp</span>
                 <span className="contact-channel-value">+55 48 98438-0803</span>
               </span>
-              <MessageCircle className="contact-channel-icon" size={16} />
+              <span className="contact-channel-action" aria-hidden="true">
+                <span>Chamar</span>
+                <MessageCircle className="contact-channel-icon" size={14} />
+              </span>
             </a>
             <a className="contact-social-link" href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noreferrer">
-              LinkedIn <ExternalLink size={13} />
+              Ver LinkedIn <ExternalLink size={12} />
             </a>
           </div>
         </div>
