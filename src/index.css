@@ -249,25 +249,22 @@ textarea {
 
 .contact-channels {
   display: grid;
-  gap: 8px;
+  gap: 0;
+  border-block: 1px solid var(--border);
 }
 
 .contact-channel {
   display: flex;
-  min-height: 58px;
+  min-height: 62px;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background-color: color-mix(in oklch, var(--primary) 3%, transparent);
-  padding: 10px 11px 10px 13px;
+  border-bottom: 1px solid var(--border);
+  padding-block: 13px;
   color: var(--primary);
   transition:
-    background-color 360ms ease,
     border-color 360ms ease,
-    color 360ms ease,
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    color 360ms ease;
 }
 
 .contact-channel-label,
@@ -298,12 +295,10 @@ textarea {
 
 .contact-channel-action {
   display: inline-flex;
-  min-height: 34px;
+  min-height: 32px;
   flex: 0 0 auto;
   align-items: center;
   gap: 8px;
-  border-left: 1px solid var(--border);
-  padding-left: 12px;
   color: var(--muted-foreground);
   font-size: 9px;
   font-weight: 700;
@@ -319,10 +314,8 @@ textarea {
 }
 
 .contact-channel:hover {
-  background-color: color-mix(in oklch, var(--primary) 6%, transparent);
   border-color: color-mix(in oklch, var(--primary) 24%, transparent);
   color: var(--secondary);
-  transform: translate3d(0, -1px, 0);
 }
 
 .contact-channel:hover .contact-channel-action {
@@ -345,22 +338,20 @@ textarea {
   min-height: 34px;
   align-items: center;
   gap: 8px;
-  margin-top: 2px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0 10px;
+  margin-top: 10px;
+  padding: 0;
   color: var(--muted-foreground);
   font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   transition:
-    border-color 300ms ease,
-    color 300ms ease;
+    color 300ms ease,
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .contact-social-link:hover {
-  border-color: color-mix(in oklch, var(--primary) 24%, transparent);
   color: var(--secondary);
+  transform: translate3d(2px, 0, 0);
 }
 
 @media (max-width: 480px) {
