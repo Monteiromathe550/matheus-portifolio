@@ -1100,7 +1100,7 @@ html.motion-ready .process-list[data-reveal-visible="true"]::before {
   .hero-title {
     max-width: 22rem;
     font-size: clamp(2.65rem, 12.8vw, 3.35rem) !important;
-    line-height: 0.96 !important;
+    line-height: 1.04 !important;
   }
 
   .hero-copy {

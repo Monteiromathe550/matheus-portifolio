@@ -372,7 +372,7 @@ function Hero() {
       <HeroShaderBackground />
       <div className="relative z-10 mx-auto mt-6 flex w-full max-w-5xl flex-col items-center text-center md:mt-8">
         <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
-        <h1 id="hero-title" className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[0.98] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
+        <h1 id="hero-title" className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[1.08] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
           <span className="hero-title-line block">Web Designer</span>
           <span className="hero-title-line block font-sans text-primary/75">
             <span className="text-secondary">&amp;</span> UX/UI Designer
