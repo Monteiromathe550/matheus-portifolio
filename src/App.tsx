@@ -274,8 +274,6 @@ function Header() {
 
   const easedNavProgress = easeOutCubic(navProgress)
   const navStyle = {
-    maxWidth: `calc(1040px - ${easedNavProgress * 180}px)`,
-    padding: `${12 - easedNavProgress * 4}px ${20 - easedNavProgress * 4}px`,
     backgroundColor: `oklch(0.055 0.004 95 / ${0.58 + easedNavProgress * 0.24})`,
     boxShadow: `0 ${18 + easedNavProgress * 4}px ${60 + easedNavProgress * 12}px rgb(0 0 0 / ${0.22 + easedNavProgress * 0.08})`,
     transform: `translate3d(0, ${easedNavProgress * -2}px, 0)`,
@@ -286,7 +284,7 @@ function Header() {
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-8 md:py-6">
       <div
         className={[
-          "site-nav-shell pointer-events-auto mx-auto flex items-center justify-between border border-border/80 backdrop-blur-xl",
+          "site-nav-shell pointer-events-auto mx-auto flex max-w-[1040px] items-center justify-between border border-border/80 px-4 py-3 backdrop-blur-xl md:px-5",
         ].join(" ")}
         style={navStyle}
       >
@@ -321,9 +319,9 @@ function Header() {
         <a
           href={whatsappUrl}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label="Falar no WhatsApp com Matheus Monteiro"
-          className="site-cta hidden min-h-10 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[10px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
+          className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[10px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
         >
           Vamos criar <MessageCircle size={13} />
         </a>
@@ -338,7 +336,7 @@ function Header() {
         </button>
       </div>
       {open && (
-        <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 grid max-w-[1040px] gap-2 border border-border bg-background/88 p-3 backdrop-blur-xl md:hidden">
+        <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 grid max-w-[1040px] gap-2 border border-border bg-background/88 p-3 backdrop-blur-xl md:hidden" aria-label="Menu mobile">
           {navItems.map((item) => (
             <a
               key={item.id}
@@ -355,7 +353,7 @@ function Header() {
           <a
             href={whatsappUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
             aria-label="Falar no WhatsApp com Matheus Monteiro"
             className="mobile-nav-link flex min-h-11 items-center gap-2 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
@@ -370,11 +368,11 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="inicio" className="relative grid min-h-[100svh] place-items-center overflow-hidden px-5 pb-24 pt-32 sm:px-6 md:px-20 md:pt-40">
+    <section id="inicio" className="relative grid min-h-[100svh] place-items-center overflow-hidden px-5 pb-24 pt-32 sm:px-6 md:px-20 md:pt-40" aria-labelledby="hero-title">
       <HeroShaderBackground />
       <div className="relative z-10 mx-auto mt-6 flex w-full max-w-5xl flex-col items-center text-center md:mt-8">
         <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
-        <h1 className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[0.98] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
+        <h1 id="hero-title" className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[0.98] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
           <span className="hero-title-line block">Web Designer</span>
           <span className="hero-title-line block font-sans text-primary/75">
             <span className="text-secondary">&amp;</span> UX/UI Designer
@@ -398,10 +396,10 @@ function Projects() {
   const [active, setActive] = useState<Project | null>(null)
 
   return (
-    <section id="projetos" className="mx-auto max-w-[1440px] px-6 py-24 md:px-20">
+    <section id="projetos" className="projects-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
       <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div data-reveal="heading">
-          <h2 className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
+          <h2 id="projects-title" className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
           <p className="mt-3 text-xs font-semibold uppercase text-muted-foreground">Trabalhos recentes</p>
         </div>
         <a href="#contato" className="section-action inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary" data-reveal="heading" style={revealStyle(1)}>
@@ -411,6 +409,7 @@ function Projects() {
       <div className="grid gap-6 lg:grid-cols-3">
         {projects.map((project, index) => (
           <button
+            type="button"
             key={project.title}
             className="project-card group border border-border bg-card text-left transition-[border-color,transform,background-color] duration-500 ease-out hover:-translate-y-0.5 hover:border-primary/35 hover:bg-card/90"
             onClick={() => setActive(project)}
@@ -500,7 +499,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
       <div className="project-dialog-panel mx-auto max-w-[1280px] border border-border bg-background">
         <div className="flex items-center justify-between border-b border-border px-6 py-5">
           <p className="text-xs font-semibold uppercase text-muted-foreground">Preview do projeto</p>
-          <button ref={closeButtonRef} className="grid h-11 w-11 place-items-center border border-border text-primary" onClick={onClose} aria-label="Fechar preview">
+          <button ref={closeButtonRef} type="button" className="grid h-11 w-11 place-items-center border border-border text-primary" onClick={onClose} aria-label="Fechar preview">
             <X size={18} />
           </button>
         </div>
@@ -529,10 +528,10 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
               </div>
             </div>
             <div className="mt-auto flex flex-col gap-3 sm:flex-row">
-              <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-primary bg-primary px-5 text-xs font-semibold uppercase text-primary-foreground hover:bg-transparent hover:text-primary">
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-primary bg-primary px-5 text-xs font-semibold uppercase text-primary-foreground hover:bg-transparent hover:text-primary">
                 Abrir projeto <ExternalLink size={14} />
               </a>
-              <button className="inline-flex min-h-12 items-center justify-center border border-border px-5 text-xs font-semibold uppercase text-primary hover:border-primary" onClick={onClose}>
+              <button type="button" className="inline-flex min-h-12 items-center justify-center border border-border px-5 text-xs font-semibold uppercase text-primary hover:border-primary" onClick={onClose}>
                 Voltar
               </button>
             </div>
@@ -545,9 +544,9 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
 
 function About() {
   return (
-    <section id="sobre" className="mx-auto max-w-[1440px] px-6 py-20 md:px-20">
+    <section id="sobre" className="about-section mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
       <div className="about-panel grid gap-10 border-y border-border py-16 lg:grid-cols-12" data-reveal="line">
-        <p className="text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</p>
+        <p id="about-title" className="text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</p>
         <ScrollRevealText text="Desenho páginas e produtos digitais com direção visual precisa, estrutura clara e atenção aos detalhes que fazem a interface parecer inevitável." />
         <div className="space-y-6 text-base leading-7 text-muted-foreground lg:col-span-3">
           <p>{keepLastWordsTogether("Atuo nos pontos onde marca, produto e conversão precisam falar a mesma língua.")}</p>
@@ -560,9 +559,9 @@ function About() {
 
 function Services() {
   return (
-    <section id="servicos" className="mx-auto max-w-[1440px] px-6 py-24 md:px-20">
-      <h2 className="mb-12 text-4xl font-medium text-primary md:text-5xl" data-reveal="heading">Especialidades</h2>
-      <div className="grid gap-6 md:grid-cols-3">
+    <section id="servicos" className="services-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
+      <h2 id="services-title" className="mb-12 text-4xl font-medium text-primary md:text-5xl" data-reveal="heading">Especialidades</h2>
+      <div className="services-grid grid gap-6 md:grid-cols-3">
         {specialties.map(([title, text], index) => (
           <div key={title} className="service-card border border-border bg-card p-7" data-reveal="card" style={revealStyle(index)}>
             <p className="service-number mb-10 text-xs font-semibold text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
@@ -577,7 +576,7 @@ function Services() {
 
 function Process() {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
+    <section id="processo" className="process-section mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
       <div className="grid gap-10 border-y border-border py-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
         <div data-reveal="heading">
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Processo</p>
@@ -601,11 +600,11 @@ function Contact() {
   const [state, handleSubmit] = useForm("mbdbpdlb")
 
   return (
-    <section id="contato" className="mx-auto max-w-[1440px] px-6 py-24 md:px-20">
+    <section id="contato" className="contact-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="contact-title">
       <div className="grid gap-12 border-t border-border pt-16 lg:grid-cols-[0.82fr_1fr] lg:gap-20">
         <div data-reveal="heading">
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Contato</p>
-          <h2 className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
+          <h2 id="contact-title" className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
           <p className="max-w-md text-base leading-7 text-muted-foreground">
             {keepLastWordsTogether("Conte o que você quer construir. Eu retorno com próximos passos, escopo inicial e uma direção clara para começarmos sem chute de preço.")}
           </p>
@@ -623,7 +622,7 @@ function Contact() {
                 <ExternalLink className="contact-channel-icon" size={13} />
               </span>
             </a>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="contact-channel group" aria-label="Falar no WhatsApp com Matheus Monteiro">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="contact-channel group" aria-label="Falar no WhatsApp com Matheus Monteiro">
               <span className="contact-channel-copy">
                 <span className="contact-channel-label">WhatsApp</span>
                 <span className="contact-channel-value">+55 48 98438-0803</span>
@@ -633,7 +632,7 @@ function Contact() {
                 <MessageCircle className="contact-channel-icon" size={14} />
               </span>
             </a>
-            <a className="contact-social-link" href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noreferrer">
+            <a className="contact-social-link" href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noopener noreferrer">
               Ver LinkedIn <ExternalLink size={12} />
             </a>
           </div>
@@ -649,6 +648,7 @@ function Contact() {
                 name="name"
                 type="text"
                 placeholder="Seu nome"
+                autoComplete="name"
                 required
               />
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Nome" field="name" errors={state.errors} />
@@ -661,6 +661,7 @@ function Contact() {
                 name="email"
                 type="email"
                 placeholder="voce@email.com"
+                autoComplete="email"
                 required
               />
               <ValidationError className="text-xs leading-5 text-destructive" prefix="E-mail" field="email" errors={state.errors} />
@@ -747,8 +748,24 @@ export default function App() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-primary">
+      <a
+        href="#conteudo"
+        className="skip-link"
+        onFocus={(event) => {
+          event.currentTarget.setAttribute("data-focus", "true")
+          event.currentTarget.style.transition = "none"
+          event.currentTarget.style.transform = "none"
+        }}
+        onBlur={(event) => {
+          event.currentTarget.removeAttribute("data-focus")
+          event.currentTarget.style.removeProperty("transition")
+          event.currentTarget.style.removeProperty("transform")
+        }}
+      >
+        Pular para o conteúdo
+      </a>
       <Header />
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         <Hero />
         <About />
         <Projects />
