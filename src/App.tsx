@@ -78,12 +78,59 @@ function keepLastWordsTogether(text: string) {
   return text.replace(/\s+([^\s]+)$/, "\u00a0$1")
 }
 
+function revealStyle(index: number) {
+  return { "--reveal-index": String(index) } as CSSProperties
+}
+
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value))
 }
 
 function easeOutCubic(value: number) {
   return 1 - Math.pow(1 - clamp(value), 3)
+}
+
+function useMotionReveals() {
+  useEffect(() => {
+    const revealElements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"))
+
+    if (!revealElements.length) return
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+    const markVisible = (element: HTMLElement) => {
+      element.dataset.revealVisible = "true"
+    }
+
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+      revealElements.forEach(markVisible)
+      return
+    }
+
+    document.documentElement.classList.add("motion-ready")
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+
+          markVisible(entry.target as HTMLElement)
+          observer.unobserve(entry.target)
+        })
+      },
+      {
+        rootMargin: "0px 0px -14% 0px",
+        threshold: 0.16,
+      },
+    )
+
+    revealElements.forEach((element) => observer.observe(element))
+
+    return () => {
+      observer.disconnect()
+      document.documentElement.classList.remove("motion-ready")
+    }
+  }, [])
 }
 
 function ScrollRevealText({ text }: { text: string }) {
@@ -245,7 +292,7 @@ function Header() {
       >
         <a
           href="#inicio"
-          className="grid h-11 w-11 place-items-center border border-border text-base font-semibold tracking-tight transition-colors hover:border-primary/50"
+          className="site-mark grid h-11 w-11 place-items-center border border-border text-base font-semibold tracking-tight transition-colors hover:border-primary/50"
           aria-label="Matheus Monteiro, voltar ao início"
         >
           MM
@@ -257,7 +304,7 @@ function Header() {
               href={`#${item.id}`}
               aria-current={activeSection === item.id ? "page" : undefined}
               className={[
-                "relative px-4 py-3 text-[11px] font-semibold uppercase transition-colors duration-500",
+                "site-nav-link relative px-4 py-3 text-[11px] font-semibold uppercase transition-colors duration-500",
                 activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-primary",
               ].join(" ")}
             >
@@ -276,7 +323,7 @@ function Header() {
           target="_blank"
           rel="noreferrer"
           aria-label="Falar no WhatsApp com Matheus Monteiro"
-          className="hidden min-h-10 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[10px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
+          className="site-cta hidden min-h-10 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[10px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
         >
           Vamos criar <MessageCircle size={13} />
         </a>
@@ -298,7 +345,7 @@ function Header() {
               href={`#${item.id}`}
               onClick={() => setOpen(false)}
               className={[
-                "flex min-h-11 items-center px-3 text-xs font-semibold uppercase transition-colors duration-300",
+                "mobile-nav-link flex min-h-11 items-center px-3 text-xs font-semibold uppercase transition-colors duration-300",
                 activeSection === item.id ? "bg-primary text-primary-foreground" : "text-muted-foreground",
               ].join(" ")}
             >
@@ -311,7 +358,7 @@ function Header() {
             rel="noreferrer"
             onClick={() => setOpen(false)}
             aria-label="Falar no WhatsApp com Matheus Monteiro"
-            className="flex min-h-11 items-center gap-2 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
+            className="mobile-nav-link flex min-h-11 items-center gap-2 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
           >
             Vamos criar algo <MessageCircle size={14} />
           </a>
@@ -329,7 +376,7 @@ function Hero() {
         <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
         <h1 className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[0.98] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
           <span className="hero-title-line block">Web Designer</span>
-          <span className="hero-title-line block font-display italic text-primary/75">
+          <span className="hero-title-line block font-sans text-primary/75">
             <span className="text-secondary">&amp;</span> UX/UI Designer
           </span>
         </h1>
@@ -353,11 +400,11 @@ function Projects() {
   return (
     <section id="projetos" className="mx-auto max-w-[1440px] px-6 py-24 md:px-20">
       <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <div>
+        <div data-reveal="heading">
           <h2 className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
           <p className="mt-3 text-xs font-semibold uppercase text-muted-foreground">Trabalhos recentes</p>
         </div>
-        <a href="#contato" className="inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary">
+        <a href="#contato" className="section-action inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary" data-reveal="heading" style={revealStyle(1)}>
           Falar sobre projeto <ExternalLink size={14} />
         </a>
       </div>
@@ -365,16 +412,18 @@ function Projects() {
         {projects.map((project, index) => (
           <button
             key={project.title}
-            className="group border border-border bg-card text-left transition-[border-color,transform,background-color] duration-500 ease-out hover:-translate-y-0.5 hover:border-primary/35 hover:bg-card/90"
+            className="project-card group border border-border bg-card text-left transition-[border-color,transform,background-color] duration-500 ease-out hover:-translate-y-0.5 hover:border-primary/35 hover:bg-card/90"
             onClick={() => setActive(project)}
             aria-label={`Abrir preview do projeto ${project.title}`}
+            data-reveal="card"
+            style={revealStyle(index)}
           >
             <div className="relative aspect-[4/3] overflow-hidden border-b border-border">
               <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-80 grayscale transition-[filter,opacity] duration-700 ease-out group-hover:opacity-95 group-hover:grayscale-0" />
-              <span className="absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
+              <span className="project-index absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
             </div>
             <div className="p-6">
-              <div className="mb-5 flex flex-wrap gap-2">
+              <div className="project-tags mb-5 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span key={tag} className="border border-border px-2 py-1 text-[10px] font-semibold uppercase text-muted-foreground">
                     {tag}
@@ -497,7 +546,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
 function About() {
   return (
     <section id="sobre" className="mx-auto max-w-[1440px] px-6 py-20 md:px-20">
-      <div className="grid gap-10 border-y border-border py-16 lg:grid-cols-12">
+      <div className="about-panel grid gap-10 border-y border-border py-16 lg:grid-cols-12" data-reveal="line">
         <p className="text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</p>
         <ScrollRevealText text="Desenho páginas e produtos digitais com direção visual precisa, estrutura clara e atenção aos detalhes que fazem a interface parecer inevitável." />
         <div className="space-y-6 text-base leading-7 text-muted-foreground lg:col-span-3">
@@ -512,11 +561,11 @@ function About() {
 function Services() {
   return (
     <section id="servicos" className="mx-auto max-w-[1440px] px-6 py-24 md:px-20">
-      <h2 className="mb-12 text-4xl font-medium text-primary md:text-5xl">Especialidades</h2>
+      <h2 className="mb-12 text-4xl font-medium text-primary md:text-5xl" data-reveal="heading">Especialidades</h2>
       <div className="grid gap-6 md:grid-cols-3">
         {specialties.map(([title, text], index) => (
-          <div key={title} className="border border-border bg-card p-7">
-            <p className="mb-10 text-xs font-semibold text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
+          <div key={title} className="service-card border border-border bg-card p-7" data-reveal="card" style={revealStyle(index)}>
+            <p className="service-number mb-10 text-xs font-semibold text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
             <h3 className="mb-5 text-2xl font-medium text-primary">{title}</h3>
             <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(text)}</p>
           </div>
@@ -530,14 +579,14 @@ function Process() {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
       <div className="grid gap-10 border-y border-border py-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-        <div>
+        <div data-reveal="heading">
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Processo</p>
           <h2 id="process-title" className="max-w-md text-4xl font-medium leading-tight text-primary md:text-5xl">Clareza antes de construir</h2>
         </div>
-        <div className="divide-y divide-border">
+        <div className="process-list divide-y divide-border" data-reveal="timeline">
           {processSteps.map(([number, title, text]) => (
-            <div key={title} className="grid gap-4 py-6 first:pt-0 last:pb-0 sm:grid-cols-[4rem_0.72fr_1.28fr] sm:items-start">
-              <p className="text-xs font-semibold text-secondary">{number}</p>
+            <div key={title} className="process-step grid gap-4 py-6 first:pt-0 last:pb-0 sm:grid-cols-[4rem_0.72fr_1.28fr] sm:items-start" data-reveal="process-step" style={revealStyle(Number(number) - 1)}>
+              <p className="process-number text-xs font-semibold text-secondary">{number}</p>
               <h3 className="text-xl font-medium text-primary">{title}</h3>
               <p className="max-w-xl text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(text)}</p>
             </div>
@@ -554,7 +603,7 @@ function Contact() {
   return (
     <section id="contato" className="mx-auto max-w-[1440px] px-6 py-24 md:px-20">
       <div className="grid gap-12 border-t border-border pt-16 lg:grid-cols-[0.82fr_1fr] lg:gap-20">
-        <div>
+        <div data-reveal="heading">
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Contato</p>
           <h2 className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
           <p className="max-w-md text-base leading-7 text-muted-foreground">
@@ -589,7 +638,7 @@ function Contact() {
             </a>
           </div>
         </div>
-        <form className="grid gap-8" onSubmit={handleSubmit} aria-busy={state.submitting}>
+        <form className="contact-form grid gap-8" onSubmit={handleSubmit} aria-busy={state.submitting} data-reveal="form">
           <input type="hidden" name="_subject" value="Novo briefing pelo site Matheus Monteiro" />
           <div className="grid gap-6 md:grid-cols-2">
             <label className="group grid gap-3">
@@ -694,6 +743,8 @@ function Contact() {
 }
 
 export default function App() {
+  useMotionReveals()
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-primary">
       <Header />
