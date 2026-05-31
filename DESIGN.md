@@ -21,39 +21,41 @@ A identidade visual deve transmitir modernidade, sofisticacao, clareza, boa leit
 9. Interface forte, mas nao agressiva.
 10. Visual alinhado a boas praticas de Material Design.
 
-## 3. Fonte Principal
+## 3. Sistema Tipografico
 
-A fonte principal do projeto e:
+O projeto usa uma combinacao de fontes menos obvia, com contraste entre display e leitura:
 
 ```css
-font-family: "Sora", sans-serif;
+--font-display: "Unbounded", "Onest", sans-serif;
+--font-main: "Onest", sans-serif;
 ```
 
-Sora deve ser usada em toda a interface: hero, headlines, cards, corpo de texto, navegacao, botoes, chips, labels e captions.
+Unbounded deve aparecer em hero, headlines e chamadas principais. Onest deve sustentar corpo de texto, navegacao, botoes, chips, labels, captions e campos de formulario.
 
 ## 4. Import da Fonte
 
 Usar este import no `code.html`:
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 Pesos utilizados:
 
 ```txt
-400: body e textos comuns
-500: headlines sutis, cards e titulos elegantes
-600: labels, botoes e destaques
-700: hero e titulos de maior impacto
-800: uso raro, apenas quando precisar de maximo impacto
+Unbounded 400-500: hero, headings e chamadas principais
+Unbounded 600-700: uso raro, apenas para impacto controlado
+Onest 400: body e textos comuns
+Onest 500: subtitulos, cards e textos de apoio
+Onest 600: labels, botoes e destaques
+Onest 700: uso pontual em marca, logo ou microdestaques
 ```
 
 ## 5. Direcao Tipografica
 
-A tipografia deve ser elegante e sutil. Os headlines nao devem parecer pesados ou agressivos. Por isso, os titulos principais usam pesos entre `500` e `600`.
+A tipografia deve ser elegante, precisa e menos previsivel. Os headlines usam Unbounded com pesos controlados para ganhar assinatura sem parecer agressivos.
 
-O peso `700` deve ser reservado para o hero ou elementos de maior impacto.
+O peso `700` deve ser reservado para elementos raros de maior impacto.
 
 Evitar o uso excessivo de `font-weight: 800`, uppercase em titulos longos, headlines muito grandes em blocos pequenos e tracking apertado em textos menores.
 
@@ -79,7 +81,8 @@ Evitar o uso excessivo de `font-weight: 800`, uppercase em titulos longos, headl
 
 ```css
 :root {
-  --font-main: "Sora", sans-serif;
+  --font-display: "Unbounded", "Onest", sans-serif;
+  --font-main: "Onest", sans-serif;
 
   --display-1-size: 96px;
   --display-1-line: 100px;
@@ -217,35 +220,35 @@ Evitar uppercase em titulos de secao, titulos de cards, blocos de contato, texto
 
 ### Logo
 
-Fonte Sora, peso 700, tamanho 28px a 48px. Uppercase opcional.
+Fonte Unbounded ou Onest, peso 600 a 700, tamanho 28px a 48px. Uppercase opcional.
 
 ### Hero
 
-Fonte Sora, peso 700, ate 96px no desktop e 56px no mobile. O hero e o unico lugar de maximo impacto tipografico.
+Fonte Unbounded no primeiro impacto e Onest como contraponto quando houver segunda linha. Ate 96px no desktop e 56px no mobile. O hero e o unico lugar de maximo impacto tipografico.
 
 ### Titulos de Secao
 
-Fonte Sora, peso 500, 48px desktop e 32px mobile. Nao usar uppercase por padrao.
+Fonte Unbounded, peso 500, 48px desktop e 32px mobile. Nao usar uppercase por padrao.
 
 ### Titulos Internos
 
-Fonte Sora, peso 500, entre 28px e 36px. Nao usar uppercase por padrao.
+Fonte Unbounded ou Onest, peso 500, entre 28px e 36px. Nao usar uppercase por padrao.
 
 ### Cards
 
-Fonte Sora, peso 500, entre 24px e 28px. Cards devem priorizar clareza e padding consistente.
+Fonte Onest ou Unbounded em uso pontual, peso 500, entre 24px e 28px. Cards devem priorizar clareza e padding consistente.
 
 ### Corpo de Texto
 
-Fonte Sora, peso 400, 16px, line-height 26px.
+Fonte Onest, peso 400, 16px, line-height 26px.
 
 ### Labels
 
-Fonte Sora, peso 600, 10px a 12px. Uppercase permitido.
+Fonte Onest, peso 600, 10px a 12px. Uppercase permitido.
 
 ### Botoes
 
-Fonte Sora, peso 600, 12px, uppercase permitido e altura minima de 48px.
+Fonte Onest, peso 600, 12px, uppercase permitido e altura minima de 48px.
 
 ### Contato
 
