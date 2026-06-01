@@ -25,9 +25,9 @@ const projects: Project[] = [
     tags: ["E-commerce", "Cosméticos"],
     image: importBrzImage,
     liveUrl: "https://solange-cosm-ticos-main.vercel.app/",
-    summary: "Loja de cosméticos importados com vitrine premium, categorias claras e caminho de compra sem ruído.",
-    challenge: "Organizar uma oferta variada de cosméticos importados sem perder elegância, confiança e ritmo de navegação.",
-    result: "Vitrine mais clara, produtos com presença visual e uma jornada direta para comparar opções e iniciar a compra.",
+    summary: "Vitrine para cosméticos importados com categorias claras, produto em primeiro plano e caminho direto para compra.",
+    challenge: "Organizar uma oferta variada sem deixar preço, benefício e navegação competindo pela atenção.",
+    result: "Categorias mais fáceis de comparar, páginas com presença visual e menos atrito até o contato de compra.",
   },
   {
     title: "ArchStudio",
@@ -35,9 +35,9 @@ const projects: Project[] = [
     tags: ["Portfolio", "Arquitetura"],
     image: archstudioImage,
     liveUrl: "https://site-arquitetura-psi.vercel.app/",
-    summary: "Portfolio para arquitetura com imagens em destaque, leitura editorial e navegação objetiva entre projetos.",
-    challenge: "Dar protagonismo aos projetos sem transformar o site em uma galeria pesada ou confusa.",
-    result: "Uma presença sofisticada, com hierarquia visual clara e espaço para cada projeto respirar.",
+    summary: "Portfolio de arquitetura com imagens amplas, leitura editorial e navegação objetiva entre ambientes.",
+    challenge: "Dar protagonismo aos projetos sem transformar o site em uma galeria pesada ou difícil de percorrer.",
+    result: "Projetos com mais respiro, ordem de leitura clara e uma presença digital alinhada ao valor do escritório.",
   },
   {
     title: "Renova Aesthetics",
@@ -45,23 +45,23 @@ const projects: Project[] = [
     tags: ["Clínica", "Portfolio"],
     image: renovaImage,
     liveUrl: "https://renova-aesthetics.vercel.app/",
-    summary: "Site para clínica estética com serviços bem apresentados, prova visual e chamada clara para agendamento.",
-    challenge: "Comunicar confiança e sofisticação sem deixar procedimentos, resultados e contato competindo pela atenção.",
-    result: "Interface refinada, serviços mais fáceis de entender e caminho de contato direto para novos agendamentos.",
+    summary: "Site para clínica estética com serviços organizados, prova visual e chamada direta para agendamento.",
+    challenge: "Comunicar cuidado e confiança sem deixar procedimentos, resultados e contato disputando atenção.",
+    result: "Serviços mais fáceis de entender, hierarquia mais calma e um caminho de agendamento mais evidente.",
   },
 ]
 
 const specialties = [
-  ["Web Design", "Sites institucionais, landing pages e portfólios com hierarquia forte, copy objetiva e acabamento premium."],
-  ["UX/UI Design", "Jornadas, telas e decisões de interface pensadas para reduzir dúvida e guiar a próxima ação."],
-  ["Design Branding", "Direção visual para marcas digitais que precisam parecer consistentes, confiáveis e fáceis de reconhecer."],
+  ["Design + Front-end", "Crio a interface e codifico o site final, com responsividade, performance e acabamento pronto para publicar."],
+  ["UX/UI Design", "Estruturo fluxos, telas e decisões de interface para reduzir dúvida antes do usuário precisar perguntar."],
+  ["Entrega completa", "Organizo conteúdo, visual, código, publicação e ajustes finais para o projeto não parar no layout."],
 ]
 
 const processSteps = [
   ["01", "Diagnóstico", "Alinho objetivo, público, referências e decisão principal que a página precisa facilitar."],
   ["02", "Direção", "Transformo o briefing em estrutura, hierarquia, tom visual e caminho de navegação."],
-  ["03", "Interface", "Desenho as telas com ritmo, responsividade, clareza de ação e acabamento visual."],
-  ["04", "Entrega", "Fecho ajustes, preparo publicação ou arquivos finais e deixo os próximos passos organizados."],
+  ["03", "Design e código", "Desenho a interface e levo para o front-end com responsividade, estados e movimento."],
+  ["04", "Publicação", "Fecho ajustes, preparo a entrega final e deixo o site pronto para ir ao ar."],
 ]
 
 const navItems = [
@@ -73,6 +73,14 @@ const navItems = [
 ]
 
 const whatsappUrl = "https://wa.me/5548984380803?text=Ol%C3%A1%2C%20Matheus!%20Vim%20pelo%20site%20e%20quero%20falar%20sobre%20um%20projeto."
+
+const fieldHelp = {
+  name: "Use o nome que devo usar na resposta.",
+  email: "Vou usar este e-mail para retornar com próximos passos.",
+  projectType: "Escolha a opção mais próxima. Se tiver dúvida, selecione UX/UI de produto ou site institucional.",
+  budget: "Pode ser uma estimativa. Ela só ajuda a ajustar profundidade e prazo.",
+  message: "Inclua objetivo, prazo ideal e o que precisa ficar pronto primeiro.",
+}
 
 function keepLastWordsTogether(text: string) {
   return text.replace(/\s+([^\s]+)$/, "\u00a0$1")
@@ -275,7 +283,7 @@ function Header() {
   const easedNavProgress = easeOutCubic(navProgress)
   const navStyle = {
     backgroundColor: `oklch(0.055 0.004 95 / ${0.58 + easedNavProgress * 0.24})`,
-    boxShadow: `0 ${18 + easedNavProgress * 4}px ${60 + easedNavProgress * 12}px rgb(0 0 0 / ${0.22 + easedNavProgress * 0.08})`,
+    boxShadow: `0 ${6 + easedNavProgress * 2}px ${10 + easedNavProgress * 4}px rgb(0 0 0 / ${0.16 + easedNavProgress * 0.04})`,
     transform: `translate3d(0, ${easedNavProgress * -2}px, 0)`,
     "--nav-progress": String(easedNavProgress),
   } as CSSProperties & Record<string, string>
@@ -323,7 +331,7 @@ function Header() {
           aria-label="Falar no WhatsApp com Matheus Monteiro"
           className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[11px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
         >
-          Vamos criar <MessageCircle size={13} />
+          Iniciar projeto <MessageCircle size={13} />
         </a>
         <button
           className="grid h-11 w-11 place-items-center border border-border md:hidden"
@@ -370,7 +378,7 @@ function Header() {
             aria-label="Falar no WhatsApp com Matheus Monteiro"
             className="mobile-menu-cta mt-3 flex min-h-12 items-center justify-between border border-primary bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
           >
-            Vamos criar algo <MessageCircle size={14} />
+            Iniciar projeto <MessageCircle size={14} />
           </a>
         </nav>
       )}
@@ -391,7 +399,7 @@ function Hero() {
           </span>
         </h1>
         <p className="hero-copy max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-          {keepLastWordsTogether("Interfaces e sites com direção visual, navegação clara e acabamento pensado para transformar visita em confiança.")}
+          {keepLastWordsTogether("Crio, codifico e entrego sites para marcas que precisam explicar valor, provar confiança e levar o visitante ao próximo passo.")}
         </p>
         <a href="#projetos" className="hero-cta mt-12 inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors duration-500 hover:text-primary">
           <span className="hero-cta-icon grid h-12 w-12 place-items-center border border-border">
@@ -413,14 +421,14 @@ function Projects() {
         <div className="max-w-2xl" data-reveal="heading">
           <h2 id="projects-title" className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
           <p className="mt-4 text-base leading-7 text-muted-foreground">
-            Uma amostra de interfaces para vender, apresentar e dar forma a uma presença digital mais confiável.
+            Três entregas com problemas diferentes: vender produto, apresentar arquitetura e converter interesse em agendamento.
           </p>
         </div>
         <a href="#contato" className="section-action inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary" data-reveal="heading" style={revealStyle(1)}>
           Falar sobre projeto <ExternalLink size={14} />
         </a>
       </div>
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="projects-grid grid gap-6 lg:grid-cols-3">
         {projects.map((project, index) => (
           <button
             type="button"
@@ -431,11 +439,11 @@ function Projects() {
             data-reveal="card"
             style={revealStyle(index)}
           >
-            <div className="relative aspect-[4/3] overflow-hidden border-b border-border">
-              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-80 grayscale transition-[filter,opacity] duration-700 ease-out group-hover:opacity-95 group-hover:grayscale-0" />
+            <div className="project-media relative aspect-[4/3] overflow-hidden border-b border-border">
+              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-90 transition-[filter,opacity] duration-700 ease-out md:opacity-80 md:grayscale md:group-hover:opacity-95 md:group-hover:grayscale-0" />
               <span className="project-index absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
             </div>
-            <div className="p-6">
+            <div className="project-card-body p-6">
               <div className="project-tags mb-5 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span key={tag} className="border border-border px-2 py-1 text-[11px] font-semibold uppercase text-muted-foreground">
@@ -443,7 +451,7 @@ function Projects() {
                   </span>
                 ))}
               </div>
-              <h3 className="mb-4 text-2xl font-medium text-primary">{project.title}</h3>
+              <h3 className="project-card-title mb-4 text-2xl font-medium text-primary">{project.title}</h3>
               <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
               <span className="project-card-action mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary">
                 Abrir preview <ExternalLink size={13} />
@@ -564,10 +572,10 @@ function About() {
     <section id="sobre" className="about-section mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
       <div className="about-panel grid gap-10 border-y border-border py-16 lg:grid-cols-12" data-reveal="line">
         <h2 id="about-title" className="font-sans text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</h2>
-        <ScrollRevealText text="Desenho páginas e produtos digitais com direção visual precisa, estrutura clara e decisões que deixam a experiência mais fácil de confiar." />
+        <ScrollRevealText text="Desenho e codifico páginas digitais com direção visual precisa, estrutura clara e uma entrega final pronta para usar." />
         <div className="space-y-6 text-base leading-7 text-muted-foreground lg:col-span-3">
-          <p>{keepLastWordsTogether("Atuo onde marca, produto e conversão precisam trabalhar juntos sem disputar atenção.")}</p>
-          <p>{keepLastWordsTogether("O resultado é uma presença digital com hierarquia, acabamento e direção clara.")}</p>
+          <p>{keepLastWordsTogether("Atuo quando o site precisa vender uma percepção antes de vender uma solução: confiança, clareza e cuidado.")}</p>
+          <p>{keepLastWordsTogether("A entrega combina estratégia, interface, front-end e publicação para o projeto não ficar só no design.")}</p>
         </div>
       </div>
     </section>
@@ -580,7 +588,7 @@ function Services() {
       <div className="mb-12 max-w-2xl" data-reveal="heading">
         <h2 id="services-title" className="text-4xl font-medium text-primary md:text-5xl">Especialidades</h2>
         <p className="mt-4 text-base leading-7 text-muted-foreground">
-          O trabalho combina estrutura, interface e direção visual para tirar o projeto do abstrato.
+          Cada frente resolve uma parte da entrega: o que mostrar, como organizar, como codificar e como colocar no ar.
         </p>
       </div>
       <div className="services-grid grid gap-6 md:grid-cols-3">
@@ -604,7 +612,7 @@ function Process() {
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Processo</p>
           <h2 id="process-title" className="max-w-md text-4xl font-medium leading-tight text-primary md:text-5xl">Do briefing à entrega</h2>
           <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
-            Cada etapa reduz ambiguidade antes de virar tela, para decisões visuais terem função.
+            Antes de desenhar e codificar, eu defino o que a página precisa provar. Depois, cada etapa aproxima o site da publicação.
           </p>
         </div>
         <div className="process-list divide-y divide-border" data-reveal="timeline">
@@ -631,10 +639,10 @@ function Contact() {
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Contato</p>
           <h2 id="contact-title" className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
           <p className="max-w-md text-base leading-7 text-muted-foreground">
-            {keepLastWordsTogether("Conte o que precisa sair do papel. Eu retorno com próximos passos, escopo inicial e uma direção clara para começar.")}
+            {keepLastWordsTogether("Conte o que precisa sair do papel. Eu retorno com caminho recomendado, escopo inicial e o melhor formato para desenhar, codificar e publicar.")}
           </p>
           <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
-            {keepLastWordsTogether("O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade já na primeira resposta.")}
+            {keepLastWordsTogether("O orçamento previsto não trava a conversa. Ele só ajuda a calibrar profundidade, prazo e prioridade.")}
           </p>
           <div className="contact-channels mt-9" aria-label="Canais de contato">
             <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
@@ -668,7 +676,7 @@ function Contact() {
             <p className="text-[11px] font-semibold uppercase text-muted-foreground">Briefing inicial</p>
             <h3 className="mt-2 text-2xl font-semibold leading-tight text-primary">Conte sobre o projeto</h3>
             <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
-              Responda o essencial. Eu uso essas informações para entender escopo, prazo e direção visual.
+              Responda o essencial. Se ainda não tiver todas as respostas, mande o que já sabe.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -681,8 +689,11 @@ function Contact() {
                 type="text"
                 placeholder="Seu nome"
                 autoComplete="name"
+                aria-describedby="name-help"
+                aria-invalid={Boolean(state.errors?.getFieldErrors?.("name")?.length) || undefined}
                 required
               />
+              <span id="name-help" className="contact-field-help">{fieldHelp.name}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Nome" field="name" errors={state.errors} />
             </label>
             <label className="group grid gap-3">
@@ -694,8 +705,11 @@ function Contact() {
                 type="email"
                 placeholder="voce@email.com"
                 autoComplete="email"
+                aria-describedby="email-help"
+                aria-invalid={Boolean(state.errors?.getFieldErrors?.("email")?.length) || undefined}
                 required
               />
+              <span id="email-help" className="contact-field-help">{fieldHelp.email}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="E-mail" field="email" errors={state.errors} />
             </label>
           </div>
@@ -706,6 +720,8 @@ function Contact() {
               className="min-h-12 border-0 border-b border-border bg-background px-0 text-base text-primary outline-none transition-colors focus:border-primary"
               name="projectType"
               defaultValue=""
+              aria-describedby="project-type-help"
+              aria-invalid={Boolean(state.errors?.getFieldErrors?.("projectType")?.length) || undefined}
               required
             >
               <option value="" disabled>
@@ -717,6 +733,7 @@ function Contact() {
               <option>UX/UI de produto</option>
               <option>Branding digital</option>
             </select>
+            <span id="project-type-help" className="contact-field-help">{fieldHelp.projectType}</span>
             <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
           </label>
           <label className="group grid gap-3">
@@ -726,6 +743,8 @@ function Contact() {
               className="min-h-12 border-0 border-b border-border bg-background px-0 text-base text-primary outline-none transition-colors focus:border-primary"
               name="budget"
               defaultValue=""
+              aria-describedby="budget-help"
+              aria-invalid={Boolean(state.errors?.getFieldErrors?.("budget")?.length) || undefined}
               required
             >
               <option value="" disabled>
@@ -736,8 +755,9 @@ function Contact() {
               <option>R$ 3.000 a R$ 6.000</option>
               <option>R$ 6.000 a R$ 10.000</option>
               <option>Acima de R$ 10.000</option>
-              <option>Ainda quero entender o investimento</option>
+              <option>Ainda quero entender o melhor investimento</option>
             </select>
+            <span id="budget-help" className="contact-field-help">{fieldHelp.budget}</span>
             <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
           </label>
           <label className="group grid gap-3">
@@ -747,8 +767,11 @@ function Contact() {
               className="min-h-36 resize-none border-0 border-b border-border bg-transparent px-0 py-3 text-base leading-7 text-primary outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
               name="message"
               placeholder="Fale sobre objetivo, prazo e o que precisa ficar pronto."
+              aria-describedby="message-help"
+              aria-invalid={Boolean(state.errors?.getFieldErrors?.("message")?.length) || undefined}
               required
             />
+            <span id="message-help" className="contact-field-help">{fieldHelp.message}</span>
             <ValidationError className="text-xs leading-5 text-destructive" prefix="Mensagem" field="message" errors={state.errors} />
           </label>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -759,7 +782,7 @@ function Contact() {
             >
               {state.submitting ? "Enviando" : "Enviar briefing"} <Send size={15} />
             </button>
-            <p className="min-h-6 text-sm leading-5 text-muted-foreground" aria-live="polite" role="status">
+            <p className="min-h-6 text-sm leading-5 text-muted-foreground" aria-live="polite" aria-atomic="true" role="status">
               {state.succeeded ? (
                 <span className="inline-flex items-center gap-2 text-primary sm:max-w-md">
                   <Check size={14} /> Briefing recebido. Retorno com o melhor caminho em até 1 dia útil.
@@ -805,7 +828,7 @@ export default function App() {
         <Process />
         <Contact />
       </main>
-      <footer className="border-t border-border px-6 py-10 text-xs font-semibold uppercase text-muted-foreground md:px-20">
+      <footer className="border-t border-border px-6 py-10 text-sm text-muted-foreground md:px-20">
         Matheus Monteiro. Todos os direitos reservados.
       </footer>
     </div>
