@@ -608,7 +608,7 @@ function Process() {
   return (
     <section id="processo" className="process-section mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
       <div className="process-shell border-y border-border py-12 lg:py-14">
-        <div className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16 xl:gap-24">
+        <div className="process-layout grid gap-12 xl:grid-cols-[0.78fr_1.22fr] xl:gap-24">
           <div className="process-intro" data-reveal="heading">
             <p className="process-kicker">Processo em 4 movimentos</p>
             <h2 id="process-title" className="max-w-[12ch] text-4xl font-medium leading-tight text-primary md:text-5xl">Do briefing à entrega</h2>

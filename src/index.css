@@ -413,7 +413,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   background:
     linear-gradient(135deg, rgb(198 186 142 / 0.09), transparent 30%),
     linear-gradient(180deg, rgb(246 244 238 / 0.04), transparent 58%);
-  opacity: 0.74;
+  opacity: 0.28;
 }
 
 .contact-shell > * {
@@ -429,6 +429,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   display: flex;
   flex-direction: column;
   max-width: 32rem;
+  padding-left: 0.08em;
 }
 
 .contact-kicker,
@@ -437,7 +438,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   color: color-mix(in oklch, var(--primary) 78%, var(--secondary));
   font-size: 0.75rem;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.25;
 }
 
 .contact-kicker {
@@ -451,7 +452,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   color: var(--primary);
   font-size: clamp(2.55rem, 5vw, 4.6rem);
   font-weight: 500;
-  line-height: 0.98;
+  line-height: 1.08;
 }
 
 .contact-lede {
@@ -519,7 +520,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   color: var(--muted-foreground);
   font-size: 0.68rem;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
@@ -540,7 +541,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   color: var(--muted-foreground);
   font-size: 0.68rem;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: uppercase;
   transition: color 360ms ease;
 }
@@ -595,21 +596,15 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 .contact-form {
   position: relative;
   display: grid;
-  gap: 1.15rem;
+  gap: 1.55rem;
   align-self: start;
-  border: 1px solid color-mix(in oklch, var(--primary) 16%, transparent);
-  background: color-mix(in oklch, var(--background) 90%, var(--primary) 4%);
-  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 0;
+  background: transparent;
+  padding: 0;
 }
 
 .contact-form::before {
-  content: "";
-  position: absolute;
-  inset-inline: -1px;
-  top: -1px;
-  height: 1px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgb(198 186 142 / 0.82), transparent);
+  display: none;
 }
 
 .contact-form-heading {
@@ -624,7 +619,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   color: var(--primary);
   font-size: clamp(1.55rem, 3vw, 2.2rem);
   font-weight: 500;
-  line-height: 1.08;
+  line-height: 1.16;
 }
 
 .contact-form-heading > p {
@@ -636,7 +631,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 
 .contact-field-grid {
   display: grid;
-  gap: 1rem;
+  gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 .contact-field {
@@ -656,15 +651,16 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 
 .contact-input {
   width: 100%;
-  min-height: 3.45rem;
-  border: 1px solid color-mix(in oklch, var(--primary) 14%, transparent);
-  background: color-mix(in oklch, var(--background) 88%, var(--primary) 5%);
+  min-height: 3.15rem;
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--primary) 18%, transparent);
+  background: transparent;
   color: var(--primary);
   font: inherit;
   font-size: 1rem;
   line-height: 1.35;
   outline: none;
-  padding: 0.95rem 1rem;
+  padding: 0.72rem 0;
 }
 
 select.contact-input {
@@ -672,7 +668,7 @@ select.contact-input {
 }
 
 textarea.contact-input {
-  min-height: 9.4rem;
+  min-height: 7.6rem;
   resize: vertical;
   line-height: 1.65;
 }
@@ -683,7 +679,7 @@ textarea.contact-input {
 
 .contact-field:focus-within .contact-input {
   border-color: color-mix(in oklch, var(--primary) 52%, transparent);
-  background: color-mix(in oklch, var(--background) 84%, var(--primary) 7%);
+  background: transparent;
 }
 
 .contact-submit-row {
@@ -732,9 +728,9 @@ textarea.contact-input {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1180px) {
   .contact-layout {
-    grid-template-columns: minmax(20rem, 0.78fr) minmax(34rem, 1.22fr);
+    grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.22fr);
     align-items: stretch;
   }
 }
@@ -894,7 +890,7 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
   background:
     linear-gradient(120deg, rgb(198 186 142 / 0.1), transparent 34%),
     linear-gradient(180deg, rgb(246 244 238 / 0.045), transparent 58%);
-  opacity: 0.72;
+  opacity: 0.22;
 }
 
 .process-shell > * {
@@ -915,7 +911,7 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
   color: color-mix(in oklch, var(--primary) 78%, var(--secondary));
   font-size: 0.82rem;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.25;
 }
 
 .process-route {
@@ -943,43 +939,35 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
 .process-list {
   position: relative;
   display: grid;
-  gap: 1px;
+  gap: 0;
   margin: 0;
   padding: 0;
-  border: 1px solid color-mix(in oklch, var(--primary) 16%, transparent);
-  background: color-mix(in oklch, var(--primary) 13%, transparent);
+  border-block: 1px solid color-mix(in oklch, var(--primary) 16%, transparent);
+  background: transparent;
   list-style: none;
 }
 
 .process-step {
   position: relative;
-  isolation: isolate;
   display: grid;
-  min-height: 168px;
-  align-content: space-between;
-  gap: clamp(1.5rem, 2.6vw, 2.4rem);
-  overflow: hidden;
-  padding: clamp(1.35rem, 3vw, 2.15rem);
-  background: color-mix(in oklch, var(--background) 91%, var(--primary) 3%);
+  min-height: auto;
+  align-content: start;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  overflow: visible;
+  border-bottom: 1px solid color-mix(in oklch, var(--primary) 13%, transparent);
+  background: transparent;
+  padding-block: clamp(1.55rem, 3.3vw, 2.4rem);
   transition:
     background-color 380ms ease,
     transform 540ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.process-step:last-child {
+  border-bottom: 0;
+}
+
 .process-step::after {
-  content: attr(data-step);
-  position: absolute;
-  right: clamp(0.85rem, 2vw, 1.6rem);
-  bottom: 0.08rem;
-  z-index: -1;
-  color: color-mix(in oklch, var(--primary) 7%, transparent);
-  font-family: var(--font-display-face);
-  font-size: clamp(3.8rem, 8vw, 7rem);
-  font-weight: 600;
-  line-height: 0.78;
-  transition:
-    color 380ms ease,
-    transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
 }
 
 .process-number {
@@ -989,7 +977,9 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
   color: var(--secondary);
   font-size: 0.76rem;
   font-weight: 700;
-  line-height: 1;
+  position: relative;
+  z-index: 1;
+  line-height: 1.25;
   transition:
     color 340ms ease,
     border-color 340ms ease,
@@ -997,6 +987,10 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
 }
 
 .process-step-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.8rem;
   max-width: 34rem;
 }
 
@@ -1016,13 +1010,12 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
 }
 
 .process-step:hover {
-  background: color-mix(in oklch, var(--background) 86%, var(--secondary) 7%);
-  transform: translate3d(0, -2px, 0);
+  background: transparent;
+  transform: translate3d(4px, 0, 0);
 }
 
 .process-step:hover::after {
-  color: color-mix(in oklch, var(--secondary) 16%, transparent);
-  transform: translate3d(0, -0.04em, 0);
+  display: none;
 }
 
 .process-step:hover .process-number {
@@ -1031,30 +1024,18 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
 }
 
 @media (min-width: 1024px) {
-  .process-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(13.5rem, auto));
+  .process-step {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
   }
 
-  .process-step:first-child {
-    background: color-mix(in oklch, var(--background) 88%, var(--secondary) 6%);
-  }
-
-  .process-step:first-child h3 {
-    font-size: clamp(1.55rem, 2.5vw, 2rem);
-    line-height: 1.08;
+  .process-step-copy {
+    grid-template-columns: minmax(10rem, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
+    max-width: none;
   }
 
   .process-step:first-child p {
     font-size: 1rem;
-  }
-
-  .process-step:first-child::after {
-    font-size: clamp(4.8rem, 8vw, 7.2rem);
-  }
-
-  .process-step:nth-child(4) {
-    background: color-mix(in oklch, var(--background) 90%, var(--primary) 5%);
   }
 }
 
@@ -1720,7 +1701,7 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
   }
 
   .process-shell {
-    padding-block: 3rem;
+    padding-block: 2.5rem;
   }
 
   .process-shell::before {
@@ -1740,9 +1721,9 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
   }
 
   .process-step {
-    min-height: 164px;
-    gap: 1.35rem;
-    padding: 1.2rem;
+    min-height: auto;
+    gap: 1rem;
+    padding: 1.45rem 0;
   }
 
   .process-step:hover {
@@ -1795,35 +1776,36 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
   }
 
   .contact-channels {
-    gap: 0.75rem;
-    border-block: 0;
+    gap: 0;
+    border-block: 1px solid var(--border);
   }
 
   .contact-channel {
-    min-height: 70px;
-    border: 1px solid var(--border);
-    background: color-mix(in oklch, var(--card) 78%, var(--primary) 4%);
-    padding: 1rem;
+    min-height: 64px;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    padding: 0.95rem 0;
   }
 
   .contact-channel:hover {
-    border-color: color-mix(in oklch, var(--primary) 30%, transparent);
+    border-color: color-mix(in oklch, var(--primary) 24%, transparent);
   }
 
   .contact-social-link {
     width: 100%;
     min-height: 44px;
     justify-content: space-between;
-    margin-top: 0.75rem;
-    border: 1px solid var(--border);
-    padding: 0 1rem;
-    background: color-mix(in oklch, var(--card) 72%, var(--primary) 3%);
+    margin-top: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0.95rem 0;
+    background: transparent;
   }
 
   .contact-form {
     gap: 1rem;
     border-top: 0;
-    padding: 1rem;
+    padding: 0;
   }
 
   .contact-form-heading {
@@ -1833,6 +1815,7 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
 
   .contact-form-heading h3 {
     font-size: clamp(1.45rem, 8vw, 1.95rem);
+    max-width: 12ch;
   }
 
   .contact-field-grid {
@@ -1848,11 +1831,11 @@ html.motion-ready .about-panel[data-reveal-visible="true"]::after {
 
   .contact-form input,
   .contact-form select {
-    min-height: 52px;
+    min-height: 50px;
   }
 
   .contact-form textarea {
-    min-height: 148px;
+    min-height: 136px;
   }
 
   .contact-submit-row {
