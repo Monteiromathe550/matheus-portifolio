@@ -58,10 +58,10 @@ const specialties = [
 ]
 
 const processSteps = [
-  ["01", "Diagnóstico", "Alinho objetivo, público, referências e decisão principal que a página precisa facilitar."],
-  ["02", "Direção", "Transformo o briefing em estrutura, hierarquia, tom visual e caminho de navegação."],
-  ["03", "Design e código", "Desenho a interface e levo para o front-end com responsividade, estados e movimento."],
-  ["04", "Publicação", "Fecho ajustes, preparo a entrega final e deixo o site pronto para ir ao ar."],
+  ["01", "Diagnóstico", "Defino objetivo, público e a ação principal que a página precisa facilitar."],
+  ["02", "Direção", "Organizo conteúdo, hierarquia e referências para a tela nascer com uma lógica clara."],
+  ["03", "Interface", "Desenho as telas e codifico estados, responsividade e movimento com acabamento."],
+  ["04", "Entrega", "Ajusto detalhes, publico ou preparo os arquivos finais e deixo os próximos passos claros."],
 ]
 
 const navItems = [
@@ -607,22 +607,37 @@ function Services() {
 function Process() {
   return (
     <section id="processo" className="process-section mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
-      <div className="grid gap-10 border-y border-border py-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-        <div data-reveal="heading">
-          <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Processo</p>
-          <h2 id="process-title" className="max-w-md text-4xl font-medium leading-tight text-primary md:text-5xl">Do briefing à entrega</h2>
-          <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
-            Antes de desenhar e codificar, eu defino o que a página precisa provar. Depois, cada etapa aproxima o site da publicação.
-          </p>
-        </div>
-        <div className="process-list divide-y divide-border" data-reveal="timeline">
-          {processSteps.map(([number, title, text]) => (
-            <div key={title} className="process-step grid gap-4 py-6 first:pt-0 last:pb-0 sm:grid-cols-[4rem_0.72fr_1.28fr] sm:items-start" data-reveal="process-step" style={revealStyle(Number(number) - 1)}>
-              <p className="process-number text-xs font-semibold text-secondary">{number}</p>
-              <h3 className="text-xl font-medium text-primary">{title}</h3>
-              <p className="max-w-xl text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(text)}</p>
+      <div className="process-shell border-y border-border py-12 lg:py-14">
+        <div className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16 xl:gap-24">
+          <div className="process-intro" data-reveal="heading">
+            <p className="process-kicker">Processo em 4 movimentos</p>
+            <h2 id="process-title" className="max-w-[12ch] text-4xl font-medium leading-tight text-primary md:text-5xl">Do briefing à entrega</h2>
+            <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground">
+              Cada etapa fecha uma decisão antes da próxima: intenção, estrutura, interface e publicação.
+            </p>
+            <div className="process-route" aria-label="Resumo do caminho do projeto">
+              <span>Briefing</span>
+              <span>Direção</span>
+              <span>Publicação</span>
             </div>
-          ))}
+          </div>
+          <ol className="process-list" data-reveal="timeline">
+            {processSteps.map(([number, title, text]) => (
+              <li
+                key={title}
+                className="process-step"
+                data-reveal="process-step"
+                data-step={number}
+                style={revealStyle(Number(number) - 1)}
+              >
+                <span className="process-number">{number}</span>
+                <div className="process-step-copy">
+                  <h3>{title}</h3>
+                  <p>{keepLastWordsTogether(text)}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
