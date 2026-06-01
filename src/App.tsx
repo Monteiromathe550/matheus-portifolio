@@ -336,27 +336,39 @@ function Header() {
         </button>
       </div>
       {open && (
-        <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 grid max-w-[1040px] gap-2 border border-border bg-background/88 p-3 backdrop-blur-xl md:hidden" aria-label="Menu mobile">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={() => setOpen(false)}
-              className={[
-                "mobile-nav-link flex min-h-11 items-center px-3 text-xs font-semibold uppercase transition-colors duration-300",
-                activeSection === item.id ? "bg-primary text-primary-foreground" : "text-muted-foreground",
-              ].join(" ")}
-            >
-              {item.label}
-            </a>
-          ))}
+        <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 max-w-[1040px] border border-border bg-background/94 p-3 backdrop-blur-xl md:hidden" aria-label="Menu mobile">
+          <div className="mobile-menu-heading flex items-center justify-between border-b border-border px-2 pb-3">
+            <span>Menu</span>
+            <span>{navItems.find((item) => item.id === activeSection)?.label ?? "Início"}</span>
+          </div>
+          <div className="mobile-nav-list grid">
+            {navItems.map((item, index) => {
+              const isActive = activeSection === item.id
+
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={[
+                    "mobile-nav-link flex min-h-12 items-center justify-between border-b border-border px-2 text-sm font-semibold transition-colors duration-300",
+                    isActive ? "is-active text-primary" : "text-muted-foreground",
+                  ].join(" ")}
+                >
+                  <span>{item.label}</span>
+                  <span className="mobile-nav-index">{String(index + 1).padStart(2, "0")}</span>
+                </a>
+              )
+            })}
+          </div>
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
             aria-label="Falar no WhatsApp com Matheus Monteiro"
-            className="mobile-nav-link flex min-h-11 items-center gap-2 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
+            className="mobile-menu-cta mt-3 flex min-h-12 items-center justify-between border border-primary bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
           >
             Vamos criar algo <MessageCircle size={14} />
           </a>

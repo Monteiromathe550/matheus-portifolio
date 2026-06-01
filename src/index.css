@@ -231,6 +231,7 @@ textarea {
 .site-nav-link,
 .site-cta,
 .mobile-nav-link,
+.mobile-menu-cta,
 .section-action {
   min-height: 44px;
   align-items: center;
@@ -245,6 +246,7 @@ textarea {
 .site-nav-link:hover,
 .site-cta:hover,
 .mobile-nav-link:hover,
+.mobile-menu-cta:hover,
 .section-action:hover {
   transform: translate3d(0, -1px, 0);
 }
@@ -255,13 +257,15 @@ textarea {
 
 .site-mark:active,
 .site-cta:active,
-.mobile-nav-link:active {
+.mobile-nav-link:active,
+.mobile-menu-cta:active {
   transform: translate3d(0, 0, 0) scale(0.98);
 }
 
 .site-cta svg,
 .section-action svg,
-.mobile-nav-link svg {
+.mobile-nav-link svg,
+.mobile-menu-cta svg {
   transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -278,7 +282,8 @@ textarea {
 
 .site-cta:hover svg,
 .section-action:hover svg,
-.mobile-nav-link:hover svg {
+.mobile-nav-link:hover svg,
+.mobile-menu-cta:hover svg {
   transform: translate3d(2px, -2px, 0);
 }
 
@@ -783,6 +788,68 @@ html.motion-ready .process-list[data-reveal-visible="true"]::before {
 .mobile-menu-panel {
   transform-origin: top center;
   animation: mobile-menu-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mobile-menu-heading {
+  color: var(--muted-foreground);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mobile-menu-heading span:last-child {
+  color: color-mix(in oklch, var(--primary) 72%, var(--secondary));
+}
+
+.mobile-nav-list {
+  margin-top: 0.25rem;
+}
+
+.mobile-nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  background: var(--secondary);
+  opacity: 0;
+  transform: translate3d(0, -50%, 0) scaleY(0.6);
+  transition:
+    opacity 280ms ease,
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-link.is-active {
+  background: color-mix(in oklch, var(--primary) 7%, transparent);
+}
+
+.mobile-nav-link.is-active::before,
+.mobile-nav-link:focus-visible::before {
+  opacity: 1;
+  transform: translate3d(0, -50%, 0) scaleY(1);
+}
+
+.mobile-nav-index {
+  color: color-mix(in oklch, var(--muted-foreground) 78%, var(--secondary));
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.mobile-nav-link.is-active .mobile-nav-index {
+  color: var(--secondary);
+}
+
+.mobile-menu-cta {
+  position: relative;
+  overflow: hidden;
 }
 
 .project-dialog-backdrop {
