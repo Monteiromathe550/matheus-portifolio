@@ -321,7 +321,7 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Falar no WhatsApp com Matheus Monteiro"
-          className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[10px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
+          className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[11px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
         >
           Vamos criar <MessageCircle size={13} />
         </a>
@@ -378,7 +378,7 @@ function Hero() {
             <span className="text-secondary">&amp;</span> UX/UI Designer
           </span>
         </h1>
-        <p className="hero-copy max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
+        <p className="hero-copy max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
           {keepLastWordsTogether("Criação de interfaces, sites e experiências digitais pensadas para unir estética, usabilidade e conversão. Minimalismo com propósito.")}
         </p>
         <a href="#projetos" className="hero-cta mt-12 inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors duration-500 hover:text-primary">
@@ -424,7 +424,7 @@ function Projects() {
             <div className="p-6">
               <div className="project-tags mb-5 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="border border-border px-2 py-1 text-[10px] font-semibold uppercase text-muted-foreground">
+                  <span key={tag} className="border border-border px-2 py-1 text-[11px] font-semibold uppercase text-muted-foreground">
                     {tag}
                   </span>
                 ))}
@@ -498,7 +498,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
     >
       <div className="project-dialog-panel mx-auto max-w-[1280px] border border-border bg-background">
         <div className="flex items-center justify-between border-b border-border px-6 py-5">
-          <p className="text-xs font-semibold uppercase text-muted-foreground">Preview do projeto</p>
+          <p className="text-[11px] font-semibold uppercase text-muted-foreground">Preview do projeto</p>
           <button ref={closeButtonRef} type="button" className="grid h-11 w-11 place-items-center border border-border text-primary" onClick={onClose} aria-label="Fechar preview">
             <X size={18} />
           </button>
@@ -506,7 +506,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
         <div className="grid lg:grid-cols-[1.35fr_0.65fr]">
           <div className="border-b border-border p-4 lg:border-b-0 lg:border-r md:p-6">
             <div className="relative aspect-video overflow-hidden border border-border bg-card">
-              <div className="absolute inset-x-0 top-0 z-10 flex h-10 items-center justify-between border-b border-border bg-background/80 px-4 text-[10px] font-semibold uppercase text-muted-foreground backdrop-blur">
+              <div className="absolute inset-x-0 top-0 z-10 flex h-10 items-center justify-between border-b border-border bg-background/80 px-4 text-[11px] font-semibold uppercase text-muted-foreground backdrop-blur">
                 <span>Preview visual</span>
                 <span>{project.category}</span>
               </div>
@@ -519,11 +519,11 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
             <p className="mb-8 text-base leading-7 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
             <div className="mb-8 space-y-6 border-y border-border py-6">
               <div>
-                <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">Desafio</p>
+                <p className="mb-2 text-[11px] font-semibold uppercase text-muted-foreground">Desafio</p>
                 <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.challenge)}</p>
               </div>
               <div>
-                <p className="mb-2 text-[10px] font-semibold uppercase text-muted-foreground">Resultado</p>
+                <p className="mb-2 text-[11px] font-semibold uppercase text-muted-foreground">Resultado</p>
                 <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.result)}</p>
               </div>
             </div>
@@ -641,7 +641,7 @@ function Contact() {
           <input type="hidden" name="_subject" value="Novo briefing pelo site Matheus Monteiro" />
           <div className="grid gap-6 md:grid-cols-2">
             <label className="group grid gap-3">
-              <span className="text-[10px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Nome</span>
+              <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Nome</span>
               <input
                 id="name"
                 className="min-h-12 border-0 border-b border-border bg-transparent px-0 text-base text-primary outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
@@ -654,7 +654,7 @@ function Contact() {
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Nome" field="name" errors={state.errors} />
             </label>
             <label className="group grid gap-3">
-              <span className="text-[10px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">E-mail</span>
+              <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">E-mail</span>
               <input
                 id="email"
                 className="min-h-12 border-0 border-b border-border bg-transparent px-0 text-base text-primary outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
@@ -668,7 +668,7 @@ function Contact() {
             </label>
           </div>
           <label className="group grid gap-3">
-            <span className="text-[10px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Tipo de projeto</span>
+            <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Tipo de projeto</span>
             <select
               id="projectType"
               className="min-h-12 border-0 border-b border-border bg-background px-0 text-base text-primary outline-none transition-colors focus:border-primary"
@@ -688,7 +688,7 @@ function Contact() {
             <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
           </label>
           <label className="group grid gap-3">
-            <span className="text-[10px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Orçamento previsto</span>
+            <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Orçamento previsto</span>
             <select
               id="budget"
               className="min-h-12 border-0 border-b border-border bg-background px-0 text-base text-primary outline-none transition-colors focus:border-primary"
@@ -709,7 +709,7 @@ function Contact() {
             <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
           </label>
           <label className="group grid gap-3">
-            <span className="text-[10px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Mensagem</span>
+            <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Mensagem</span>
             <textarea
               id="message"
               className="min-h-36 resize-none border-0 border-b border-border bg-transparent px-0 py-3 text-base leading-7 text-primary outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"

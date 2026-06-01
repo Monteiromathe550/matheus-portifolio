@@ -59,9 +59,9 @@
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(1 0 0 / 0.2);
   --sidebar-ring: oklch(1 0 0 / 0.3);
-  --font-body: "Onest", "Segoe UI", sans-serif;
-  --font-label: "Onest", "Segoe UI", sans-serif;
-  --font-display-face: "Unbounded", "Onest", sans-serif;
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --font-label: "Manrope", "Segoe UI", sans-serif;
+  --font-display-face: "Chivo", "Manrope", sans-serif;
   --font-geist-sans: var(--font-body);
   --font-geist-mono: var(--font-label);
   --font-bodoni: var(--font-display-face);
@@ -119,14 +119,17 @@ body {
   font-family: var(--font-body);
   font-feature-settings: "kern" 1;
   font-kerning: normal;
-  text-rendering: geometricPrecision;
+  font-optical-sizing: auto;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3 {
   font-family: var(--font-display-face);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0;
   text-wrap: balance;
 }
 
@@ -411,7 +414,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 .contact-channel-label {
   margin-bottom: 6px;
   color: var(--muted-foreground);
-  font-size: 9px;
+  font-size: 0.68rem;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
@@ -432,7 +435,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   align-items: center;
   gap: 8px;
   color: var(--muted-foreground);
-  font-size: 9px;
+  font-size: 0.68rem;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
@@ -473,7 +476,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   margin-top: 10px;
   padding: 0;
   color: var(--muted-foreground);
-  font-size: 9px;
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
   transition:
@@ -1099,7 +1102,7 @@ html.motion-ready .process-list[data-reveal-visible="true"]::before {
 
   .hero-title {
     max-width: 22rem;
-    font-size: clamp(2.65rem, 12.8vw, 3.35rem) !important;
+    font-size: clamp(2.3rem, 10vw, 2.5rem) !important;
     line-height: 1.04 !important;
   }
 
