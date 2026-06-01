@@ -607,8 +607,8 @@ function Services() {
 function Process() {
   return (
     <section id="processo" className="process-section mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
-      <div className="process-shell border-y border-border py-12 lg:py-14">
-        <div className="process-layout grid gap-12 xl:grid-cols-[0.78fr_1.22fr] xl:gap-24">
+      <div className="process-shell py-12 lg:py-14">
+        <div className="process-layout">
           <div className="process-intro" data-reveal="heading">
             <p className="process-kicker">Processo em 4 movimentos</p>
             <h2 id="process-title" className="max-w-[12ch] text-4xl font-medium leading-tight text-primary md:text-5xl">Do briefing à entrega</h2>
@@ -649,7 +649,7 @@ function Contact() {
 
   return (
     <section id="contato" className="contact-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="contact-title">
-      <div className="contact-shell border-y border-border py-14 lg:py-16">
+      <div className="contact-shell py-14 lg:py-16">
         <div className="contact-layout">
           <div className="contact-copy" data-reveal="heading">
             <p className="contact-kicker">Contato</p>
@@ -657,10 +657,6 @@ function Contact() {
             <p className="contact-lede">
               {keepLastWordsTogether("Conte o que precisa sair do papel. Eu retorno com direção recomendada, escopo inicial e o melhor formato para desenhar, codificar e publicar.")}
             </p>
-            <div className="contact-note" aria-label="Como funciona o retorno">
-              <span>Retorno em até 1 dia útil</span>
-              <p>O orçamento previsto só ajuda a calibrar profundidade, prazo e prioridade.</p>
-            </div>
             <div className="contact-channels" aria-label="Canais de contato">
               <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
                 <span className="contact-channel-copy">
