@@ -664,6 +664,13 @@ function Contact() {
         </div>
         <form className="contact-form grid gap-8" onSubmit={handleSubmit} aria-busy={state.submitting} data-reveal="form">
           <input type="hidden" name="_subject" value="Novo briefing pelo site Matheus Monteiro" />
+          <div className="contact-form-heading">
+            <p className="text-[11px] font-semibold uppercase text-muted-foreground">Briefing inicial</p>
+            <h3 className="mt-2 text-2xl font-semibold leading-tight text-primary">Conte sobre o projeto</h3>
+            <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
+              Responda o essencial. Eu uso essas informações para entender escopo, prazo e direção visual.
+            </p>
+          </div>
           <div className="grid gap-6 md:grid-cols-2">
             <label className="group grid gap-3">
               <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Nome</span>
