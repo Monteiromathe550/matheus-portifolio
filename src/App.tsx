@@ -649,165 +649,168 @@ function Contact() {
 
   return (
     <section id="contato" className="contact-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="contact-title">
-      <div className="grid gap-12 border-t border-border pt-16 lg:grid-cols-[0.82fr_1fr] lg:gap-20">
-        <div data-reveal="heading">
-          <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Contato</p>
-          <h2 id="contact-title" className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
-          <p className="max-w-md text-base leading-7 text-muted-foreground">
-            {keepLastWordsTogether("Conte o que precisa sair do papel. Eu retorno com caminho recomendado, escopo inicial e o melhor formato para desenhar, codificar e publicar.")}
-          </p>
-          <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
-            {keepLastWordsTogether("O orçamento previsto não trava a conversa. Ele só ajuda a calibrar profundidade, prazo e prioridade.")}
-          </p>
-          <div className="contact-channels mt-9" aria-label="Canais de contato">
-            <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
-              <span className="contact-channel-copy">
-                <span className="contact-channel-label">E-mail</span>
-                <span className="contact-channel-value">matheusapm550@gmail.com</span>
-              </span>
-              <span className="contact-channel-action" aria-hidden="true">
-                <span>Escrever</span>
-                <ExternalLink className="contact-channel-icon" size={13} />
-              </span>
-            </a>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="contact-channel group" aria-label="Falar no WhatsApp com Matheus Monteiro">
-              <span className="contact-channel-copy">
-                <span className="contact-channel-label">WhatsApp</span>
-                <span className="contact-channel-value">+55 48 98438-0803</span>
-              </span>
-              <span className="contact-channel-action" aria-hidden="true">
-                <span>Chamar</span>
-                <MessageCircle className="contact-channel-icon" size={14} />
-              </span>
-            </a>
-            <a className="contact-social-link" href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noopener noreferrer">
-              Ver LinkedIn <ExternalLink size={12} />
-            </a>
-          </div>
-        </div>
-        <form className="contact-form grid gap-8" onSubmit={handleSubmit} aria-busy={state.submitting} data-reveal="form">
-          <input type="hidden" name="_subject" value="Novo briefing pelo site Matheus Monteiro" />
-          <div className="contact-form-heading">
-            <p className="text-[11px] font-semibold uppercase text-muted-foreground">Briefing inicial</p>
-            <h3 className="mt-2 text-2xl font-semibold leading-tight text-primary">Conte sobre o projeto</h3>
-            <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
-              Responda o essencial. Se ainda não tiver todas as respostas, mande o que já sabe.
+      <div className="contact-shell border-y border-border py-14 lg:py-16">
+        <div className="contact-layout">
+          <div className="contact-copy" data-reveal="heading">
+            <p className="contact-kicker">Contato</p>
+            <h2 id="contact-title" className="contact-title">Iniciar projeto</h2>
+            <p className="contact-lede">
+              {keepLastWordsTogether("Conte o que precisa sair do papel. Eu retorno com direção recomendada, escopo inicial e o melhor formato para desenhar, codificar e publicar.")}
             </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            <label className="group grid gap-3">
-              <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Nome</span>
-              <input
-                id="name"
-                className="min-h-12 border-0 border-b border-border bg-transparent px-0 text-base text-primary outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
-                name="name"
-                type="text"
-                placeholder="Seu nome"
-                autoComplete="name"
-                aria-describedby="name-help"
-                aria-invalid={Boolean(state.errors?.getFieldErrors?.("name")?.length) || undefined}
-                required
-              />
-              <span id="name-help" className="contact-field-help">{fieldHelp.name}</span>
-              <ValidationError className="text-xs leading-5 text-destructive" prefix="Nome" field="name" errors={state.errors} />
-            </label>
-            <label className="group grid gap-3">
-              <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">E-mail</span>
-              <input
-                id="email"
-                className="min-h-12 border-0 border-b border-border bg-transparent px-0 text-base text-primary outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
-                name="email"
-                type="email"
-                placeholder="voce@email.com"
-                autoComplete="email"
-                aria-describedby="email-help"
-                aria-invalid={Boolean(state.errors?.getFieldErrors?.("email")?.length) || undefined}
-                required
-              />
-              <span id="email-help" className="contact-field-help">{fieldHelp.email}</span>
-              <ValidationError className="text-xs leading-5 text-destructive" prefix="E-mail" field="email" errors={state.errors} />
-            </label>
-          </div>
-          <label className="group grid gap-3">
-            <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Tipo de projeto</span>
-            <select
-              id="projectType"
-              className="min-h-12 border-0 border-b border-border bg-background px-0 text-base text-primary outline-none transition-colors focus:border-primary"
-              name="projectType"
-              defaultValue=""
-              aria-describedby="project-type-help"
-              aria-invalid={Boolean(state.errors?.getFieldErrors?.("projectType")?.length) || undefined}
-              required
-            >
-              <option value="" disabled>
-                Selecione uma opção
-              </option>
-              <option>Site institucional</option>
-              <option>Landing page</option>
-              <option>E-commerce</option>
-              <option>UX/UI de produto</option>
-              <option>Branding digital</option>
-            </select>
-            <span id="project-type-help" className="contact-field-help">{fieldHelp.projectType}</span>
-            <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
-          </label>
-          <label className="group grid gap-3">
-            <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Orçamento previsto</span>
-            <select
-              id="budget"
-              className="min-h-12 border-0 border-b border-border bg-background px-0 text-base text-primary outline-none transition-colors focus:border-primary"
-              name="budget"
-              defaultValue=""
-              aria-describedby="budget-help"
-              aria-invalid={Boolean(state.errors?.getFieldErrors?.("budget")?.length) || undefined}
-              required
-            >
-              <option value="" disabled>
-                Selecione uma faixa
-              </option>
-              <option>Até R$ 1.500</option>
-              <option>R$ 1.500 a R$ 3.000</option>
-              <option>R$ 3.000 a R$ 6.000</option>
-              <option>R$ 6.000 a R$ 10.000</option>
-              <option>Acima de R$ 10.000</option>
-              <option>Ainda quero entender o melhor investimento</option>
-            </select>
-            <span id="budget-help" className="contact-field-help">{fieldHelp.budget}</span>
-            <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
-          </label>
-          <label className="group grid gap-3">
-            <span className="text-[11px] font-semibold uppercase text-muted-foreground transition-colors group-focus-within:text-primary">Mensagem</span>
-            <textarea
-              id="message"
-              className="min-h-36 resize-none border-0 border-b border-border bg-transparent px-0 py-3 text-base leading-7 text-primary outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
-              name="message"
-              placeholder="Fale sobre objetivo, prazo e o que precisa ficar pronto."
-              aria-describedby="message-help"
-              aria-invalid={Boolean(state.errors?.getFieldErrors?.("message")?.length) || undefined}
-              required
-            />
-            <span id="message-help" className="contact-field-help">{fieldHelp.message}</span>
-            <ValidationError className="text-xs leading-5 text-destructive" prefix="Mensagem" field="message" errors={state.errors} />
-          </label>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            <button
-              className="inline-flex min-h-12 items-center justify-center gap-3 border border-primary bg-primary px-6 text-xs font-semibold uppercase text-primary-foreground transition-colors hover:bg-transparent hover:text-primary disabled:cursor-not-allowed disabled:opacity-55 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-ring"
-              type="submit"
-              disabled={state.submitting}
-            >
-              {state.submitting ? "Enviando" : "Enviar briefing"} <Send size={15} />
-            </button>
-            <p className="min-h-6 text-sm leading-5 text-muted-foreground" aria-live="polite" aria-atomic="true" role="status">
-              {state.succeeded ? (
-                <span className="inline-flex items-center gap-2 text-primary sm:max-w-md">
-                  <Check size={14} /> Briefing recebido. Retorno com o melhor caminho em até 1 dia útil.
+            <div className="contact-note" aria-label="Como funciona o retorno">
+              <span>Retorno em até 1 dia útil</span>
+              <p>O orçamento previsto só ajuda a calibrar profundidade, prazo e prioridade.</p>
+            </div>
+            <div className="contact-channels" aria-label="Canais de contato">
+              <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
+                <span className="contact-channel-copy">
+                  <span className="contact-channel-label">E-mail</span>
+                  <span className="contact-channel-value">matheusapm550@gmail.com</span>
                 </span>
-              ) : (
-                "Resposta em até 1 dia útil"
-              )}
-            </p>
+                <span className="contact-channel-action" aria-hidden="true">
+                  <span>Escrever</span>
+                  <ExternalLink className="contact-channel-icon" size={13} />
+                </span>
+              </a>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="contact-channel group" aria-label="Falar no WhatsApp com Matheus Monteiro">
+                <span className="contact-channel-copy">
+                  <span className="contact-channel-label">WhatsApp</span>
+                  <span className="contact-channel-value">+55 48 98438-0803</span>
+                </span>
+                <span className="contact-channel-action" aria-hidden="true">
+                  <span>Chamar</span>
+                  <MessageCircle className="contact-channel-icon" size={14} />
+                </span>
+              </a>
+              <a className="contact-social-link" href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noopener noreferrer">
+                Ver LinkedIn <ExternalLink size={12} />
+              </a>
+            </div>
           </div>
-        </form>
+          <form className="contact-form" onSubmit={handleSubmit} aria-busy={state.submitting} data-reveal="form">
+            <input type="hidden" name="_subject" value="Novo briefing pelo site Matheus Monteiro" />
+            <div className="contact-form-heading">
+              <div>
+                <p className="contact-form-kicker">Briefing inicial</p>
+                <h3>Conte sobre o projeto</h3>
+              </div>
+              <p>Responda o essencial. Se ainda não tiver todas as respostas, mande o que já sabe.</p>
+            </div>
+            <div className="contact-field-grid">
+              <label className="contact-field group">
+                <span className="contact-field-label">Nome</span>
+                <input
+                  id="name"
+                  className="contact-input"
+                  name="name"
+                  type="text"
+                  placeholder="Seu nome"
+                  autoComplete="name"
+                  aria-describedby="name-help"
+                  aria-invalid={Boolean(state.errors?.getFieldErrors?.("name")?.length) || undefined}
+                  required
+                />
+                <span id="name-help" className="contact-field-help">{fieldHelp.name}</span>
+                <ValidationError className="text-xs leading-5 text-destructive" prefix="Nome" field="name" errors={state.errors} />
+              </label>
+              <label className="contact-field group">
+                <span className="contact-field-label">E-mail</span>
+                <input
+                  id="email"
+                  className="contact-input"
+                  name="email"
+                  type="email"
+                  placeholder="voce@email.com"
+                  autoComplete="email"
+                  aria-describedby="email-help"
+                  aria-invalid={Boolean(state.errors?.getFieldErrors?.("email")?.length) || undefined}
+                  required
+                />
+                <span id="email-help" className="contact-field-help">{fieldHelp.email}</span>
+                <ValidationError className="text-xs leading-5 text-destructive" prefix="E-mail" field="email" errors={state.errors} />
+              </label>
+            </div>
+            <label className="contact-field group">
+              <span className="contact-field-label">Tipo de projeto</span>
+              <select
+                id="projectType"
+                className="contact-input"
+                name="projectType"
+                defaultValue=""
+                aria-describedby="project-type-help"
+                aria-invalid={Boolean(state.errors?.getFieldErrors?.("projectType")?.length) || undefined}
+                required
+              >
+                <option value="" disabled>
+                  Selecione uma opção
+                </option>
+                <option>Site institucional</option>
+                <option>Landing page</option>
+                <option>E-commerce</option>
+                <option>UX/UI de produto</option>
+                <option>Branding digital</option>
+              </select>
+              <span id="project-type-help" className="contact-field-help">{fieldHelp.projectType}</span>
+              <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
+            </label>
+            <label className="contact-field group">
+              <span className="contact-field-label">Orçamento previsto</span>
+              <select
+                id="budget"
+                className="contact-input"
+                name="budget"
+                defaultValue=""
+                aria-describedby="budget-help"
+                aria-invalid={Boolean(state.errors?.getFieldErrors?.("budget")?.length) || undefined}
+                required
+              >
+                <option value="" disabled>
+                  Selecione uma faixa
+                </option>
+                <option>Até R$ 1.500</option>
+                <option>R$ 1.500 a R$ 3.000</option>
+                <option>R$ 3.000 a R$ 6.000</option>
+                <option>R$ 6.000 a R$ 10.000</option>
+                <option>Acima de R$ 10.000</option>
+                <option>Ainda quero entender o melhor investimento</option>
+              </select>
+              <span id="budget-help" className="contact-field-help">{fieldHelp.budget}</span>
+              <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
+            </label>
+            <label className="contact-field contact-field-message group">
+              <span className="contact-field-label">Mensagem</span>
+              <textarea
+                id="message"
+                className="contact-input"
+                name="message"
+                placeholder="Fale sobre objetivo, prazo e o que precisa ficar pronto."
+                aria-describedby="message-help"
+                aria-invalid={Boolean(state.errors?.getFieldErrors?.("message")?.length) || undefined}
+                required
+              />
+              <span id="message-help" className="contact-field-help">{fieldHelp.message}</span>
+              <ValidationError className="text-xs leading-5 text-destructive" prefix="Mensagem" field="message" errors={state.errors} />
+            </label>
+            <div className="contact-submit-row">
+              <button
+                className="contact-submit"
+                type="submit"
+                disabled={state.submitting}
+              >
+                {state.submitting ? "Enviando" : "Enviar briefing"} <Send size={15} />
+              </button>
+              <p className="contact-status" aria-live="polite" aria-atomic="true" role="status">
+                {state.succeeded ? (
+                  <span className="inline-flex items-center gap-2 text-primary sm:max-w-md">
+                    <Check size={14} /> Briefing recebido. Retorno com o melhor caminho em até 1 dia útil.
+                  </span>
+                ) : (
+                  "Resposta em até 1 dia útil"
+                )}
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   )
