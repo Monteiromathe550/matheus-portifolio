@@ -25,9 +25,9 @@ const projects: Project[] = [
     tags: ["E-commerce", "Cosméticos"],
     image: importBrzImage,
     liveUrl: "https://solange-cosm-ticos-main.vercel.app/",
-    summary: "E-commerce de cosméticos importados com direção visual premium, vitrine clara e foco na experiência de compra.",
-    challenge: "Apresentar cosméticos importados com uma vitrine elegante, clara e preparada para compra.",
-    result: "Uma narrativa visual mais premium, produtos em destaque e uma experiência direta para escolher kits e cosméticos.",
+    summary: "Loja de cosméticos importados com vitrine premium, categorias claras e caminho de compra sem ruído.",
+    challenge: "Organizar uma oferta variada de cosméticos importados sem perder elegância, confiança e ritmo de navegação.",
+    result: "Vitrine mais clara, produtos com presença visual e uma jornada direta para comparar opções e iniciar a compra.",
   },
   {
     title: "ArchStudio",
@@ -35,9 +35,9 @@ const projects: Project[] = [
     tags: ["Portfolio", "Arquitetura"],
     image: archstudioImage,
     liveUrl: "https://site-arquitetura-psi.vercel.app/",
-    summary: "Site para arquiteto apresentar seus trabalhos com estética premium, navegação objetiva e foco no portfólio.",
-    challenge: "Criar uma presença digital para arquitetos apresentarem seus trabalhos com impacto visual e leitura profissional.",
-    result: "Portfolio com presença sofisticada, projetos em destaque e narrativa clara para apresentar o trabalho do arquiteto.",
+    summary: "Portfolio para arquitetura com imagens em destaque, leitura editorial e navegação objetiva entre projetos.",
+    challenge: "Dar protagonismo aos projetos sem transformar o site em uma galeria pesada ou confusa.",
+    result: "Uma presença sofisticada, com hierarquia visual clara e espaço para cada projeto respirar.",
   },
   {
     title: "Renova Aesthetics",
@@ -45,23 +45,23 @@ const projects: Project[] = [
     tags: ["Clínica", "Portfolio"],
     image: renovaImage,
     liveUrl: "https://renova-aesthetics.vercel.app/",
-    summary: "Site para clínica de estética apresentar trabalhos, procedimentos e posicionamento premium com foco em agendamento.",
-    challenge: "Apresentar uma clínica de estética com confiança, sofisticação e espaço para mostrar trabalhos e procedimentos.",
-    result: "Site institucional refinado, com apresentação clara dos serviços e caminho direto para agendamento.",
+    summary: "Site para clínica estética com serviços bem apresentados, prova visual e chamada clara para agendamento.",
+    challenge: "Comunicar confiança e sofisticação sem deixar procedimentos, resultados e contato competindo pela atenção.",
+    result: "Interface refinada, serviços mais fáceis de entender e caminho de contato direto para novos agendamentos.",
   },
 ]
 
 const specialties = [
-  ["Web Design", "Sites institucionais e landing pages com hierarquia forte, copy objetiva e acabamento visual de marca premium."],
-  ["UX/UI Design", "Fluxos, telas e decisões de produto desenhados para reduzir dúvida, aumentar confiança e guiar ação."],
-  ["Design Branding", "Direção visual para marcas digitais, com identidade consistente, presença premium e comunicação memorável."],
+  ["Web Design", "Sites institucionais, landing pages e portfólios com hierarquia forte, copy objetiva e acabamento premium."],
+  ["UX/UI Design", "Jornadas, telas e decisões de interface pensadas para reduzir dúvida e guiar a próxima ação."],
+  ["Design Branding", "Direção visual para marcas digitais que precisam parecer consistentes, confiáveis e fáceis de reconhecer."],
 ]
 
 const processSteps = [
-  ["01", "Diagnóstico", "Entendo objetivo, público, referência visual e o que precisa converter para definir a direção certa."],
-  ["02", "Direção", "Transformo o briefing em estrutura, hierarquia, estilo visual e primeira rota de experiência."],
-  ["03", "Interface", "Desenho telas com atenção a ritmo, responsividade, clareza de ação e detalhes de acabamento."],
-  ["04", "Entrega", "Organizo próximos passos, ajustes finais e arquivos ou publicação para a presença digital ficar pronta."],
+  ["01", "Diagnóstico", "Alinho objetivo, público, referências e decisão principal que a página precisa facilitar."],
+  ["02", "Direção", "Transformo o briefing em estrutura, hierarquia, tom visual e caminho de navegação."],
+  ["03", "Interface", "Desenho as telas com ritmo, responsividade, clareza de ação e acabamento visual."],
+  ["04", "Entrega", "Fecho ajustes, preparo publicação ou arquivos finais e deixo os próximos passos organizados."],
 ]
 
 const navItems = [
@@ -379,13 +379,13 @@ function Hero() {
           </span>
         </h1>
         <p className="hero-copy max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-          {keepLastWordsTogether("Criação de interfaces, sites e experiências digitais pensadas para unir estética, usabilidade e conversão. Minimalismo com propósito.")}
+          {keepLastWordsTogether("Interfaces e sites com direção visual, navegação clara e acabamento pensado para transformar visita em confiança.")}
         </p>
         <a href="#projetos" className="hero-cta mt-12 inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors duration-500 hover:text-primary">
           <span className="hero-cta-icon grid h-12 w-12 place-items-center border border-border">
             <ArrowDown size={17} />
           </span>
-          Ver projetos
+          Ver trabalhos
         </a>
       </div>
     </section>
@@ -397,10 +397,12 @@ function Projects() {
 
   return (
     <section id="projetos" className="projects-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
-      <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <div data-reveal="heading">
+      <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div className="max-w-2xl" data-reveal="heading">
           <h2 id="projects-title" className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
-          <p className="mt-3 text-xs font-semibold uppercase text-muted-foreground">Trabalhos recentes</p>
+          <p className="mt-4 text-base leading-7 text-muted-foreground">
+            Uma amostra de interfaces para vender, apresentar e dar forma a uma presença digital mais confiável.
+          </p>
         </div>
         <a href="#contato" className="section-action inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary" data-reveal="heading" style={revealStyle(1)}>
           Falar sobre projeto <ExternalLink size={14} />
@@ -431,6 +433,9 @@ function Projects() {
               </div>
               <h3 className="mb-4 text-2xl font-medium text-primary">{project.title}</h3>
               <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
+              <span className="project-card-action mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary">
+                Abrir preview <ExternalLink size={13} />
+              </span>
             </div>
           </button>
         ))}
@@ -546,11 +551,11 @@ function About() {
   return (
     <section id="sobre" className="about-section mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
       <div className="about-panel grid gap-10 border-y border-border py-16 lg:grid-cols-12" data-reveal="line">
-        <p id="about-title" className="text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</p>
-        <ScrollRevealText text="Desenho páginas e produtos digitais com direção visual precisa, estrutura clara e atenção aos detalhes que fazem a interface parecer inevitável." />
+        <h2 id="about-title" className="font-sans text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</h2>
+        <ScrollRevealText text="Desenho páginas e produtos digitais com direção visual precisa, estrutura clara e decisões que deixam a experiência mais fácil de confiar." />
         <div className="space-y-6 text-base leading-7 text-muted-foreground lg:col-span-3">
-          <p>{keepLastWordsTogether("Atuo nos pontos onde marca, produto e conversão precisam falar a mesma língua.")}</p>
-          <p>{keepLastWordsTogether("O resultado é uma presença digital com hierarquia, acabamento e intenção.")}</p>
+          <p>{keepLastWordsTogether("Atuo onde marca, produto e conversão precisam trabalhar juntos sem disputar atenção.")}</p>
+          <p>{keepLastWordsTogether("O resultado é uma presença digital com hierarquia, acabamento e direção clara.")}</p>
         </div>
       </div>
     </section>
@@ -560,7 +565,12 @@ function About() {
 function Services() {
   return (
     <section id="servicos" className="services-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
-      <h2 id="services-title" className="mb-12 text-4xl font-medium text-primary md:text-5xl" data-reveal="heading">Especialidades</h2>
+      <div className="mb-12 max-w-2xl" data-reveal="heading">
+        <h2 id="services-title" className="text-4xl font-medium text-primary md:text-5xl">Especialidades</h2>
+        <p className="mt-4 text-base leading-7 text-muted-foreground">
+          O trabalho combina estrutura, interface e direção visual para tirar o projeto do abstrato.
+        </p>
+      </div>
       <div className="services-grid grid gap-6 md:grid-cols-3">
         {specialties.map(([title, text], index) => (
           <div key={title} className="service-card border border-border bg-card p-7" data-reveal="card" style={revealStyle(index)}>
@@ -580,7 +590,10 @@ function Process() {
       <div className="grid gap-10 border-y border-border py-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
         <div data-reveal="heading">
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Processo</p>
-          <h2 id="process-title" className="max-w-md text-4xl font-medium leading-tight text-primary md:text-5xl">Clareza antes de construir</h2>
+          <h2 id="process-title" className="max-w-md text-4xl font-medium leading-tight text-primary md:text-5xl">Do briefing à entrega</h2>
+          <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
+            Cada etapa reduz ambiguidade antes de virar tela, para decisões visuais terem função.
+          </p>
         </div>
         <div className="process-list divide-y divide-border" data-reveal="timeline">
           {processSteps.map(([number, title, text]) => (
@@ -606,10 +619,10 @@ function Contact() {
           <p className="mb-5 text-xs font-semibold uppercase text-muted-foreground">Contato</p>
           <h2 id="contact-title" className="mb-7 text-4xl font-medium leading-tight text-primary md:text-5xl">Iniciar projeto</h2>
           <p className="max-w-md text-base leading-7 text-muted-foreground">
-            {keepLastWordsTogether("Conte o que você quer construir. Eu retorno com próximos passos, escopo inicial e uma direção clara para começarmos sem chute de preço.")}
+            {keepLastWordsTogether("Conte o que precisa sair do papel. Eu retorno com próximos passos, escopo inicial e uma direção clara para começar.")}
           </p>
           <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
-            {keepLastWordsTogether("O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade desde a primeira resposta.")}
+            {keepLastWordsTogether("O orçamento previsto ajuda a ajustar profundidade, prazo e prioridade já na primeira resposta.")}
           </p>
           <div className="contact-channels mt-9" aria-label="Canais de contato">
             <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
