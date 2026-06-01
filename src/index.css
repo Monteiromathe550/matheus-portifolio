@@ -59,9 +59,9 @@
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(1 0 0 / 0.2);
   --sidebar-ring: oklch(1 0 0 / 0.3);
-  --font-body: "Manrope", "Segoe UI", sans-serif;
-  --font-label: "Manrope", "Segoe UI", sans-serif;
-  --font-display-face: "Chivo", "Manrope", sans-serif;
+  --font-body: "Urbanist", "Segoe UI", sans-serif;
+  --font-label: "Urbanist", "Segoe UI", sans-serif;
+  --font-display-face: "Syne", "Urbanist", sans-serif;
   --font-geist-sans: var(--font-body);
   --font-geist-mono: var(--font-label);
   --font-bodoni: var(--font-display-face);
