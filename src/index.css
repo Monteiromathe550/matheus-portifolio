@@ -2298,3 +2298,16 @@ textarea.contact-input {
     filter: blur(36px) saturate(1.04);
   }
 }
+
+@media (max-width: 1023px) {
+  .process-list {
+    gap: 1rem;
+    padding-bottom: clamp(5rem, 14vh, 8rem);
+  }
+
+  .process-step {
+    position: relative;
+    top: auto;
+    z-index: auto;
+  }
+}
