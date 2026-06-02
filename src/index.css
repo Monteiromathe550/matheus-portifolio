@@ -2319,3 +2319,51 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
   margin-bottom: 1px;
   box-shadow: inset 0 -1px 0 var(--stack-border);
 }
+
+.section-spacing {
+  margin-top: clamp(1.25rem, 3vw, 3rem);
+}
+
+.about-section,
+.projects-section,
+.services-section,
+.process-section,
+.contact-section {
+  padding-block: clamp(4rem, 7vw, 5.75rem);
+}
+
+.projects-grid {
+  padding-bottom: clamp(5rem, 11vh, 7.5rem);
+}
+
+.services-grid {
+  padding-bottom: clamp(5.25rem, 12vh, 8rem);
+}
+
+.process-list {
+  padding-bottom: clamp(12rem, 28vh, 18rem);
+}
+
+@media (max-width: 640px) {
+  .section-spacing {
+    margin-top: 1.25rem;
+  }
+
+  .about-section,
+  .projects-section,
+  .services-section,
+  .process-section,
+  .contact-section {
+    padding-top: 3.25rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .projects-grid,
+  .services-grid {
+    padding-bottom: 4.5rem;
+  }
+
+  .process-list {
+    padding-bottom: 8rem;
+  }
+}
