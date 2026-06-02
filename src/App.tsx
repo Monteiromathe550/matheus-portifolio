@@ -157,6 +157,56 @@ function useMotionReveals() {
   }, [])
 }
 
+function useStackScrollMotion() {
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const stackCards = Array.from(document.querySelectorAll<HTMLElement>(".stack-card"))
+
+    if (!stackCards.length || reducedMotion.matches) return
+
+    let animationFrame = 0
+
+    const update = () => {
+      animationFrame = 0
+      const viewport = window.innerHeight || 1
+
+      stackCards.forEach((card) => {
+        const rect = card.getBoundingClientRect()
+        const enterProgress = clamp((viewport - rect.top) / (viewport * 0.82))
+        const exitProgress = clamp(rect.bottom / (viewport * 0.42))
+        const presence = Math.min(enterProgress, exitProgress)
+        const settledLift = clamp((viewport * 0.18 - rect.top) / (viewport * 0.18))
+        const y = (1 - easeOutCubic(presence)) * 24 - settledLift * 5
+        const scale = 0.985 + easeOutCubic(presence) * 0.015
+
+        card.style.setProperty("--stack-motion-y", `${Math.round(y * 100) / 100}px`)
+        card.style.setProperty("--stack-motion-scale", String(Math.round(scale * 1000) / 1000))
+        card.style.setProperty("--stack-motion-presence", String(Math.round(presence * 1000) / 1000))
+      })
+    }
+
+    const requestUpdate = () => {
+      if (animationFrame) return
+      animationFrame = window.requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener("scroll", requestUpdate, { passive: true })
+    window.addEventListener("resize", requestUpdate)
+
+    return () => {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame)
+      window.removeEventListener("scroll", requestUpdate)
+      window.removeEventListener("resize", requestUpdate)
+      stackCards.forEach((card) => {
+        card.style.removeProperty("--stack-motion-y")
+        card.style.removeProperty("--stack-motion-scale")
+        card.style.removeProperty("--stack-motion-presence")
+      })
+    }
+  }, [])
+}
+
 function ScrollRevealText({ text }: { text: string }) {
   const ref = useRef<HTMLParagraphElement>(null)
   const words = text.split(" ")
@@ -809,6 +859,7 @@ function Contact() {
 
 export default function App() {
   useMotionReveals()
+  useStackScrollMotion()
 
   return (
     <div className="portfolio-page min-h-screen overflow-x-clip bg-background text-primary">
