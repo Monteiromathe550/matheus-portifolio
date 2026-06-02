@@ -308,7 +308,7 @@ textarea {
   display: inline-flex;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .site-cta {
     display: inline-flex;
   }
@@ -319,6 +319,87 @@ textarea {
 .mobile-nav-link:hover svg,
 .mobile-menu-cta:hover svg {
   transform: translate3d(2px, -2px, 0);
+}
+
+.site-footer {
+  padding-block: clamp(3rem, 7vw, 5.5rem) 2rem;
+}
+
+.site-footer-inner {
+  display: grid;
+  gap: clamp(3rem, 7vw, 5.5rem);
+}
+
+.site-footer-lead {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-footer-kicker {
+  color: color-mix(in oklch, var(--primary) 72%, var(--secondary));
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.site-footer-title {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 19ch;
+  align-items: flex-end;
+  gap: 0.8rem;
+  color: var(--primary);
+  font-size: clamp(2rem, 5vw, 4.6rem);
+  font-weight: 500;
+  line-height: 1.02;
+  transition:
+    color 320ms ease,
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-footer-title svg {
+  flex: 0 0 auto;
+  margin-bottom: 0.32em;
+  color: var(--secondary);
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-footer-title:hover {
+  color: color-mix(in oklch, var(--primary) 82%, var(--secondary));
+  transform: translate3d(0, -2px, 0);
+}
+
+.site-footer-title:hover svg {
+  transform: translate3d(3px, -3px, 0);
+}
+
+.site-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.4rem;
+}
+
+.site-footer-links a {
+  color: color-mix(in oklch, var(--muted-foreground) 88%, var(--primary));
+  text-transform: uppercase;
+  transition: color 280ms ease;
+}
+
+.site-footer-links a:hover {
+  color: var(--secondary);
 }
 
 html.motion-ready [data-reveal] {
@@ -592,6 +673,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 
 .contact-form {
   position: relative;
+  container-type: inline-size;
   display: grid;
   gap: 2rem;
   align-self: start;
@@ -610,7 +692,8 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 .contact-form-heading {
   display: grid;
   gap: 1rem;
-  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--stack-border);
+  padding-bottom: 1.25rem;
 }
 
 .contact-form-heading h3 {
@@ -782,7 +865,7 @@ textarea.contact-input {
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@container (min-width: 46rem) {
   .contact-field-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -795,7 +878,7 @@ textarea.contact-input {
 
 @media (min-width: 1180px) {
   .contact-layout {
-    grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.22fr);
+    grid-template-columns: minmax(17rem, 0.7fr) minmax(0, 1.3fr);
     align-items: stretch;
   }
 }
@@ -810,7 +893,7 @@ textarea.contact-input {
 }
 
 .section-spacing {
-  margin-top: clamp(1rem, 4vw, 4rem);
+  margin-top: clamp(2.5rem, 6vw, 6rem);
   border-top: 0;
 }
 
@@ -1226,7 +1309,7 @@ textarea.contact-input {
 
 @media (min-width: 1024px) {
   .reference-layout {
-    grid-template-columns: minmax(18rem, 0.86fr) minmax(0, 1.14fr);
+    grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1.28fr);
     align-items: start;
   }
 
@@ -1651,6 +1734,7 @@ textarea.contact-input {
 .projects-grid {
   display: grid;
   gap: clamp(1.15rem, 2.5vw, 2rem);
+  padding-bottom: clamp(7rem, 16vh, 11rem);
 }
 
 .stack-card {
@@ -1724,6 +1808,11 @@ textarea.contact-input {
   background: var(--stack-surface);
 }
 
+.services-grid,
+.process-list {
+  padding-bottom: clamp(9rem, 20vh, 14rem);
+}
+
 .service-card {
   top: calc(7.75rem + var(--stack-offset));
 }
@@ -1751,7 +1840,7 @@ textarea.contact-input {
 
 .contact-form-heading {
   gap: 1.2rem;
-  padding-bottom: 0.45rem;
+  padding-bottom: 1.25rem;
 }
 
 .contact-field-grid {
@@ -1781,11 +1870,6 @@ textarea.contact-input {
     opacity: 1 !important;
     filter: none !important;
     transform: none !important;
-  }
-
-  .stack-card {
-    position: relative !important;
-    top: auto !important;
   }
 
   .about-reveal-word {
@@ -1901,6 +1985,7 @@ textarea.contact-input {
 
   .projects-grid {
     gap: 0.9rem;
+    padding-bottom: 5.5rem;
   }
 
   .project-card {
@@ -1987,6 +2072,7 @@ textarea.contact-input {
 
   .services-grid {
     gap: 1rem;
+    padding-bottom: 6rem;
   }
 
   .service-card {
@@ -2034,6 +2120,10 @@ textarea.contact-input {
 
   .process-shell {
     padding-block: 2.5rem;
+  }
+
+  .process-list {
+    padding-bottom: 6.5rem;
   }
 
   .process-shell::before {

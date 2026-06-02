@@ -73,6 +73,7 @@ const navItems = [
   { id: "sobre", label: "Sobre" },
   { id: "projetos", label: "Projetos" },
   { id: "servicos", label: "Serviços" },
+  { id: "processo", label: "Processo" },
   { id: "contato", label: "Contato" },
 ]
 
@@ -318,7 +319,7 @@ function Header() {
         >
           MM
         </a>
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Navegação principal">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegação principal">
           {navItems.map((item) => (
             <a
               key={item.id}
@@ -344,12 +345,12 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Falar no WhatsApp com Matheus Monteiro"
-          className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
+          className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary lg:inline-flex"
         >
           Iniciar projeto <MessageCircle size={13} />
         </a>
         <button
-          className="grid h-11 w-11 place-items-center border border-border md:hidden"
+          className="grid h-11 w-11 place-items-center border border-border lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
@@ -359,7 +360,7 @@ function Header() {
         </button>
       </div>
       {open && (
-        <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 max-w-[1040px] border border-border bg-background/94 p-3 backdrop-blur-xl md:hidden" aria-label="Menu mobile">
+        <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 max-w-[1040px] border border-border bg-background/94 p-3 backdrop-blur-xl lg:hidden" aria-label="Menu mobile">
           <div className="mobile-menu-heading flex items-center justify-between border-b border-border px-2 pb-3">
             <span>Menu</span>
             <span>{navItems.find((item) => item.id === activeSection)?.label ?? "Início"}</span>
@@ -836,8 +837,24 @@ export default function App() {
         <Process />
         <Contact />
       </main>
-      <footer className="border-t border-border px-6 py-10 text-sm text-muted-foreground md:px-20">
-        Matheus Monteiro. Todos os direitos reservados.
+      <footer className="site-footer border-t border-border px-6 md:px-20">
+        <div className="site-footer-inner mx-auto max-w-[1280px]">
+          <div className="site-footer-lead">
+            <p className="site-footer-kicker">Disponível para novos projetos</p>
+            <a className="site-footer-title" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              Vamos transformar uma ideia em presença digital.
+              <ExternalLink size={20} />
+            </a>
+          </div>
+          <div className="site-footer-meta">
+            <p>Matheus Monteiro. Web design, UX/UI e front-end.</p>
+            <div className="site-footer-links" aria-label="Links do rodapé">
+              <a href="mailto:matheusapm550@gmail.com">E-mail</a>
+              <a href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="#inicio">Voltar ao topo</a>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   )
