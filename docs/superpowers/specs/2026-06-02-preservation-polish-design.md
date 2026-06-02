@@ -27,8 +27,8 @@ Use the same border token and horizontal content alignment for every divider. Av
 Keep the existing type family and hierarchy. Limit major section titles to a maximum of two visual lines at supported widths.
 
 - Projects keeps its concise title.
-- Services keeps its meaning but uses a shorter title: `Design e front-end em uma entrega.`
-- Process keeps its meaning but uses a shorter title: `Do briefing à entrega, sem ruído.`
+- Services keeps its meaning but uses a shorter title: `Design e front-end integrados.`
+- Process keeps its meaning but uses a shorter title: `Do briefing à entrega.`
 - Contact keeps `Iniciar projeto`.
 
 Tune title width and responsive font sizing so desktop, tablet, and mobile remain balanced without overflow.

@@ -94,6 +94,17 @@ function revealStyle(index: number) {
   return { "--reveal-index": String(index) } as CSSProperties
 }
 
+type StackStyle = CSSProperties & Record<"--reveal-index" | "--stack-index" | "--stack-offset" | "--stack-offset-mobile", string>
+
+function stackStyle(index: number, desktopStep: number, mobileStep: number): StackStyle {
+  return {
+    "--reveal-index": String(index),
+    "--stack-index": String(index),
+    "--stack-offset": `${index * desktopStep}rem`,
+    "--stack-offset-mobile": `${index * mobileStep}rem`,
+  }
+}
+
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value))
 }
@@ -420,7 +431,7 @@ function Projects() {
   const [active, setActive] = useState<Project | null>(null)
 
   return (
-    <section id="projetos" className="projects-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
+    <section id="projetos" className="projects-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
       <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
         <div className="max-w-2xl" data-reveal="heading">
           <h2 id="projects-title" className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
@@ -432,18 +443,18 @@ function Projects() {
           Falar sobre projeto <ExternalLink size={14} />
         </a>
       </div>
-      <div className="projects-grid grid gap-6 lg:grid-cols-3">
+      <div className="projects-grid">
         {projects.map((project, index) => (
           <button
             type="button"
             key={project.title}
-            className="project-card group border border-border bg-card text-left transition-[border-color,transform,background-color] duration-500 ease-out hover:-translate-y-0.5 hover:border-primary/35 hover:bg-card/90"
+            className="project-card stack-card group text-left"
             onClick={() => setActive(project)}
             aria-label={`Abrir preview do projeto ${project.title}`}
             data-reveal="card"
-            style={revealStyle(index)}
+            style={stackStyle(index, 0.9, 0.55)}
           >
-            <div className="project-media relative aspect-[4/3] overflow-hidden border-b border-border">
+            <div className="project-media relative overflow-hidden">
               <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-90 transition-[filter,opacity] duration-700 ease-out md:opacity-80 md:grayscale md:group-hover:opacity-95 md:group-hover:grayscale-0" />
               <span className="project-index absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
             </div>
@@ -573,8 +584,8 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
 
 function About() {
   return (
-    <section id="sobre" className="about-section mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
-      <div className="about-panel grid gap-10 border-y border-border py-16 lg:grid-cols-12" data-reveal="line">
+    <section id="sobre" className="about-section section-divider mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
+      <div className="about-panel grid gap-10 py-16 lg:grid-cols-12" data-reveal="line">
         <h2 id="about-title" className="font-sans text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</h2>
         <ScrollRevealText text="Desenho e codifico páginas digitais com direção visual precisa, estrutura clara e uma entrega final pronta para usar." />
         <div className="space-y-6 text-base leading-7 text-muted-foreground lg:col-span-3">
@@ -588,18 +599,18 @@ function About() {
 
 function Services() {
   return (
-    <section id="servicos" className="services-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
+    <section id="servicos" className="services-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
       <div className="reference-layout services-layout">
         <div className="reference-copy" data-reveal="heading">
           <p className="reference-kicker">Serviços</p>
-          <h2 id="services-title" className="reference-title">Design, front-end e conteúdo. Tudo em uma entrega.</h2>
+          <h2 id="services-title" className="reference-title">Design e front-end integrados.</h2>
           <p className="reference-lede">
             Cada frente resolve uma parte do projeto: o que mostrar, como organizar, como codificar e como colocar no ar.
           </p>
         </div>
         <div className="reference-list services-grid" aria-label="Especialidades">
         {specialties.map(([title, text], index) => (
-          <article key={title} className="reference-card service-card" data-reveal="card" style={revealStyle(index)}>
+          <article key={title} className="reference-card service-card stack-card" data-reveal="card" style={stackStyle(index, 0.8, 0.48)}>
             <p className="reference-number service-number">{String(index + 1).padStart(2, "0")}</p>
             <div className="reference-card-copy">
               <h3>{title}</h3>
@@ -615,24 +626,24 @@ function Services() {
 
 function Process() {
   return (
-    <section id="processo" className="process-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="process-title">
+    <section id="processo" className="process-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="process-title">
       <div className="process-shell">
         <div className="reference-layout process-layout">
           <div className="reference-copy process-intro" data-reveal="heading">
             <p className="reference-kicker process-kicker">Processo</p>
-            <h2 id="process-title" className="reference-title">Do briefing à entrega, sem ruído no caminho.</h2>
+            <h2 id="process-title" className="reference-title">Do briefing à entrega.</h2>
             <p className="reference-lede">
               Cada etapa fecha uma decisão antes da próxima: intenção, estrutura, interface e publicação.
             </p>
           </div>
           <ol className="reference-list process-list" data-reveal="timeline">
-            {processSteps.map(([number, title, text]) => (
+            {processSteps.map(([number, title, text], index) => (
               <li
                 key={title}
-                className="reference-card process-step"
+                className="reference-card process-step stack-card"
                 data-reveal="process-step"
                 data-step={number}
-                style={revealStyle(Number(number) - 1)}
+                style={stackStyle(index, 0.65, 0.42)}
               >
                 <span className="reference-number process-number">{number}</span>
                 <div className="reference-card-copy process-step-copy">
@@ -652,7 +663,7 @@ function Contact() {
   const [state, handleSubmit] = useForm("mbdbpdlb")
 
   return (
-    <section id="contato" className="contact-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="contact-title">
+    <section id="contato" className="contact-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="contact-title">
       <div className="contact-shell py-14 lg:py-16">
         <div className="contact-layout">
           <div className="contact-copy" data-reveal="heading">
@@ -799,7 +810,7 @@ export default function App() {
   useMotionReveals()
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-primary">
+    <div className="portfolio-page min-h-screen overflow-x-clip bg-background text-primary">
       <a
         href="#conteudo"
         className="skip-link"
