@@ -325,7 +325,7 @@ function Header() {
               href={`#${item.id}`}
               aria-current={activeSection === item.id ? "page" : undefined}
               className={[
-                "site-nav-link relative px-4 py-3 text-[11px] font-semibold uppercase transition-colors duration-500",
+                "site-nav-link relative px-4 py-3 text-xs font-semibold uppercase transition-colors duration-500",
                 activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-primary",
               ].join(" ")}
             >
@@ -344,7 +344,7 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Falar no WhatsApp com Matheus Monteiro"
-          className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-[11px] font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
+          className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary md:inline-flex"
         >
           Iniciar projeto <MessageCircle size={13} />
         </a>
@@ -431,7 +431,7 @@ function Projects() {
   const [active, setActive] = useState<Project | null>(null)
 
   return (
-    <section id="projetos" className="projects-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
+    <section id="projetos" className="projects-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
       <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
         <div className="max-w-2xl" data-reveal="heading">
           <h2 id="projects-title" className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
@@ -461,7 +461,7 @@ function Projects() {
             <div className="project-card-body p-6">
               <div className="project-tags mb-5 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="border border-border px-2 py-1 text-[11px] font-semibold uppercase text-muted-foreground">
+                  <span key={tag} className="border border-border px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
                     {tag}
                   </span>
                 ))}
@@ -538,7 +538,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
     >
       <div className="project-dialog-panel mx-auto max-w-[1280px] border border-border bg-background">
         <div className="flex items-center justify-between border-b border-border px-6 py-5">
-          <p className="text-[11px] font-semibold uppercase text-muted-foreground">Preview do projeto</p>
+          <p className="text-xs font-semibold uppercase text-muted-foreground">Preview do projeto</p>
           <button ref={closeButtonRef} type="button" className="grid h-11 w-11 place-items-center border border-border text-primary" onClick={onClose} aria-label="Fechar preview">
             <X size={18} />
           </button>
@@ -546,7 +546,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
         <div className="grid lg:grid-cols-[1.35fr_0.65fr]">
           <div className="border-b border-border p-4 lg:border-b-0 lg:border-r md:p-6">
             <div className="relative aspect-video overflow-hidden border border-border bg-card">
-              <div className="absolute inset-x-0 top-0 z-10 flex h-10 items-center justify-between border-b border-border bg-background/80 px-4 text-[11px] font-semibold uppercase text-muted-foreground backdrop-blur">
+              <div className="absolute inset-x-0 top-0 z-10 flex h-10 items-center justify-between border-b border-border bg-background/80 px-4 text-xs font-semibold uppercase text-muted-foreground backdrop-blur">
                 <span>Preview visual</span>
                 <span>{project.category}</span>
               </div>
@@ -559,11 +559,11 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
             <p className="mb-8 text-base leading-7 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
             <div className="mb-8 space-y-6 border-y border-border py-6">
               <div>
-                <p className="mb-2 text-[11px] font-semibold uppercase text-muted-foreground">Desafio</p>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">Desafio</p>
                 <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.challenge)}</p>
               </div>
               <div>
-                <p className="mb-2 text-[11px] font-semibold uppercase text-muted-foreground">Resultado</p>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">Resultado</p>
                 <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.result)}</p>
               </div>
             </div>
@@ -584,7 +584,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
 
 function About() {
   return (
-    <section id="sobre" className="about-section section-divider mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
+    <section id="sobre" className="about-section section-spacing mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
       <div className="about-panel grid gap-10 py-16 lg:grid-cols-12" data-reveal="line">
         <h2 id="about-title" className="font-sans text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</h2>
         <ScrollRevealText text="Desenho e codifico páginas digitais com direção visual precisa, estrutura clara e uma entrega final pronta para usar." />
@@ -599,7 +599,7 @@ function About() {
 
 function Services() {
   return (
-    <section id="servicos" className="services-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
+    <section id="servicos" className="services-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
       <div className="reference-layout services-layout">
         <div className="reference-copy" data-reveal="heading">
           <p className="reference-kicker">Serviços</p>
@@ -626,7 +626,7 @@ function Services() {
 
 function Process() {
   return (
-    <section id="processo" className="process-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="process-title">
+    <section id="processo" className="process-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="process-title">
       <div className="process-shell">
         <div className="reference-layout process-layout">
           <div className="reference-copy process-intro" data-reveal="heading">
@@ -663,7 +663,7 @@ function Contact() {
   const [state, handleSubmit] = useForm("mbdbpdlb")
 
   return (
-    <section id="contato" className="contact-section section-divider mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="contact-title">
+    <section id="contato" className="contact-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="contact-title">
       <div className="contact-shell py-14 lg:py-16">
         <div className="contact-layout">
           <div className="contact-copy" data-reveal="heading">
