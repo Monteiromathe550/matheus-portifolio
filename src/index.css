@@ -48,12 +48,16 @@
   --stack-surface: oklch(0.115 0.006 95);
   --stack-surface-strong: oklch(0.085 0.005 95);
   --stack-border: oklch(0.955 0.012 88 / 0.18);
+  --field-surface: oklch(0.075 0.005 95);
+  --field-surface-active: oklch(0.09 0.006 95);
+  --field-border: oklch(0.955 0.012 88 / 0.3);
+  --field-border-active: oklch(0.955 0.012 88 / 0.66);
   --chart-1: oklch(0.65 0.25 25);
   --chart-2: oklch(0.8 0.15 85);
   --chart-3: oklch(0.7 0.2 140);
   --chart-4: oklch(0.7 0.2 240);
   --chart-5: oklch(0.6 0.25 300);
-  --radius: 0.5rem;
+  --radius: 0;
   --sidebar: oklch(0 0 0 / 0.9);
   --sidebar-foreground: oklch(1 0 0);
   --sidebar-primary: oklch(0.65 0.25 25);
@@ -582,7 +586,7 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   gap: 2rem;
   align-self: start;
   border: 0;
-  border-radius: 8px;
+  border-radius: 0;
   background:
     linear-gradient(145deg, rgb(246 244 238 / 0.055), transparent 48%),
     color-mix(in oklch, var(--card) 72%, transparent);
@@ -667,9 +671,9 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
-  border: 1px solid color-mix(in oklch, var(--primary) 14%, transparent);
-  border-radius: 999px;
-  background: color-mix(in oklch, var(--background) 72%, var(--primary) 5%);
+  border: 1px solid var(--field-border);
+  border-radius: 0;
+  background: var(--field-surface);
   color: color-mix(in oklch, var(--primary) 86%, var(--muted-foreground));
   font-size: 0.84rem;
   line-height: 1;
@@ -700,9 +704,9 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 .contact-input {
   width: 100%;
   min-height: 3.15rem;
-  border: 1px solid transparent;
-  border-radius: var(--radius);
-  background: color-mix(in oklch, var(--background) 72%, var(--primary) 5%);
+  border: 1px solid var(--field-border);
+  border-radius: 0;
+  background: var(--field-surface);
   color: var(--primary);
   font: inherit;
   font-size: 1rem;
@@ -725,9 +729,10 @@ textarea.contact-input {
   color: var(--primary);
 }
 
-.contact-field:focus-within .contact-input {
-  border-color: color-mix(in oklch, var(--primary) 52%, transparent);
-  background: color-mix(in oklch, var(--background) 76%, var(--primary) 7%);
+.contact-field:focus-within .contact-input,
+.contact-input:focus-visible {
+  border-color: var(--field-border-active);
+  background: var(--field-surface-active);
 }
 
 .contact-submit-row {
@@ -744,7 +749,7 @@ textarea.contact-input {
   justify-content: center;
   gap: 0.7rem;
   border: 1px solid var(--primary);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--primary);
   color: var(--primary-foreground);
   padding-inline: 1.25rem;
@@ -993,7 +998,7 @@ textarea.contact-input {
   align-items: center;
   justify-content: center;
   border: 1px solid color-mix(in oklch, var(--secondary) 44%, transparent);
-  border-radius: 999px;
+  border-radius: 0;
   background: color-mix(in oklch, var(--secondary) 9%, transparent);
   padding: 0;
   color: var(--secondary);
@@ -1135,7 +1140,7 @@ textarea.contact-input {
   align-items: start;
   gap: clamp(1rem, 3vw, 1.55rem);
   border: 1px solid color-mix(in oklch, var(--primary) 15%, transparent);
-  border-radius: 8px;
+  border-radius: 0;
   background: color-mix(in oklch, var(--card) 70%, transparent);
   padding: clamp(1.2rem, 3vw, 2rem);
   transition:
@@ -1389,7 +1394,7 @@ textarea.contact-input {
 
 .project-dialog-panel {
   overflow: hidden;
-  border-radius: var(--radius);
+  border-radius: 0;
   animation: dialog-panel-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
   will-change: transform, opacity;
 }
@@ -1652,7 +1657,7 @@ textarea.contact-input {
   min-height: clamp(28rem, 62vw, 44rem);
   overflow: hidden;
   border: 1px solid var(--stack-border);
-  border-radius: var(--radius);
+  border-radius: 0;
   background: var(--stack-surface-strong);
   transition:
     border-color 360ms ease,
@@ -1691,7 +1696,7 @@ textarea.contact-input {
   z-index: 1;
   width: min(31rem, calc(100% - 2rem));
   border: 1px solid var(--stack-border);
-  border-radius: var(--radius);
+  border-radius: 0;
   background: var(--stack-surface);
 }
 
@@ -1705,7 +1710,7 @@ textarea.contact-input {
   align-self: start;
   z-index: calc(10 + var(--stack-index));
   border: 1px solid var(--stack-border);
-  border-radius: var(--radius);
+  border-radius: 0;
   background: var(--stack-surface);
 }
 
@@ -1729,7 +1734,7 @@ textarea.contact-input {
 .contact-form {
   gap: clamp(2.15rem, 4vw, 2.8rem);
   border: 1px solid var(--stack-border);
-  border-radius: var(--radius);
+  border-radius: 0;
   background: var(--stack-surface);
   padding: clamp(1.4rem, 3vw, 2.25rem);
 }
@@ -1980,7 +1985,7 @@ textarea.contact-input {
     grid-template-columns: 3.1rem minmax(0, 1fr);
     gap: 1rem;
     border: 1px solid var(--stack-border);
-    border-radius: 8px;
+    border-radius: 0;
     background: var(--stack-surface);
     padding: 1.15rem;
   }
@@ -2039,7 +2044,7 @@ textarea.contact-input {
     grid-template-columns: 3.1rem minmax(0, 1fr);
     gap: 1rem;
     border: 1px solid var(--stack-border);
-    border-radius: 8px;
+    border-radius: 0;
     background: var(--stack-surface);
     padding: 1.15rem;
   }
