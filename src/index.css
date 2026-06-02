@@ -1818,9 +1818,14 @@ textarea.contact-input {
 }
 
 .process-step {
-  top: calc(7.5rem + var(--stack-offset));
-  min-height: clamp(8.5rem, 12vw, 10rem);
+  top: calc(clamp(5.5rem, 8vh, 7rem) + var(--stack-offset));
+  min-height: clamp(8.75rem, 13vw, 10.75rem);
   padding: clamp(1.1rem, 2.5vw, 1.65rem);
+}
+
+.process-list {
+  gap: clamp(1.65rem, 3vw, 2.4rem);
+  padding-bottom: clamp(18rem, 42vh, 28rem);
 }
 
 .service-card:hover,
@@ -2123,7 +2128,8 @@ textarea.contact-input {
   }
 
   .process-list {
-    padding-bottom: 6.5rem;
+    gap: 1rem;
+    padding-bottom: 12rem;
   }
 
   .process-shell::before {
@@ -2139,7 +2145,7 @@ textarea.contact-input {
   }
 
   .process-step {
-    top: calc(6.2rem + var(--stack-offset-mobile));
+    top: calc(5.45rem + var(--stack-offset-mobile));
     min-height: auto;
     grid-template-columns: 3.1rem minmax(0, 1fr);
     gap: 1rem;

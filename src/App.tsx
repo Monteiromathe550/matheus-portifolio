@@ -644,7 +644,7 @@ function Process() {
                 className="reference-card process-step stack-card"
                 data-reveal="process-step"
                 data-step={number}
-                style={stackStyle(index, 0.65, 0.42)}
+                style={stackStyle(index, 1.95, 1.15)}
               >
                 <span className="reference-number process-number">{number}</span>
                 <div className="reference-card-copy process-step-copy">
