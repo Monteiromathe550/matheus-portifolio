@@ -2311,3 +2311,18 @@ textarea.contact-input {
     z-index: auto;
   }
 }
+
+.process-list {
+  gap: clamp(1rem, 2.4vw, 1.5rem);
+  padding-bottom: clamp(6rem, 16vh, 10rem);
+}
+
+.process-step {
+  position: relative;
+  top: auto;
+  z-index: auto;
+}
+
+.process-step:last-child {
+  margin-bottom: 1px;
+}
