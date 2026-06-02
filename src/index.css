@@ -183,6 +183,16 @@ button {
   cursor: pointer;
 }
 
+button,
+[role="button"],
+.skip-link,
+.site-cta,
+.mobile-menu-cta,
+.hero-cta-icon,
+.hero-cta-icon::before {
+  border-radius: 0;
+}
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
