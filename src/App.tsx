@@ -52,9 +52,9 @@ const projects: Project[] = [
 ]
 
 const specialties = [
-  ["Design + Front-end", "Crio a interface e codifico o site final, com responsividade, performance e acabamento pronto para publicar."],
-  ["UX/UI Design", "Estruturo fluxos, telas e decisões de interface para reduzir dúvida antes do usuário precisar perguntar."],
-  ["Entrega completa", "Organizo conteúdo, visual, código, publicação e ajustes finais para o projeto não parar no layout."],
+  ["Web design", "Sites sob medida com hierarquia clara, visual premium e caminho direto para a ação principal."],
+  ["UX/UI de produto", "Fluxos, telas e decisões de interface para reduzir dúvida e deixar a experiência mais fácil de usar."],
+  ["Front-end e publicação", "Interface codificada com responsividade, estados, performance e acabamento pronto para colocar no ar."],
 ]
 
 const processSteps = [
@@ -63,6 +63,10 @@ const processSteps = [
   ["03", "Interface", "Desenho as telas e codifico estados, responsividade e movimento com acabamento."],
   ["04", "Entrega", "Ajusto detalhes, publico ou preparo os arquivos finais e deixo os próximos passos claros."],
 ]
+
+const projectTypeOptions = ["Site institucional", "Landing page", "E-commerce", "UX/UI de produto", "Branding digital"]
+
+const budgetOptions = ["Até R$ 1.500", "R$ 1.500 a R$ 3.000", "R$ 3.000 a R$ 6.000", "R$ 6.000 a R$ 10.000", "Acima de R$ 10.000"]
 
 const navItems = [
   { id: "inicio", label: "Início" },
@@ -585,20 +589,25 @@ function About() {
 function Services() {
   return (
     <section id="servicos" className="services-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
-      <div className="mb-12 max-w-2xl" data-reveal="heading">
-        <h2 id="services-title" className="text-4xl font-medium text-primary md:text-5xl">Especialidades</h2>
-        <p className="mt-4 text-base leading-7 text-muted-foreground">
-          Cada frente resolve uma parte da entrega: o que mostrar, como organizar, como codificar e como colocar no ar.
-        </p>
-      </div>
-      <div className="services-grid grid gap-6 md:grid-cols-3">
+      <div className="reference-layout services-layout">
+        <div className="reference-copy" data-reveal="heading">
+          <p className="reference-kicker">Serviços</p>
+          <h2 id="services-title" className="reference-title">Design, front-end e conteúdo. Tudo em uma entrega.</h2>
+          <p className="reference-lede">
+            Cada frente resolve uma parte do projeto: o que mostrar, como organizar, como codificar e como colocar no ar.
+          </p>
+        </div>
+        <div className="reference-list services-grid" aria-label="Especialidades">
         {specialties.map(([title, text], index) => (
-          <div key={title} className="service-card border border-border bg-card p-7" data-reveal="card" style={revealStyle(index)}>
-            <p className="service-number mb-10 text-xs font-semibold text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
-            <h3 className="mb-5 text-2xl font-medium text-primary">{title}</h3>
-            <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(text)}</p>
-          </div>
+          <article key={title} className="reference-card service-card" data-reveal="card" style={revealStyle(index)}>
+            <p className="reference-number service-number">{String(index + 1).padStart(2, "0")}</p>
+            <div className="reference-card-copy">
+              <h3>{title}</h3>
+              <p>{keepLastWordsTogether(text)}</p>
+            </div>
+          </article>
         ))}
+        </div>
       </div>
     </section>
   )
@@ -606,32 +615,27 @@ function Services() {
 
 function Process() {
   return (
-    <section id="processo" className="process-section mx-auto max-w-[1440px] px-6 py-10 md:px-20 md:py-16" aria-labelledby="process-title">
-      <div className="process-shell py-12 lg:py-14">
-        <div className="process-layout">
-          <div className="process-intro" data-reveal="heading">
-            <p className="process-kicker">Processo em 4 movimentos</p>
-            <h2 id="process-title" className="max-w-[12ch] text-4xl font-medium leading-tight text-primary md:text-5xl">Do briefing à entrega</h2>
-            <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground">
+    <section id="processo" className="process-section mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="process-title">
+      <div className="process-shell">
+        <div className="reference-layout process-layout">
+          <div className="reference-copy process-intro" data-reveal="heading">
+            <p className="reference-kicker process-kicker">Processo</p>
+            <h2 id="process-title" className="reference-title">Do briefing à entrega, sem ruído no caminho.</h2>
+            <p className="reference-lede">
               Cada etapa fecha uma decisão antes da próxima: intenção, estrutura, interface e publicação.
             </p>
-            <div className="process-route" aria-label="Resumo do caminho do projeto">
-              <span>Briefing</span>
-              <span>Direção</span>
-              <span>Publicação</span>
-            </div>
           </div>
-          <ol className="process-list" data-reveal="timeline">
+          <ol className="reference-list process-list" data-reveal="timeline">
             {processSteps.map(([number, title, text]) => (
               <li
                 key={title}
-                className="process-step"
+                className="reference-card process-step"
                 data-reveal="process-step"
                 data-step={number}
                 style={revealStyle(Number(number) - 1)}
               >
-                <span className="process-number">{number}</span>
-                <div className="process-step-copy">
+                <span className="reference-number process-number">{number}</span>
+                <div className="reference-card-copy process-step-copy">
                   <h3>{title}</h3>
                   <p>{keepLastWordsTogether(text)}</p>
                 </div>
@@ -726,53 +730,32 @@ function Contact() {
                 <ValidationError className="text-xs leading-5 text-destructive" prefix="E-mail" field="email" errors={state.errors} />
               </label>
             </div>
-            <label className="contact-field group">
-              <span className="contact-field-label">Tipo de projeto</span>
-              <select
-                id="projectType"
-                className="contact-input"
-                name="projectType"
-                defaultValue=""
-                aria-describedby="project-type-help"
-                aria-invalid={Boolean(state.errors?.getFieldErrors?.("projectType")?.length) || undefined}
-                required
-              >
-                <option value="" disabled>
-                  Selecione uma opção
-                </option>
-                <option>Site institucional</option>
-                <option>Landing page</option>
-                <option>E-commerce</option>
-                <option>UX/UI de produto</option>
-                <option>Branding digital</option>
-              </select>
+            <fieldset className="contact-choice-group" aria-describedby="project-type-help">
+              <legend className="contact-field-label">Tipo de projeto</legend>
+              <div className="contact-choice-list">
+                {projectTypeOptions.map((option, index) => (
+                  <label key={option} className="contact-choice">
+                    <input type="radio" name="projectType" value={option} required={index === 0} />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
               <span id="project-type-help" className="contact-field-help">{fieldHelp.projectType}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
-            </label>
-            <label className="contact-field group">
-              <span className="contact-field-label">Orçamento previsto</span>
-              <select
-                id="budget"
-                className="contact-input"
-                name="budget"
-                defaultValue=""
-                aria-describedby="budget-help"
-                aria-invalid={Boolean(state.errors?.getFieldErrors?.("budget")?.length) || undefined}
-                required
-              >
-                <option value="" disabled>
-                  Selecione uma faixa
-                </option>
-                <option>Até R$ 1.500</option>
-                <option>R$ 1.500 a R$ 3.000</option>
-                <option>R$ 3.000 a R$ 6.000</option>
-                <option>R$ 6.000 a R$ 10.000</option>
-                <option>Acima de R$ 10.000</option>
-                <option>Ainda quero entender o melhor investimento</option>
-              </select>
+            </fieldset>
+            <fieldset className="contact-choice-group" aria-describedby="budget-help">
+              <legend className="contact-field-label">Orçamento previsto</legend>
+              <div className="contact-choice-list">
+                {budgetOptions.map((option, index) => (
+                  <label key={option} className="contact-choice">
+                    <input type="radio" name="budget" value={option} required={index === 0} />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
               <span id="budget-help" className="contact-field-help">{fieldHelp.budget}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
-            </label>
+            </fieldset>
             <label className="contact-field contact-field-message group">
               <span className="contact-field-label">Mensagem</span>
               <textarea
