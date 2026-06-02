@@ -347,7 +347,7 @@ function Header() {
           aria-label="Falar no WhatsApp com Matheus Monteiro"
           className="site-cta hidden min-h-11 items-center justify-center gap-2 border border-primary/80 bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary lg:inline-flex"
         >
-          Iniciar projeto <MessageCircle size={13} />
+          Iniciar projeto
         </a>
         <button
           className="grid h-11 w-11 place-items-center border border-border lg:hidden"
@@ -394,7 +394,7 @@ function Header() {
             aria-label="Falar no WhatsApp com Matheus Monteiro"
             className="mobile-menu-cta mt-3 flex min-h-12 items-center justify-between border border-primary bg-primary px-3 text-xs font-semibold uppercase text-primary-foreground transition-colors duration-300 hover:bg-transparent hover:text-primary"
           >
-            Iniciar projeto <MessageCircle size={14} />
+            Iniciar projeto
           </a>
         </nav>
       )}
