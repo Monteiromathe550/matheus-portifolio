@@ -1233,7 +1233,7 @@ textarea.contact-input {
   border: none;
   border-top: 1px solid color-mix(in oklch, var(--primary) 15%, transparent);
   background: transparent;
-  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+  padding: clamp(1.2rem, 2.5vw, 1.8rem) 0;
   transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1264,11 +1264,20 @@ textarea.contact-input {
   border: 0;
   border-radius: 0;
   background: transparent;
-  padding: 0.1rem 0 0;
-  color: color-mix(in oklch, var(--primary) 82%, var(--secondary));
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
-  font-weight: 400;
+  padding: 0.25rem 0 0;
+  color: color-mix(in oklch, var(--primary) 35%, transparent);
+  font-size: clamp(0.8rem, 1.2vw, 0.92rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
   line-height: 1.2;
+  transition: color 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reference-list:hover .reference-card:hover .reference-number,
+.services-grid:hover .service-card:hover .service-number,
+.process-list:hover .process-step:hover .process-number {
+  color: color-mix(in oklch, var(--primary) 70%, transparent);
 }
 
 .reference-card-copy,
@@ -1731,41 +1740,19 @@ textarea.contact-input {
 }
 
 .projects-grid {
-  display: grid;
-  gap: clamp(1.15rem, 2.5vw, 2rem);
-  padding-bottom: clamp(7rem, 16vh, 11rem);
-}
-
-.stack-card {
-  --stack-index: 0;
-  --stack-offset: 0rem;
-  --stack-offset-mobile: 0rem;
-  --stack-motion-y: 0px;
-  --stack-motion-scale: 1;
-  --stack-motion-presence: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(6rem, 12vh, 10rem);
 }
 
 .project-card {
-  position: sticky;
-  top: calc(7.25rem + var(--stack-offset));
-  z-index: calc(10 + var(--stack-index));
-  display: block;
-  min-height: clamp(28rem, 62vw, 44rem);
-  overflow: hidden;
-  border: 1px solid var(--stack-border);
-  border-radius: 0;
-  background: var(--stack-surface-strong);
-  transform: translate3d(0, var(--stack-motion-y), 0) scale(var(--stack-motion-scale));
-  transition:
-    border-color 360ms ease,
-    transform 180ms linear;
-  will-change: transform;
-}
-
-.project-card:hover,
-.project-card:focus-visible {
-  border-color: color-mix(in oklch, var(--primary) 30%, transparent);
-  transform: translate3d(0, calc(var(--stack-motion-y) - 2px), 0) scale(var(--stack-motion-scale));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  border: none;
+  background: transparent;
 }
 
 .project-card::after {
@@ -1775,8 +1762,21 @@ textarea.contact-input {
 .project-media {
   position: relative;
   width: 100%;
-  min-height: clamp(28rem, 62vw, 44rem);
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  background: color-mix(in oklch, var(--primary) 5%, transparent);
+}
+
+@media (min-width: 768px) {
+  .project-media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-media {
+    aspect-ratio: 21 / 9;
+  }
 }
 
 .project-media img {
@@ -1785,17 +1785,21 @@ textarea.contact-input {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-media img,
+.project-card:focus-visible .project-media img {
+  transform: scale(1.03);
 }
 
 .project-card-body {
-  position: absolute;
-  left: clamp(1rem, 3vw, 2rem);
-  bottom: clamp(1rem, 3vw, 2rem);
+  position: relative;
   z-index: 1;
-  width: min(31rem, calc(100% - 2rem));
-  border: 1px solid var(--stack-border);
-  border-radius: 0;
-  background: var(--stack-surface);
+  width: 100%;
+  max-width: 48rem;
+  border: none;
+  background: transparent;
 }
 
 .project-card-body p {

@@ -499,27 +499,26 @@ function Projects() {
           <button
             type="button"
             key={project.title}
-            className="project-card stack-card group text-left"
+            className="project-card group text-left"
             onClick={() => setActive(project)}
             aria-label={`Abrir preview do projeto ${project.title}`}
             data-reveal="card"
-            style={stackStyle(index, 0.9, 0.55)}
           >
             <div className="project-media relative overflow-hidden">
               <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-90 transition-[filter,opacity] duration-700 ease-out md:opacity-80 md:grayscale md:group-hover:opacity-95 md:group-hover:grayscale-0" />
               <span className="project-index absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
             </div>
-            <div className="project-card-body p-6">
-              <div className="project-tags mb-5 flex flex-wrap gap-2">
+            <div className="project-card-body p-0">
+              <div className="project-tags mb-4 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span key={tag} className="border border-border px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="project-card-title mb-4 text-2xl font-medium text-primary">{project.title}</h3>
+              <h3 className="project-card-title mb-3 text-2xl font-medium text-primary">{project.title}</h3>
               <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
-              <span className="project-card-action mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary">
+              <span className="project-card-action mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary">
                 Abrir preview <ExternalLink size={13} />
               </span>
             </div>
