@@ -1972,51 +1972,17 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
   }
 
   .projects-grid {
-    gap: 0.9rem;
+    gap: clamp(3rem, 8vw, 5rem);
     padding-bottom: 5.5rem;
   }
 
   .project-card {
-    top: calc(6.4rem + var(--stack-offset-mobile));
-    display: block;
-    min-height: 27rem;
+    gap: 1rem;
   }
 
-  .project-card:hover,
-  .project-card:focus-visible {
-    transform: none;
-  }
-
-  .project-media {
-    width: 100%;
-    min-height: 27rem;
-  }
-
-  .project-card img,
-  .project-card:hover img,
-  .project-card:focus-visible img {
-    transform: scale(1.02);
-  }
-
-  .project-index {
-    left: 0.75rem;
-    top: 0.75rem;
-    color: var(--secondary);
-  }
-
-  .project-card-body {
-    display: flex;
-    left: 0.8rem;
-    bottom: 0.8rem;
-    min-width: 0;
-    width: calc(100% - 1.6rem);
-    overflow: hidden;
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .project-tags {
-    display: flex;
+  .project-card-body p {
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .project-card-title {
@@ -2025,19 +1991,6 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
     line-height: 1.15;
   }
 
-  .project-card-body p {
-    display: -webkit-box;
-    overflow: hidden;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  .project-card-action {
-    margin-top: auto;
-    padding-top: 0.75rem;
-  }
 
   .projects-section h2,
   .services-section h2,
