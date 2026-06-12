@@ -3,7 +3,7 @@ import { useForm, ValidationError } from "@formspree/react"
 import { ArrowDown, Check, ExternalLink, Menu, MessageCircle, Send, X } from "lucide-react"
 import { HeroShaderBackground } from "@/components/ui/hero-shader-background"
 
-import archstudioImage from "../assets/archstudio.jpg"
+import smartLivingImage from "../assets/smart-living.jpg"
 import importBrzImage from "../assets/import-brz.jpg"
 import renovaImage from "../assets/renova-aesthetics.jpg"
 
@@ -30,14 +30,14 @@ const projects: Project[] = [
     result: "Categorias mais fáceis de comparar, páginas com presença visual e menos atrito até o contato de compra.",
   },
   {
-    title: "ArchStudio",
-    category: "Arquitetura / Portfolio",
-    tags: ["Portfolio", "Arquitetura"],
-    image: archstudioImage,
-    liveUrl: "https://site-arquitetura-psi.vercel.app/",
-    summary: "Portfolio de arquitetura com imagens amplas, leitura editorial e navegação objetiva entre ambientes.",
-    challenge: "Dar protagonismo aos projetos sem transformar o site em uma galeria pesada ou difícil de percorrer.",
-    result: "Projetos com mais respiro, ordem de leitura clara e uma presença digital alinhada ao valor do escritório.",
+    title: "Smart Living",
+    category: "E-commerce / Home",
+    tags: ["E-commerce", "Smart Home", "Organização"],
+    image: smartLivingImage,
+    liveUrl: "https://smartlivinguk.store/",
+    summary: "E-commerce focado em produtos inteligentes e práticos para organização e otimização do lar.",
+    challenge: "Apresentar itens do dia a dia com apelo visual premium, transmitindo facilidade e beleza sem complicação.",
+    result: "Uma experiência de compra fluida que reflete a essência da marca: uma casa mais inteligente e organizada.",
   },
   {
     title: "Renova Aesthetics",
