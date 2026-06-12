@@ -3,7 +3,7 @@ import { useForm, ValidationError } from "@formspree/react"
 import { ArrowDown, Check, ExternalLink, Menu, MessageCircle, Send, X } from "lucide-react"
 import { HeroShaderBackground } from "@/components/ui/hero-shader-background"
 
-import smartLivingImage from "../assets/smart-living.jpg"
+import smartLivingImage from "../assets/smart-living.png"
 import importBrzImage from "../assets/import-brz.jpg"
 import renovaImage from "../assets/renova-aesthetics.jpg"
 
