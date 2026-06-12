@@ -661,7 +661,7 @@ function Services() {
         </div>
         <div className="reference-list services-grid" aria-label="Especialidades">
         {specialties.map(([title, text], index) => (
-          <article key={title} className="reference-card service-card stack-card" data-reveal="card" style={stackStyle(index, 0.8, 0.48)}>
+          <article key={title} className="reference-card service-card" data-reveal="card">
             <p className="reference-number service-number">{String(index + 1).padStart(2, "0")}</p>
             <div className="reference-card-copy">
               <h3>{title}</h3>
@@ -691,10 +691,9 @@ function Process() {
             {processSteps.map(([number, title, text], index) => (
               <li
                 key={title}
-                className="reference-card process-step stack-card"
+                className="reference-card process-step"
                 data-reveal="process-step"
                 data-step={number}
-                style={stackStyle(index, 1.95, 1.15)}
               >
                 <span className="reference-number process-number">{number}</span>
                 <div className="reference-card-copy process-step-copy">
