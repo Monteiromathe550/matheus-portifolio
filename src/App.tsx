@@ -615,7 +615,7 @@ function Hero() {
     <section id="inicio" className="hero-section relative grid min-h-[100svh] place-items-center overflow-hidden px-5 pb-24 pt-32 sm:px-6 md:px-20 md:pt-40" aria-labelledby="hero-title">
       <HeroShaderBackground />
       <div className="hero-inner relative z-10 mx-auto mt-6 flex w-full max-w-5xl flex-col items-center text-center md:mt-8">
-        <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro / Web design e UX/UI</p>
+        <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
         <h1 id="hero-title" className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[1.08] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
           <span className="hero-title-line block">Web Designer</span>
           <span className="hero-title-line block font-sans text-primary/75">
@@ -796,7 +796,7 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
               </div>
             </div>
             <div className="mt-auto flex flex-col gap-3 sm:flex-row">
-              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-primary bg-primary px-5 text-xs font-semibold uppercase text-primary-foreground hover:bg-transparent hover:text-primary">
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="project-live-link inline-flex min-h-12 items-center justify-center gap-2 border border-primary px-5 text-xs font-semibold uppercase">
                 Abrir projeto <ExternalLink size={14} />
               </a>
               <button type="button" className="inline-flex min-h-12 items-center justify-center border border-border px-5 text-xs font-semibold uppercase text-primary hover:border-primary" onClick={onClose}>
