@@ -585,10 +585,10 @@ html.motion-ready [data-reveal][data-reveal-visible="true"] {
 
 .hero-kicker {
   margin: 0 0 clamp(1.1rem, 2vw, 1.55rem);
-  color: color-mix(in oklch, var(--primary) 74%, var(--secondary));
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1.2;
+  color: color-mix(in oklch, var(--muted-foreground) 80%, var(--primary));
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
@@ -2179,7 +2179,18 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
   }
 
   .anime-ready,
-  .anime-visible {
+  .anime-visible,
+  .anime-heading-ready,
+  .anime-heading-ready .section-kicker,
+  .anime-heading-ready .about-kicker,
+  .anime-heading-ready .contact-kicker,
+  .anime-heading-ready h2,
+  .anime-heading-ready .section-heading-main p,
+  .anime-heading-ready .about-copy-card,
+  .anime-heading-ready .agency-link,
+  .anime-heading-ready .contact-lede,
+  .anime-heading-ready .contact-channels,
+  .anime-media-ready {
     opacity: 1 !important;
     filter: none !important;
     transform: none !important;
@@ -2664,10 +2675,10 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 
 .section-kicker {
   margin: 0;
-  color: color-mix(in oklch, var(--primary) 56%, transparent);
-  font-size: 0.76rem;
-  font-weight: 700;
-  line-height: 1;
+  color: color-mix(in oklch, var(--muted-foreground) 78%, var(--primary));
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.15;
   text-transform: uppercase;
 }
 
@@ -2704,8 +2715,34 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 
 .anime-ready {
   opacity: 0.001;
-  transform: translate3d(0, 28px, 0);
-  filter: blur(12px);
+  transform: translate3d(0, 24px, 0) scale(0.985);
+  filter: blur(8px);
+}
+
+.anime-heading-ready {
+  opacity: 0.001;
+  transform: translate3d(-14px, 0, 0);
+  filter: blur(6px);
+}
+
+.anime-heading-ready .section-kicker,
+.anime-heading-ready .about-kicker,
+.anime-heading-ready .contact-kicker,
+.anime-heading-ready h2,
+.anime-heading-ready .section-heading-main p,
+.anime-heading-ready .about-copy-card,
+.anime-heading-ready .agency-link,
+.anime-heading-ready .contact-lede,
+.anime-heading-ready .contact-channels {
+  opacity: 0.001;
+  transform: translate3d(0, 8px, 0);
+  filter: blur(4px);
+}
+
+.anime-media-ready {
+  opacity: 0.72;
+  transform: translate3d(10px, 0, 0) scale(1.035);
+  filter: saturate(0.86) contrast(0.96);
 }
 
 .anime-visible {
@@ -3915,13 +3952,36 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 
 /* Full-bleed section headers on desktop */
 @media (min-width: 960px) {
+  .about-section,
+  .projects-section,
+  .services-section,
+  .process-section,
+  .proof-section,
+  .contact-section {
+    width: 100% !important;
+    max-width: none !important;
+    padding-inline: clamp(4rem, 6vw, 6rem) !important;
+  }
+
+  .about-section > .about-agency-panel,
+  .projects-section > .agency-section-heading,
   .services-section > .agency-section-heading,
   .process-section .agency-section-heading,
-  .proof-section > .agency-section-heading {
+  .proof-section > .agency-section-heading,
+  .contact-section > .contact-shell {
     width: 100vw !important;
     max-width: none !important;
     margin-left: calc(50% - 50vw) !important;
     margin-right: calc(50% - 50vw) !important;
     padding-inline: clamp(4rem, 6vw, 6rem) !important;
+  }
+
+  .projects-section > .agency-projects,
+  .services-section .agency-services-grid,
+  .process-section .agency-process-list,
+  .proof-section .proof-grid,
+  .contact-section .contact-layout {
+    width: 100%;
+    max-width: none;
   }
 }

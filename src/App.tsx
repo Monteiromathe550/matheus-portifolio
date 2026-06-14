@@ -231,23 +231,31 @@ function useAnimePageMotion() {
     const heroTimeline = createTimeline({
       defaults: {
         ease: "outExpo",
-        duration: 760,
+        duration: 620,
       },
     })
 
     heroTimeline
-      .add(".site-nav-shell", { opacity: [0, 1], y: [-12, 0], filter: ["blur(10px)", "blur(0px)"] }, 80)
-      .add(".hero-kicker", { opacity: [0, 1], y: [16, 0], filter: ["blur(10px)", "blur(0px)"] }, 160)
-      .add(".hero-title-line", { opacity: [0, 1], y: [28, 0], filter: ["blur(14px)", "blur(0px)"], delay: stagger(80) }, 240)
-      .add(".hero-copy", { opacity: [0, 1], y: [18, 0], filter: ["blur(10px)", "blur(0px)"] }, 500)
-      .add(".hero-actions > *", { opacity: [0, 1], y: [14, 0], delay: stagger(70) }, 640)
+      .add(".site-nav-shell", { opacity: [0, 1], y: [-8, 0], filter: ["blur(6px)", "blur(0px)"] }, 80)
+      .add(".hero-kicker", { opacity: [0, 1], y: [8, 0], filter: ["blur(4px)", "blur(0px)"] }, 160)
+      .add(".hero-title-line", { opacity: [0, 1], y: [18, 0], filter: ["blur(8px)", "blur(0px)"], delay: stagger(60) }, 240)
+      .add(".hero-copy", { opacity: [0, 1], y: [10, 0], filter: ["blur(5px)", "blur(0px)"] }, 500)
+      .add(".hero-actions > *", { opacity: [0, 1], y: [8, 0], delay: stagger(55) }, 640)
 
+    const headingGroups = Array.from(document.querySelectorAll<HTMLElement>(".agency-section-heading, .about-agency-panel, .contact-copy"))
     const revealGroups = Array.from(
       document.querySelectorAll<HTMLElement>(".agency-project-card, .agency-service-card, .agency-process-step, .proof-card, .contact-form"),
     )
+    const projectMedia = Array.from(document.querySelectorAll<HTMLElement>(".agency-project-media img"))
 
+    headingGroups.forEach((element) => {
+      element.classList.add("anime-heading-ready")
+    })
     revealGroups.forEach((element) => {
       element.classList.add("anime-ready")
+    })
+    projectMedia.forEach((element) => {
+      element.classList.add("anime-media-ready")
     })
 
     const observer = new IntersectionObserver(
@@ -256,17 +264,58 @@ function useAnimePageMotion() {
           if (!entry.isIntersecting) return
 
           const target = entry.target as HTMLElement
-          target.classList.remove("anime-ready")
+          const isHeading = target.classList.contains("anime-heading-ready")
+
+          target.classList.remove("anime-ready", "anime-heading-ready")
           target.classList.add("anime-visible")
 
-          animate(target, {
-            opacity: [0, 1],
-            y: [28, 0],
-            filter: ["blur(12px)", "blur(0px)"],
-            duration: 680,
-            ease: "outExpo",
-            delay: Number(target.style.getPropertyValue("--reveal-index") || 0) * 55,
-          })
+          if (isHeading) {
+            animate(target, {
+              opacity: [0, 1],
+              x: [-14, 0],
+              filter: ["blur(6px)", "blur(0px)"],
+              duration: 680,
+              ease: "outExpo",
+            })
+
+            const headingParts = Array.from(target.querySelectorAll<HTMLElement>(".section-kicker, .about-kicker, .contact-kicker, h2, .section-heading-main p, .about-copy-card, .agency-link, .contact-lede, .contact-channels"))
+            if (headingParts.length) {
+              animate(headingParts, {
+                opacity: [0, 1],
+                y: [8, 0],
+                filter: ["blur(4px)", "blur(0px)"],
+                duration: 520,
+                ease: "outExpo",
+                delay: stagger(45, { start: 70 }),
+              })
+            }
+          } else {
+            const revealIndex = Number(target.style.getPropertyValue("--reveal-index") || 0)
+
+            animate(target, {
+              opacity: [0, 1],
+              y: [24, 0],
+              scale: [0.985, 1],
+              filter: ["blur(8px)", "blur(0px)"],
+              duration: 680,
+              ease: "outExpo",
+              delay: revealIndex * 70,
+            })
+
+            const media = target.querySelector<HTMLElement>(".agency-project-media img")
+            if (media) {
+              media.classList.remove("anime-media-ready")
+              animate(media, {
+                opacity: [0.72, 1],
+                scale: [1.035, 1],
+                x: [10, 0],
+                filter: ["saturate(0.86) contrast(0.96)", "saturate(1) contrast(1)"],
+                duration: 760,
+                ease: "outExpo",
+                delay: revealIndex * 70 + 70,
+              })
+            }
+          }
 
           observer.unobserve(target)
         })
@@ -277,6 +326,7 @@ function useAnimePageMotion() {
       },
     )
 
+    headingGroups.forEach((element) => observer.observe(element))
     revealGroups.forEach((element) => observer.observe(element))
 
     const pressables = Array.from(document.querySelectorAll<HTMLElement>(".hero-primary-action, .site-cta, .project-card, .contact-submit"))
