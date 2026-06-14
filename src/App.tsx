@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent } from "react"
 import { useForm, ValidationError } from "@formspree/react"
+import { animate, createTimeline, stagger } from "animejs"
 import { ArrowDown, Check, ExternalLink, Menu, MessageCircle, Send, X } from "lucide-react"
 import { HeroShaderBackground } from "@/components/ui/hero-shader-background"
 
@@ -55,6 +56,14 @@ const specialties = [
   ["Web design", "Sites sob medida com hierarquia clara, visual premium e caminho direto para a ação principal."],
   ["UX/UI de produto", "Fluxos, telas e decisões de interface para reduzir dúvida e deixar a experiência mais fácil de usar."],
   ["Front-end e publicação", "Interface codificada com responsividade, estados, performance e acabamento pronto para colocar no ar."],
+  ["Ajustes e evolução", "Refinos de páginas existentes para melhorar leitura, percepção de marca, responsividade e caminho de conversão."],
+]
+
+const serviceNotes = [
+  "Direção, narrativa e interface",
+  "Fluxos, componentes e clareza",
+  "Código, responsividade e publicação",
+  "Polimento, revisão e performance",
 ]
 
 const processSteps = [
@@ -62,6 +71,12 @@ const processSteps = [
   ["02", "Direção", "Organizo conteúdo, hierarquia e referências para a tela nascer com uma lógica clara."],
   ["03", "Interface", "Desenho as telas e codifico estados, responsividade e movimento com acabamento."],
   ["04", "Entrega", "Ajusto detalhes, publico ou preparo os arquivos finais e deixo os próximos passos claros."],
+]
+
+const proofPoints = [
+  ["Briefing claro", "O projeto começa com objetivo, público e ação principal definidos antes da interface."],
+  ["Imagem aplicada", "A direção visual vira tela real, com mockups, hierarquia e conteúdo pronto para vender percepção."],
+  ["Entrega publicável", "O resultado considera responsividade, estados, performance e o caminho para contato."],
 ]
 
 const projectTypeOptions = ["Site institucional", "Landing page", "E-commerce", "UX/UI de produto", "Branding digital"]
@@ -207,6 +222,99 @@ function useStackScrollMotion() {
   }, [])
 }
 
+function useAnimePageMotion() {
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+    if (reducedMotion.matches) return
+
+    const heroTimeline = createTimeline({
+      defaults: {
+        ease: "outExpo",
+        duration: 760,
+      },
+    })
+
+    heroTimeline
+      .add(".site-nav-shell", { opacity: [0, 1], y: [-12, 0], filter: ["blur(10px)", "blur(0px)"] }, 80)
+      .add(".hero-kicker", { opacity: [0, 1], y: [16, 0], filter: ["blur(10px)", "blur(0px)"] }, 160)
+      .add(".hero-title-line", { opacity: [0, 1], y: [28, 0], filter: ["blur(14px)", "blur(0px)"], delay: stagger(80) }, 240)
+      .add(".hero-copy", { opacity: [0, 1], y: [18, 0], filter: ["blur(10px)", "blur(0px)"] }, 500)
+      .add(".hero-actions > *", { opacity: [0, 1], y: [14, 0], delay: stagger(70) }, 640)
+
+    const revealGroups = Array.from(
+      document.querySelectorAll<HTMLElement>(".agency-project-card, .agency-service-card, .agency-process-step, .proof-card, .contact-form"),
+    )
+
+    revealGroups.forEach((element) => {
+      element.classList.add("anime-ready")
+    })
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+
+          const target = entry.target as HTMLElement
+          target.classList.remove("anime-ready")
+          target.classList.add("anime-visible")
+
+          animate(target, {
+            opacity: [0, 1],
+            y: [28, 0],
+            filter: ["blur(12px)", "blur(0px)"],
+            duration: 680,
+            ease: "outExpo",
+            delay: Number(target.style.getPropertyValue("--reveal-index") || 0) * 55,
+          })
+
+          observer.unobserve(target)
+        })
+      },
+      {
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.12,
+      },
+    )
+
+    revealGroups.forEach((element) => observer.observe(element))
+
+    const pressables = Array.from(document.querySelectorAll<HTMLElement>(".hero-primary-action, .site-cta, .project-card, .contact-submit"))
+
+    const handlePointerDown = (event: Event) => {
+      animate(event.currentTarget as HTMLElement, {
+        scale: [1, 0.985],
+        duration: 120,
+        ease: "outQuart",
+      })
+    }
+
+    const handlePointerUp = (event: Event) => {
+      animate(event.currentTarget as HTMLElement, {
+        scale: [0.985, 1],
+        duration: 220,
+        ease: "outExpo",
+      })
+    }
+
+    pressables.forEach((element) => {
+      element.addEventListener("pointerdown", handlePointerDown)
+      element.addEventListener("pointerup", handlePointerUp)
+      element.addEventListener("pointerleave", handlePointerUp)
+    })
+
+    return () => {
+      heroTimeline.revert()
+      observer.disconnect()
+      pressables.forEach((element) => {
+        element.removeEventListener("pointerdown", handlePointerDown)
+        element.removeEventListener("pointerup", handlePointerUp)
+        element.removeEventListener("pointerleave", handlePointerUp)
+      })
+    }
+  }, [])
+}
+
 function ScrollRevealText({ text }: { text: string }) {
   const ref = useRef<HTMLParagraphElement>(null)
   const words = text.split(" ")
@@ -217,7 +325,7 @@ function ScrollRevealText({ text }: { text: string }) {
     <span
       key={`${word}-${index}`}
       className="about-reveal-word"
-      style={{ opacity: 0.3, transform: "translateY(10px)" } as CSSProperties}
+      style={{ opacity: 1, transform: "translateY(0)" } as CSSProperties}
     >
       {word}
       {isLast ? "" : " "}
@@ -243,8 +351,8 @@ function ScrollRevealText({ text }: { text: string }) {
       wordNodes().forEach((word, index) => {
         const wordStart = index / (words.length + 6)
         const wordProgress = easeOutCubic((revealProgress - wordStart) / 0.18)
-        word.style.opacity = String(0.3 + wordProgress * 0.7)
-        word.style.transform = motionQuery.matches ? "none" : `translateY(${(1 - wordProgress) * 10}px)`
+        word.style.opacity = String(0.78 + wordProgress * 0.22)
+        word.style.transform = motionQuery.matches ? "none" : `translateY(${(1 - wordProgress) * 4}px)`
       })
     }
 
@@ -275,7 +383,7 @@ function ScrollRevealText({ text }: { text: string }) {
   }, [words.length])
 
   return (
-    <p ref={ref} className="text-3xl font-medium leading-tight text-primary md:text-5xl lg:col-span-6" aria-label={text}>
+    <p ref={ref} className="about-statement text-3xl font-medium leading-tight text-primary md:text-5xl lg:col-span-6" aria-label={text}>
       {mainWords.map((word, index) => renderRevealWord(word, index))}
       <span className="about-reveal-tail">
         {tailWords.map((word, index) => renderRevealWord(word, mainWords.length + index, index === tailWords.length - 1))}
@@ -355,7 +463,7 @@ function Header() {
   } as CSSProperties & Record<string, string>
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-8 md:py-6">
+    <header className="site-header pointer-events-none fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-8 md:py-6">
       <div
         className={[
           "site-nav-shell pointer-events-auto mx-auto flex max-w-[1040px] items-center justify-between border border-border/80 px-4 py-3 backdrop-blur-xl md:px-5",
@@ -369,7 +477,7 @@ function Header() {
         >
           MM
         </a>
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegação principal">
+        <nav className="site-main-nav hidden items-center gap-1 lg:flex" aria-label="Navegação principal">
           {navItems.map((item) => (
             <a
               key={item.id}
@@ -400,7 +508,7 @@ function Header() {
           Iniciar projeto
         </a>
         <button
-          className="grid h-11 w-11 place-items-center border border-border lg:hidden"
+          className="site-menu-button grid h-11 w-11 place-items-center border border-border lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
@@ -454,10 +562,10 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="inicio" className="relative grid min-h-[100svh] place-items-center overflow-hidden px-5 pb-24 pt-32 sm:px-6 md:px-20 md:pt-40" aria-labelledby="hero-title">
+    <section id="inicio" className="hero-section relative grid min-h-[100svh] place-items-center overflow-hidden px-5 pb-24 pt-32 sm:px-6 md:px-20 md:pt-40" aria-labelledby="hero-title">
       <HeroShaderBackground />
-      <div className="relative z-10 mx-auto mt-6 flex w-full max-w-5xl flex-col items-center text-center md:mt-8">
-        <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro</p>
+      <div className="hero-inner relative z-10 mx-auto mt-6 flex w-full max-w-5xl flex-col items-center text-center md:mt-8">
+        <p className="hero-kicker mb-6 text-xs font-semibold uppercase text-muted-foreground">Matheus Monteiro / Web design e UX/UI</p>
         <h1 id="hero-title" className="hero-title mb-8 w-full max-w-[920px] text-[clamp(2.45rem,10.6vw,5.2rem)] font-normal leading-[1.08] tracking-normal text-primary" aria-label="Web Designer e UX/UI Designer">
           <span className="hero-title-line block">Web Designer</span>
           <span className="hero-title-line block font-sans text-primary/75">
@@ -465,14 +573,19 @@ function Hero() {
           </span>
         </h1>
         <p className="hero-copy max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-          {keepLastWordsTogether("Crio, codifico e entrego sites para marcas que precisam explicar valor, provar confiança e levar o visitante ao próximo passo.")}
+          {keepLastWordsTogether("Crio, codifico e publico sites para marcas que precisam explicar valor, provar confiança e levar o visitante ao próximo passo.")}
         </p>
-        <a href="#projetos" className="hero-cta mt-12 inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors duration-500 hover:text-primary">
-          <span className="hero-cta-icon grid h-12 w-12 place-items-center border border-border">
-            <ArrowDown size={17} />
-          </span>
-          Ver trabalhos
-        </a>
+        <div className="hero-actions" aria-label="Ações principais">
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hero-primary-action">
+            Iniciar projeto <ExternalLink size={14} />
+          </a>
+          <a href="#projetos" className="hero-cta inline-flex items-center gap-4 text-xs font-semibold uppercase text-muted-foreground transition-colors duration-500 hover:text-primary">
+            <span className="hero-cta-icon grid h-12 w-12 place-items-center border border-border">
+              <ArrowDown size={17} />
+            </span>
+            Ver trabalhos
+          </a>
+        </div>
       </div>
     </section>
   )
@@ -483,32 +596,36 @@ function Projects() {
 
   return (
     <section id="projetos" className="projects-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
-      <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-        <div className="max-w-2xl" data-reveal="heading">
-          <h2 id="projects-title" className="text-4xl font-medium text-primary md:text-5xl">Projetos selecionados</h2>
-          <p className="mt-4 text-base leading-7 text-muted-foreground">
-            Três entregas com problemas diferentes: vender produto, apresentar arquitetura e converter interesse em agendamento.
+      <div className="section-heading agency-section-heading">
+        <p className="section-kicker">Projetos</p>
+        <div className="section-heading-main" data-reveal="heading">
+          <h2 id="projects-title">Projetos com imagem e conversão.</h2>
+          <p>
+            Interfaces com contexto, hierarquia e ação clara para avançar.
           </p>
         </div>
-        <a href="#contato" className="section-action inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary" data-reveal="heading" style={revealStyle(1)}>
+        <a href="#contato" className="section-action agency-link" data-reveal="heading" style={revealStyle(1)}>
           Falar sobre projeto <ExternalLink size={14} />
         </a>
       </div>
-      <div className="projects-grid">
+      <div className="projects-grid agency-projects">
         {projects.map((project, index) => (
           <button
             type="button"
             key={project.title}
-            className="project-card group text-left"
+            className="project-card agency-project-card group text-left"
             onClick={() => setActive(project)}
             aria-label={`Abrir preview do projeto ${project.title}`}
             data-reveal="card"
           >
-            <div className="project-media relative overflow-hidden">
-              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-90 transition-[filter,opacity] duration-700 ease-out md:opacity-80 md:grayscale md:group-hover:opacity-95 md:group-hover:grayscale-0" />
+            <div
+              className="project-media agency-project-media relative overflow-hidden"
+              style={{ "--project-image": `url(${project.image})` } as CSSProperties & Record<"--project-image", string>}
+            >
+              <img src={project.image} alt={`Preview visual do projeto ${project.title}`} loading="eager" decoding="async" className="h-full w-full object-cover opacity-90 transition-[filter,opacity] duration-700 ease-out md:opacity-80 md:grayscale md:group-hover:opacity-95 md:group-hover:grayscale-0" />
               <span className="project-index absolute left-5 top-5 text-xs font-semibold text-primary/70">{String(index + 1).padStart(2, "0")}</span>
             </div>
-            <div className="project-card-body p-0">
+            <div className="project-card-body agency-project-body p-0">
               <div className="project-tags mb-4 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span key={tag} className="border border-border px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
@@ -516,10 +633,21 @@ function Projects() {
                   </span>
                 ))}
               </div>
+              <p className="agency-project-category">{project.category}</p>
               <h3 className="project-card-title mb-3 text-2xl font-medium text-primary">{project.title}</h3>
-              <p className="text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
+              <p className="agency-project-summary text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
+              <div className="agency-project-proof" aria-label={`Decisões do projeto ${project.title}`}>
+                <span>
+                  <strong>Desafio</strong>
+                  {project.challenge}
+                </span>
+                <span>
+                  <strong>Resultado</strong>
+                  {project.result}
+                </span>
+              </div>
               <span className="project-card-action mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary">
-                Abrir preview <ExternalLink size={13} />
+                Ver estudo <ExternalLink size={13} />
               </span>
             </div>
           </button>
@@ -635,12 +763,15 @@ function ProjectDialog({ project, onClose }: { project: Project; onClose: () => 
 function About() {
   return (
     <section id="sobre" className="about-section section-spacing mx-auto max-w-[1440px] px-6 py-20 md:px-20" aria-labelledby="about-title">
-      <div className="about-panel grid gap-10 py-16 lg:grid-cols-12" data-reveal="line">
-        <h2 id="about-title" className="font-sans text-xs font-semibold uppercase text-muted-foreground lg:col-span-3">Sobre</h2>
-        <ScrollRevealText text="Desenho e codifico páginas digitais com direção visual precisa, estrutura clara e uma entrega final pronta para usar." />
-        <div className="space-y-6 text-base leading-7 text-muted-foreground lg:col-span-3">
-          <p>{keepLastWordsTogether("Atuo quando o site precisa vender uma percepção antes de vender uma solução: confiança, clareza e cuidado.")}</p>
-          <p>{keepLastWordsTogether("A entrega combina estratégia, interface, front-end e publicação para o projeto não ficar só no design.")}</p>
+      <div className="about-panel about-agency-panel" data-reveal="line">
+        <h2 id="about-title" className="about-kicker font-sans text-xs font-semibold uppercase text-muted-foreground">Sobre</h2>
+        <div className="about-statement-wrap">
+          <ScrollRevealText text="Crio sites com direção visual, estrutura clara e front-end pronto para publicar." />
+        </div>
+        <div className="about-copy-card space-y-6 text-base leading-7 text-muted-foreground">
+          <span>Como entro no projeto</span>
+          <p>{keepLastWordsTogether("Organizo valor, desenho a interface e codifico a experiência para a página parecer confiável desde o primeiro contato.")}</p>
+          <p>{keepLastWordsTogether("Quando o site já existe, refino leitura, responsividade, percepção de marca e caminho de conversão.")}</p>
         </div>
       </div>
     </section>
@@ -650,24 +781,27 @@ function About() {
 function Services() {
   return (
     <section id="servicos" className="services-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
-      <div className="reference-layout services-layout">
-        <div className="reference-copy" data-reveal="heading">
-          <p className="reference-kicker">Serviços</p>
-          <h2 id="services-title" className="reference-title">Design e front-end integrados.</h2>
-          <p className="reference-lede">
-            Cada frente resolve uma parte do projeto: o que mostrar, como organizar, como codificar e como colocar no ar.
-          </p>
+      <div className="agency-services-shell">
+        <div className="section-heading agency-section-heading">
+          <p className="section-kicker">Serviços</p>
+          <div className="section-heading-main" data-reveal="heading">
+            <h2 id="services-title">Do visual ao site no ar.</h2>
+            <p>
+              Direção, interface e front-end no mesmo fluxo de entrega.
+            </p>
+          </div>
         </div>
-        <div className="reference-list services-grid" aria-label="Especialidades">
-        {specialties.map(([title, text], index) => (
-          <article key={title} className="reference-card service-card" data-reveal="card">
-            <p className="reference-number service-number">{String(index + 1).padStart(2, "0")}</p>
-            <div className="reference-card-copy">
-              <h3>{title}</h3>
-              <p>{keepLastWordsTogether(text)}</p>
-            </div>
-          </article>
-        ))}
+        <div className="services-grid agency-services-grid" aria-label="Especialidades">
+          {specialties.map(([title, text], index) => (
+            <article key={title} className="service-card agency-service-card" data-reveal="card" style={revealStyle(index)}>
+              <span className="service-number agency-service-number">{String(index + 1).padStart(2, "0")}</span>
+              <div className="agency-service-copy">
+                <h3>{title}</h3>
+                <p>{keepLastWordsTogether(text)}</p>
+              </div>
+              <span className="agency-service-note">{serviceNotes[index]}</span>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -677,32 +811,58 @@ function Services() {
 function Process() {
   return (
     <section id="processo" className="process-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="process-title">
-      <div className="process-shell">
-        <div className="reference-layout process-layout">
-          <div className="reference-copy process-intro" data-reveal="heading">
-            <p className="reference-kicker process-kicker">Processo</p>
-            <h2 id="process-title" className="reference-title">Do briefing à entrega.</h2>
-            <p className="reference-lede">
-              Cada etapa fecha uma decisão antes da próxima: intenção, estrutura, interface e publicação.
+      <div className="process-shell agency-process-shell">
+        <div className="section-heading agency-section-heading">
+          <p className="section-kicker process-kicker">Processo</p>
+          <div className="section-heading-main" data-reveal="heading">
+            <h2 id="process-title">Processo direto até publicar.</h2>
+            <p>
+              Briefing, estrutura, tela e publicação sem etapa solta.
             </p>
           </div>
-          <ol className="reference-list process-list" data-reveal="timeline">
+        </div>
+        <ol className="process-list agency-process-list" data-reveal="timeline">
             {processSteps.map(([number, title, text], index) => (
               <li
                 key={title}
-                className="reference-card process-step"
+                className="process-step agency-process-step"
                 data-reveal="process-step"
                 data-step={number}
+                style={revealStyle(index)}
               >
-                <span className="reference-number process-number">{number}</span>
-                <div className="reference-card-copy process-step-copy">
+                <span className="process-number agency-process-number">{number}</span>
+                <div className="process-step-copy agency-process-copy">
                   <h3>{title}</h3>
                   <p>{keepLastWordsTogether(text)}</p>
                 </div>
               </li>
             ))}
           </ol>
+      </div>
+    </section>
+  )
+}
+
+function Proof() {
+  return (
+    <section id="prova" className="proof-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="proof-title">
+      <div className="section-heading agency-section-heading">
+        <p className="section-kicker">Prova</p>
+        <div className="section-heading-main" data-reveal="heading">
+          <h2 id="proof-title">Prova antes do contato.</h2>
+          <p>
+            Três sinais de cuidado antes do próximo passo.
+          </p>
         </div>
+      </div>
+      <div className="proof-grid" aria-label="Provas de entrega">
+        {proofPoints.map(([title, text], index) => (
+          <article key={title} className="proof-card" data-reveal="card" style={revealStyle(index)}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{title}</h3>
+            <p>{keepLastWordsTogether(text)}</p>
+          </article>
+        ))}
       </div>
     </section>
   )
@@ -719,7 +879,7 @@ function Contact() {
             <p className="contact-kicker">Contato</p>
             <h2 id="contact-title" className="contact-title">Iniciar projeto</h2>
             <p className="contact-lede">
-              {keepLastWordsTogether("Conte o que precisa sair do papel. Eu retorno com direção recomendada, escopo inicial e o melhor formato para desenhar, codificar e publicar.")}
+              {keepLastWordsTogether("Envie o essencial. Eu retorno com direção, escopo e próximos passos.")}
             </p>
             <div className="contact-channels" aria-label="Canais de contato">
               <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
@@ -858,6 +1018,7 @@ function Contact() {
 export default function App() {
   useMotionReveals()
   useStackScrollMotion()
+  useAnimePageMotion()
 
   return (
     <div className="portfolio-page min-h-screen overflow-x-clip bg-background text-primary">
@@ -884,6 +1045,7 @@ export default function App() {
         <Projects />
         <Services />
         <Process />
+        <Proof />
         <Contact />
       </main>
       <footer className="site-footer border-t border-border px-6 md:px-20">

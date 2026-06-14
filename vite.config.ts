@@ -5,8 +5,14 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    watch: {
+      ignored: ["**/.codex/**"],
+    },
+  },
   build: {
     chunkSizeWarningLimit: 1000,
+    cssTarget: "chrome89",
   },
   resolve: {
     alias: {
