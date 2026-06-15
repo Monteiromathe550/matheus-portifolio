@@ -3261,11 +3261,11 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 }
 
 .agency-project-body .project-card-title {
-  max-width: min(100%, 18ch);
+  max-width: 100%;
   margin: 0;
   overflow-wrap: anywhere;
-  font-size: clamp(1.35rem, 1.05vw + 0.95rem, 1.8rem);
-  line-height: 1.16;
+  font-size: clamp(1.18rem, 0.7vw + 0.95rem, 1.45rem);
+  line-height: 1.22;
   text-wrap: balance;
 }
 
@@ -4145,4 +4145,53 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
     font-size: clamp(1.9rem, 8.6vw, 2.6rem) !important;
     line-height: 1.06 !important;
   }
+}
+
+/* Floating interface pass: remove inner section lighting */
+.about-agency-panel,
+.agency-section-heading,
+.contact-shell {
+  background: transparent !important;
+  border-block-color: color-mix(in oklch, var(--primary) 9%, transparent) !important;
+  box-shadow: none !important;
+}
+
+.about-agency-panel::before,
+.about-agency-panel::after,
+.agency-section-heading::before,
+.agency-section-heading::after,
+.contact-shell::before,
+.contact-shell::after,
+.process-shell::before,
+.process-shell::after {
+  display: none !important;
+}
+
+.about-copy-card,
+.agency-project-card,
+.agency-service-card,
+.agency-process-step,
+.proof-card,
+.contact-form {
+  background: oklch(0.062 0.004 95 / 0.72) !important;
+  border-color: color-mix(in oklch, var(--primary) 14%, transparent) !important;
+  box-shadow: 0 8px 8px rgb(0 0 0 / 0.16);
+}
+
+.agency-project-card:hover,
+.agency-project-card:focus-visible,
+.agency-service-card:hover,
+.agency-service-card:focus-visible,
+.agency-process-step:hover,
+.agency-process-step:focus-visible,
+.proof-card:hover,
+.proof-card:focus-visible {
+  background: oklch(0.074 0.004 95 / 0.82) !important;
+  border-color: color-mix(in oklch, var(--primary) 22%, transparent) !important;
+}
+
+.agency-service-number,
+.agency-process-number,
+.proof-card span {
+  background: transparent !important;
 }
