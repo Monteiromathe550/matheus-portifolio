@@ -3261,9 +3261,12 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 }
 
 .agency-project-body .project-card-title {
-  max-width: 11ch;
-  font-size: clamp(1.85rem, 2.8vw, 2.75rem);
-  line-height: 1;
+  max-width: min(100%, 18ch);
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(1.35rem, 1.05vw + 0.95rem, 1.8rem);
+  line-height: 1.16;
+  text-wrap: balance;
 }
 
 .agency-project-summary {

@@ -25,7 +25,7 @@ const projects: Project[] = [
     category: "E-commerce / Cosméticos importados",
     tags: ["E-commerce", "Cosméticos"],
     image: importBrzImage,
-    liveUrl: "https://solange-cosm-ticos-main.vercel.app/",
+    liveUrl: "https://importbrzglobal.com/",
     summary: "Vitrine para cosméticos importados com categorias claras, produto em primeiro plano e caminho direto para compra.",
     challenge: "Organizar uma oferta variada sem deixar preço, benefício e navegação competindo pela atenção.",
     result: "Categorias mais fáceis de comparar, páginas com presença visual e menos atrito até o contato de compra.",
