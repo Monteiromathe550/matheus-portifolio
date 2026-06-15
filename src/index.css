@@ -4152,8 +4152,18 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 .agency-section-heading,
 .contact-shell {
   background: transparent !important;
-  border-block-color: color-mix(in oklch, var(--primary) 9%, transparent) !important;
+  border: 0 !important;
+  border-block: 0 !important;
   box-shadow: none !important;
+}
+
+.about-section > .about-agency-panel,
+.projects-section > .agency-section-heading,
+.services-section > .agency-section-heading,
+.process-section .agency-section-heading,
+.proof-section > .agency-section-heading {
+  padding-inline: 0 !important;
+  padding-block: 0 !important;
 }
 
 .about-agency-panel::before,
