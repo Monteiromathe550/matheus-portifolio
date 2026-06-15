@@ -4307,3 +4307,55 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
     grid-row: auto;
   }
 }
+
+/* Standard section headings: divider belongs below the copy */
+.projects-section > .agency-section-heading,
+.services-section .agency-section-heading,
+.process-section .agency-section-heading,
+.proof-section > .agency-section-heading {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.projects-section .section-heading-main,
+.services-section .section-heading-main,
+.process-section .section-heading-main,
+.proof-section .section-heading-main {
+  gap: clamp(0.75rem, 1.8vw, 1.15rem) !important;
+}
+
+.projects-section .section-heading-main p,
+.services-section .section-heading-main p,
+.process-section .section-heading-main p,
+.proof-section .section-heading-main p {
+  border-left: 0 !important;
+  border-bottom: 1px solid color-mix(in oklch, var(--primary) 12%, transparent) !important;
+  border-top: 0 !important;
+  margin-top: 0;
+  padding-left: 0 !important;
+  padding-bottom: clamp(1.1rem, 1.8vw, 1.45rem) !important;
+  padding-top: 0 !important;
+}
+
+@media (min-width: 960px) {
+  .projects-section .section-heading-main,
+  .services-section .section-heading-main,
+  .process-section .section-heading-main,
+  .proof-section .section-heading-main {
+    gap: clamp(1.75rem, 4vw, 4.5rem) !important;
+  }
+
+  .projects-section .section-heading-main p,
+  .services-section .section-heading-main p,
+  .process-section .section-heading-main p,
+  .proof-section .section-heading-main p {
+    align-self: end;
+    border-bottom: 1px solid color-mix(in oklch, var(--primary) 12%, transparent) !important;
+    border-left: 0 !important;
+    border-top: 0 !important;
+    margin-top: 0;
+    padding-bottom: clamp(1.1rem, 1.8vw, 1.45rem) !important;
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+  }
+}
