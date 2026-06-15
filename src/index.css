@@ -4205,3 +4205,86 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 .proof-card span {
   background: transparent !important;
 }
+
+.section-spacing,
+.about-section,
+.projects-section,
+.services-section,
+.process-section,
+.proof-section,
+.contact-section,
+.section-heading,
+.agency-section-heading,
+.section-heading-main {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.section-spacing,
+.about-section,
+.projects-section,
+.services-section,
+.process-section,
+.proof-section,
+.contact-section,
+.section-heading,
+.agency-section-heading {
+  border: 0 !important;
+  border-block: 0 !important;
+}
+
+.about-section > .about-agency-panel,
+.projects-section > .agency-section-heading,
+.services-section > .agency-section-heading,
+.process-section .agency-section-heading,
+.proof-section > .agency-section-heading {
+  border-top: 1px solid color-mix(in oklch, var(--primary) 12%, transparent) !important;
+}
+
+.section-spacing::before,
+.section-spacing::after,
+.about-section::before,
+.about-section::after,
+.projects-section::before,
+.projects-section::after,
+.services-section::before,
+.services-section::after,
+.process-section::before,
+.process-section::after,
+.proof-section::before,
+.proof-section::after,
+.contact-section::before,
+.contact-section::after,
+.section-heading::before,
+.section-heading::after,
+.section-heading-main::before,
+.section-heading-main::after {
+  display: none !important;
+}
+
+.about-section > .about-agency-panel {
+  column-gap: clamp(2rem, 5vw, 5.5rem) !important;
+  row-gap: clamp(1.35rem, 2.2vw, 2.25rem) !important;
+  grid-template-columns: minmax(0, 0.56fr) minmax(24rem, 0.44fr) !important;
+  align-items: center !important;
+}
+
+.about-agency-panel .about-kicker {
+  align-self: end;
+  grid-column: 1 / -1;
+}
+
+.about-statement-wrap {
+  align-content: center !important;
+}
+
+.about-copy-card {
+  align-self: center;
+}
+
+@media (max-width: 900px) {
+  .about-section > .about-agency-panel {
+    grid-template-columns: 1fr !important;
+    row-gap: 1.2rem !important;
+  }
+}
