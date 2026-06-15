@@ -66,9 +66,9 @@
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(1 0 0 / 0.2);
   --sidebar-ring: oklch(1 0 0 / 0.3);
-  --font-body: "Chillax", "Segoe UI", sans-serif;
-  --font-label: "Chillax", "Segoe UI", sans-serif;
-  --font-display-face: "Chillax", "Segoe UI", sans-serif;
+  --font-body: "Chillax", "Inter", "Segoe UI", sans-serif;
+  --font-label: "Chillax", "Inter", "Segoe UI", sans-serif;
+  --font-display-face: "Chillax", "Inter", "Segoe UI", sans-serif;
   --font-geist-sans: var(--font-body);
   --font-geist-mono: var(--font-label);
   --font-bodoni: var(--font-display-face);
@@ -2652,7 +2652,6 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 
 .contact-section {
   padding-block: clamp(4rem, 7vw, 5.75rem);
-  border-top: 1px solid color-mix(in oklch, var(--primary) 15%, transparent);
 }
 
 .projects-grid {

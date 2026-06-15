@@ -22,72 +22,72 @@ type Project = {
 const projects: Project[] = [
   {
     title: "Import BRZ Global",
-    category: "E-commerce / Cosm├®ticos importados",
-    tags: ["E-commerce", "Cosm├®ticos"],
+    category: "E-commerce / Cosméticos importados",
+    tags: ["E-commerce", "Cosméticos"],
     image: importBrzImage,
     liveUrl: "https://importbrzglobal.com/",
-    summary: "Vitrine para cosm├®ticos importados com categorias claras, produto em primeiro plano e caminho direto para compra.",
-    challenge: "Organizar uma oferta variada sem deixar pre├ºo, benef├¡cio e navega├º├úo competindo pela aten├º├úo.",
-    result: "Categorias mais f├íceis de comparar, p├íginas com presen├ºa visual e menos atrito at├® o contato de compra.",
+    summary: "Vitrine para cosméticos importados com categorias claras, produto em primeiro plano e caminho direto para compra.",
+    challenge: "Organizar uma oferta variada sem deixar preço, benefício e navegação competindo pela atenção.",
+    result: "Categorias mais fáceis de comparar, páginas com presença visual e menos atrito até o contato de compra.",
   },
   {
     title: "Smart Living",
     category: "E-commerce / Home",
-    tags: ["E-commerce", "Smart Home", "Organiza├º├úo"],
+    tags: ["E-commerce", "Smart Home", "Organização"],
     image: smartLivingImage,
     liveUrl: "https://smartlivinguk.store/",
-    summary: "E-commerce focado em produtos inteligentes e pr├íticos para organiza├º├úo e otimiza├º├úo do lar.",
-    challenge: "Apresentar itens do dia a dia com apelo visual premium, transmitindo facilidade e beleza sem complica├º├úo.",
-    result: "Uma experi├¬ncia de compra fluida que reflete a ess├¬ncia da marca: uma casa mais inteligente e organizada.",
+    summary: "E-commerce focado em produtos inteligentes e práticos para organização e otimização do lar.",
+    challenge: "Apresentar itens do dia a dia com apelo visual premium, transmitindo facilidade e beleza sem complicação.",
+    result: "Uma experiência de compra fluida que reflete a essência da marca: uma casa mais inteligente e organizada.",
   },
   {
     title: "Renova Aesthetics",
-    category: "Cl├¡nica est├®tica / Portfolio",
-    tags: ["Cl├¡nica", "Portfolio"],
+    category: "Clínica estética / Portfolio",
+    tags: ["Clínica", "Portfolio"],
     image: renovaImage,
     liveUrl: "https://renova-aesthetics.vercel.app/",
-    summary: "Site para cl├¡nica est├®tica com servi├ºos organizados, prova visual e chamada direta para agendamento.",
-    challenge: "Comunicar cuidado e confian├ºa sem deixar procedimentos, resultados e contato disputando aten├º├úo.",
-    result: "Servi├ºos mais f├íceis de entender, hierarquia mais calma e um caminho de agendamento mais evidente.",
+    summary: "Site para clínica estética com serviços organizados, prova visual e chamada direta para agendamento.",
+    challenge: "Comunicar cuidado e confiança sem deixar procedimentos, resultados e contato disputando atenção.",
+    result: "Serviços mais fáceis de entender, hierarquia mais calma e um caminho de agendamento mais evidente.",
   },
 ]
 
 const specialties = [
-  ["Web design", "Sites sob medida com hierarquia clara, visual premium e caminho direto para a a├º├úo principal."],
-  ["UX/UI de produto", "Fluxos, telas e decis├Áes de interface para reduzir d├║vida e deixar a experi├¬ncia mais f├ícil de usar."],
-  ["Front-end e publica├º├úo", "Interface codificada com responsividade, estados, performance e acabamento pronto para colocar no ar."],
-  ["Ajustes e evolu├º├úo", "Refinos de p├íginas existentes para melhorar leitura, percep├º├úo de marca, responsividade e caminho de convers├úo."],
+  ["Web design", "Sites sob medida com hierarquia clara, visual premium e caminho direto para a ação principal."],
+  ["UX/UI de produto", "Fluxos, telas e decisões de interface para reduzir dúvida e deixar a experiência mais fácil de usar."],
+  ["Front-end e publicação", "Interface codificada com responsividade, estados, performance e acabamento pronto para colocar no ar."],
+  ["Ajustes e evolução", "Refinos de páginas existentes para melhorar leitura, percepção de marca, responsividade e caminho de conversão."],
 ]
 
 const serviceNotes = [
-  "Dire├º├úo, narrativa e interface",
+  "Direção, narrativa e interface",
   "Fluxos, componentes e clareza",
-  "C├│digo, responsividade e publica├º├úo",
-  "Polimento, revis├úo e performance",
+  "Código, responsividade e publicação",
+  "Polimento, revisão e performance",
 ]
 
 const processSteps = [
-  ["01", "Diagn├│stico", "Defino objetivo, p├║blico e a a├º├úo principal que a p├ígina precisa facilitar."],
-  ["02", "Dire├º├úo", "Organizo conte├║do, hierarquia e refer├¬ncias para a tela nascer com uma l├│gica clara."],
+  ["01", "Diagnóstico", "Defino objetivo, público e a ação principal que a página precisa facilitar."],
+  ["02", "Direção", "Organizo conteúdo, hierarquia e referências para a tela nascer com uma lógica clara."],
   ["03", "Interface", "Desenho as telas e codifico estados, responsividade e movimento com acabamento."],
-  ["04", "Entrega", "Ajusto detalhes, publico ou preparo os arquivos finais e deixo os pr├│ximos passos claros."],
+  ["04", "Entrega", "Ajusto detalhes, publico ou preparo os arquivos finais e deixo os próximos passos claros."],
 ]
 
 const proofPoints = [
-  ["Briefing claro", "O projeto come├ºa com objetivo, p├║blico e a├º├úo principal definidos antes da interface."],
-  ["Imagem aplicada", "A dire├º├úo visual vira tela real, com mockups, hierarquia e conte├║do pronto para vender percep├º├úo."],
-  ["Entrega public├ível", "O resultado considera responsividade, estados, performance e o caminho para contato."],
+  ["Briefing claro", "O projeto começa com objetivo, público e ação principal definidos antes da interface."],
+  ["Imagem aplicada", "A direção visual vira tela real, com mockups, hierarquia e conteúdo pronto para vender percepção."],
+  ["Entrega publicável", "O resultado considera responsividade, estados, performance e o caminho para contato."],
 ]
 
 const projectTypeOptions = ["Site institucional", "Landing page", "E-commerce", "UX/UI de produto", "Branding digital"]
 
-const budgetOptions = ["At├® R$ 1.500", "R$ 1.500 a R$ 3.000", "R$ 3.000 a R$ 6.000", "R$ 6.000 a R$ 10.000", "Acima de R$ 10.000"]
+const budgetOptions = ["Até R$ 1.500", "R$ 1.500 a R$ 3.000", "R$ 3.000 a R$ 6.000", "R$ 6.000 a R$ 10.000", "Acima de R$ 10.000"]
 
 const navItems = [
-  { id: "inicio", label: "In├¡cio" },
+  { id: "inicio", label: "Início" },
   { id: "sobre", label: "Sobre" },
   { id: "projetos", label: "Projetos" },
-  { id: "servicos", label: "Servi├ºos" },
+  { id: "servicos", label: "Serviços" },
   { id: "processo", label: "Processo" },
   { id: "contato", label: "Contato" },
 ]
@@ -96,9 +96,9 @@ const whatsappUrl = "https://wa.me/5548984380803?text=Ol%C3%A1%2C%20Matheus!%20V
 
 const fieldHelp = {
   name: "Use o nome que devo usar na resposta.",
-  email: "Vou usar este e-mail para retornar com pr├│ximos passos.",
-  projectType: "Escolha a op├º├úo mais pr├│xima. Se tiver d├║vida, selecione UX/UI de produto ou site institucional.",
-  budget: "Pode ser uma estimativa. Ela s├│ ajuda a ajustar profundidade e prazo.",
+  email: "Vou usar este e-mail para retornar com próximos passos.",
+  projectType: "Escolha a opção mais próxima. Se tiver dúvida, selecione UX/UI de produto ou site institucional.",
+  budget: "Pode ser uma estimativa. Ela só ajuda a ajustar profundidade e prazo.",
   message: "Inclua objetivo, prazo ideal e o que precisa ficar pronto primeiro.",
 }
 
@@ -523,11 +523,11 @@ function Header() {
         <a
           href="#inicio"
           className="site-mark grid h-11 w-11 place-items-center border border-border text-base font-semibold tracking-tight transition-colors hover:border-primary/50"
-          aria-label="Matheus Monteiro, voltar ao in├¡cio"
+          aria-label="Matheus Monteiro, voltar ao início"
         >
           MM
         </a>
-        <nav className="site-main-nav hidden items-center gap-1 lg:flex" aria-label="Navega├º├úo principal">
+        <nav className="site-main-nav hidden items-center gap-1 lg:flex" aria-label="Navegação principal">
           {navItems.map((item) => (
             <a
               key={item.id}
@@ -571,7 +571,7 @@ function Header() {
         <nav id={mobileMenuId} className="mobile-menu-panel pointer-events-auto mx-auto mt-3 max-w-[1040px] border border-border bg-background/94 p-3 backdrop-blur-xl lg:hidden" aria-label="Menu mobile">
           <div className="mobile-menu-heading flex items-center justify-between border-b border-border px-2 pb-3">
             <span>Menu</span>
-            <span>{navItems.find((item) => item.id === activeSection)?.label ?? "In├¡cio"}</span>
+            <span>{navItems.find((item) => item.id === activeSection)?.label ?? "Início"}</span>
           </div>
           <div className="mobile-nav-list grid">
             {navItems.map((item, index) => {
@@ -623,9 +623,9 @@ function Hero() {
           </span>
         </h1>
         <p className="hero-copy max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-          {keepLastWordsTogether("Crio, codifico e publico sites para marcas que precisam explicar valor, provar confian├ºa e levar o visitante ao pr├│ximo passo.")}
+          {keepLastWordsTogether("Crio, codifico e publico sites para marcas que precisam explicar valor, provar confiança e levar o visitante ao próximo passo.")}
         </p>
-        <div className="hero-actions" aria-label="A├º├Áes principais">
+        <div className="hero-actions" aria-label="Ações principais">
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hero-primary-action">
             Iniciar projeto <ExternalLink size={14} />
           </a>
@@ -649,9 +649,9 @@ function Projects() {
       <div className="section-heading agency-section-heading">
         <p className="section-kicker">Projetos</p>
         <div className="section-heading-main" data-reveal="heading">
-          <h2 id="projects-title">Projetos com imagem e convers├úo.</h2>
+          <h2 id="projects-title">Projetos com imagem e conversão.</h2>
           <p>
-            Interfaces com contexto, hierarquia e a├º├úo clara para avan├ºar.
+            Interfaces com contexto, hierarquia e ação clara para avançar.
           </p>
         </div>
         <a href="#contato" className="section-action agency-link" data-reveal="heading" style={revealStyle(1)}>
@@ -686,7 +686,7 @@ function Projects() {
               <p className="agency-project-category">{project.category}</p>
               <h3 className="project-card-title mb-3 text-2xl font-medium text-primary">{project.title}</h3>
               <p className="agency-project-summary text-sm leading-6 text-muted-foreground">{keepLastWordsTogether(project.summary)}</p>
-              <div className="agency-project-proof" aria-label={`Decis├Áes do projeto ${project.title}`}>
+              <div className="agency-project-proof" aria-label={`Decisões do projeto ${project.title}`}>
                 <span>
                   <strong>Desafio</strong>
                   {project.challenge}
@@ -816,12 +816,12 @@ function About() {
       <div className="about-panel about-agency-panel" data-reveal="line">
         <h2 id="about-title" className="about-kicker font-sans text-xs font-semibold uppercase text-muted-foreground">Sobre</h2>
         <div className="about-statement-wrap">
-          <ScrollRevealText text="Crio sites com dire├º├úo visual, estrutura clara e front-end pronto para publicar." />
+          <ScrollRevealText text="Crio sites com direção visual, estrutura clara e front-end pronto para publicar." />
         </div>
         <div className="about-copy-card space-y-6 text-base leading-7 text-muted-foreground">
           <span>Como entro no projeto</span>
-          <p>{keepLastWordsTogether("Organizo valor, desenho a interface e codifico a experi├¬ncia para a p├ígina parecer confi├ível desde o primeiro contato.")}</p>
-          <p>{keepLastWordsTogether("Quando o site j├í existe, refino leitura, responsividade, percep├º├úo de marca e caminho de convers├úo.")}</p>
+          <p>{keepLastWordsTogether("Organizo valor, desenho a interface e codifico a experiência para a página parecer confiável desde o primeiro contato.")}</p>
+          <p>{keepLastWordsTogether("Quando o site já existe, refino leitura, responsividade, percepção de marca e caminho de conversão.")}</p>
         </div>
       </div>
     </section>
@@ -833,11 +833,11 @@ function Services() {
     <section id="servicos" className="services-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="services-title">
       <div className="agency-services-shell">
         <div className="section-heading agency-section-heading">
-          <p className="section-kicker">Servi├ºos</p>
+          <p className="section-kicker">Serviços</p>
           <div className="section-heading-main" data-reveal="heading">
             <h2 id="services-title">Do visual ao site no ar.</h2>
             <p>
-              Dire├º├úo, interface e front-end no mesmo fluxo de entrega.
+              Direção, interface e front-end no mesmo fluxo de entrega.
             </p>
           </div>
         </div>
@@ -865,9 +865,9 @@ function Process() {
         <div className="section-heading agency-section-heading">
           <p className="section-kicker process-kicker">Processo</p>
           <div className="section-heading-main" data-reveal="heading">
-            <h2 id="process-title">Processo direto at├® publicar.</h2>
+            <h2 id="process-title">Processo direto até publicar.</h2>
             <p>
-              Briefing, estrutura, tela e publica├º├úo sem etapa solta.
+              Briefing, estrutura, tela e publicação sem etapa solta.
             </p>
           </div>
         </div>
@@ -901,7 +901,7 @@ function Proof() {
         <div className="section-heading-main" data-reveal="heading">
           <h2 id="proof-title">Prova antes do contato.</h2>
           <p>
-            Tr├¬s sinais de cuidado antes do pr├│ximo passo.
+            Três sinais de cuidado antes do próximo passo.
           </p>
         </div>
       </div>
@@ -929,7 +929,7 @@ function Contact() {
             <p className="contact-kicker">Contato</p>
             <h2 id="contact-title" className="contact-title">Iniciar projeto</h2>
             <p className="contact-lede">
-              {keepLastWordsTogether("Envie o essencial. Eu retorno com dire├º├úo, escopo e pr├│ximos passos.")}
+              {keepLastWordsTogether("Envie o essencial. Eu retorno com direção, escopo e próximos passos.")}
             </p>
             <div className="contact-channels" aria-label="Canais de contato">
               <a href="mailto:matheusapm550@gmail.com" className="contact-channel group">
@@ -964,7 +964,7 @@ function Contact() {
                 <p className="contact-form-kicker">Briefing inicial</p>
                 <h3>Conte sobre o projeto</h3>
               </div>
-              <p>Responda o essencial. Se ainda n├úo tiver todas as respostas, mande o que j├í sabe.</p>
+              <p>Responda o essencial. Se ainda não tiver todas as respostas, mande o que já sabe.</p>
             </div>
             <div className="contact-field-grid">
               <label className="contact-field group">
@@ -1014,7 +1014,7 @@ function Contact() {
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
             </fieldset>
             <fieldset className="contact-choice-group" aria-describedby="budget-help">
-              <legend className="contact-field-label">Or├ºamento previsto</legend>
+              <legend className="contact-field-label">Orçamento previsto</legend>
               <div className="contact-choice-list">
                 {budgetOptions.map((option, index) => (
                   <label key={option} className="contact-choice">
@@ -1024,7 +1024,7 @@ function Contact() {
                 ))}
               </div>
               <span id="budget-help" className="contact-field-help">{fieldHelp.budget}</span>
-              <ValidationError className="text-xs leading-5 text-destructive" prefix="Or├ºamento" field="budget" errors={state.errors} />
+              <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
             </fieldset>
             <label className="contact-field contact-field-message group">
               <span className="contact-field-label">Mensagem</span>
@@ -1051,10 +1051,10 @@ function Contact() {
               <p className="contact-status" aria-live="polite" aria-atomic="true" role="status">
                 {state.succeeded ? (
                   <span className="inline-flex items-center gap-2 text-primary sm:max-w-md">
-                    <Check size={14} /> Briefing recebido. Retorno com o melhor caminho em at├® 1 dia ├║til.
+                    <Check size={14} /> Briefing recebido. Retorno com o melhor caminho em até 1 dia útil.
                   </span>
                 ) : (
-                  "Resposta em at├® 1 dia ├║til"
+                  "Resposta em até 1 dia útil"
                 )}
               </p>
             </div>
@@ -1086,7 +1086,7 @@ export default function App() {
           event.currentTarget.style.removeProperty("transform")
         }}
       >
-        Pular para o conte├║do
+        Pular para o conteúdo
       </a>
       <Header />
       <main id="conteudo" tabIndex={-1}>
@@ -1101,15 +1101,15 @@ export default function App() {
       <footer className="site-footer px-6 md:px-20">
         <div className="site-footer-inner mx-auto max-w-[1280px]">
           <div className="site-footer-lead">
-            <p className="site-footer-kicker">Dispon├¡vel para novos projetos</p>
+            <p className="site-footer-kicker">Disponível para novos projetos</p>
             <a className="site-footer-title" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              Vamos transformar uma ideia em presen├ºa digital.
+              Vamos transformar uma ideia em presença digital.
               <ExternalLink size={20} />
             </a>
           </div>
           <div className="site-footer-meta">
             <p>Matheus Monteiro. Web design, UX/UI e front-end.</p>
-            <div className="site-footer-links" aria-label="Links do rodap├®">
+            <div className="site-footer-links" aria-label="Links do rodapé">
               <a href="mailto:matheusapm550@gmail.com">E-mail</a>
               <a href="https://www.linkedin.com/in/monteiro00/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="#inicio">Voltar ao topo</a>
