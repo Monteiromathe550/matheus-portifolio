@@ -2646,7 +2646,8 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 .about-section,
 .projects-section,
 .services-section,
-.process-section {
+.process-section,
+.proof-section {
   padding-block: clamp(4rem, 7vw, 5.75rem);
 }
 
@@ -2655,15 +2656,15 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 }
 
 .projects-grid {
-  padding-bottom: clamp(5rem, 11vh, 7.5rem);
+  padding-bottom: 0;
 }
 
 .services-grid {
-  padding-bottom: clamp(5.25rem, 12vh, 8rem);
+  padding-bottom: 0;
 }
 
 .process-list {
-  padding-bottom: clamp(12rem, 28vh, 18rem);
+  padding-bottom: 0;
 }
 
 @media (max-width: 640px) {
@@ -2675,6 +2676,7 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
   .projects-section,
   .services-section,
   .process-section,
+  .proof-section,
   .contact-section {
     padding-top: 3.25rem;
     padding-bottom: 3.5rem;
@@ -2682,11 +2684,11 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
 
   .projects-grid,
   .services-grid {
-    padding-bottom: 4.5rem;
+    padding-bottom: 0;
   }
 
   .process-list {
-    padding-bottom: 8rem;
+    padding-bottom: 0;
   }
 }
 
