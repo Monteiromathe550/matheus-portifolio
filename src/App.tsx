@@ -1018,18 +1018,21 @@ function Contact() {
               <span id="project-type-help" className="contact-field-help">{fieldHelp.projectType}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
             </fieldset>
-            <label className="contact-field contact-budget-field group">
-              <span className="contact-field-label">Orçamento previsto <span className="contact-optional-label">opcional</span></span>
-              <select className="contact-input contact-select" name="budget" defaultValue="Ainda não sei" aria-describedby="budget-help">
-                {budgetOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
+            <fieldset className="contact-choice-group contact-budget-field" aria-describedby="budget-help">
+              <legend className="contact-field-label">
+                Orçamento previsto <span className="contact-optional-label">opcional</span>
+              </legend>
+              <div className="contact-choice-list contact-budget-list">
+                {budgetOptions.map((option, index) => (
+                  <label key={option} className="contact-choice contact-budget-choice">
+                    <input type="radio" name="budget" value={option} defaultChecked={index === 0} />
+                    <span>{option}</span>
+                  </label>
                 ))}
-              </select>
+              </div>
               <span id="budget-help" className="contact-field-help">{fieldHelp.budget}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
-            </label>
+            </fieldset>
             <label className="contact-field contact-field-message group">
               <span className="contact-field-label">Mensagem</span>
               <textarea

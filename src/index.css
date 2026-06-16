@@ -4393,7 +4393,32 @@ main[id] {
 }
 
 .projects-section[data-focus-section="work-proof"] .agency-section-heading {
-  max-width: 62rem !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.projects-section[data-focus-section="work-proof"] .section-heading-main {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.services-section .agency-services-shell > .agency-section-heading {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  grid-template-columns: none !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.services-section .agency-services-shell > .agency-section-heading .section-heading-main {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  justify-items: start !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
 }
 
 .projects-section[data-focus-section="work-proof"] .section-heading-main h2 {
@@ -4418,12 +4443,12 @@ main[id] {
   padding-bottom: 16px !important;
 }
 
-.services-section .section-heading-main,
+.services-section .agency-services-shell > .agency-section-heading .section-heading-main,
 .process-section .section-heading-main {
   gap: 16px !important;
 }
 
-.services-section .section-heading-main p,
+.services-section .agency-services-shell > .agency-section-heading .section-heading-main p,
 .process-section .section-heading-main p {
   width: 100% !important;
   max-width: none !important;
@@ -4476,6 +4501,50 @@ main[id] {
     var(--field-surface-active);
 }
 
+.contact-budget-field {
+  width: 100%;
+  max-width: none;
+  gap: 16px;
+  padding-block: 0;
+}
+
+.contact-budget-field .contact-field-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.contact-optional-label {
+  display: inline-flex;
+  min-height: 18px;
+  align-items: center;
+  margin-left: 0;
+  color: color-mix(in oklch, var(--muted-foreground) 78%, var(--primary));
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.contact-budget-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
+  gap: 8px;
+}
+
+.contact-budget-choice span {
+  width: 100%;
+  min-height: 48px;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.contact-budget-field .contact-field-help {
+  max-width: 30rem;
+}
+
 @media (min-width: 960px) {
   .projects-section[data-focus-section="work-proof"]:target {
     padding-top: clamp(6.4rem, 8vw, 7.25rem) !important;
@@ -4512,5 +4581,86 @@ main[id] {
 
   .contact-budget-field {
     max-width: 100%;
+  }
+}
+
+/* 8px rhythm pass: keep internal section headings on the same grid. */
+.projects-section > .agency-section-heading,
+.services-section .agency-services-shell > .agency-section-heading,
+.process-section .agency-process-shell > .agency-section-heading {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-bottom: 64px !important;
+  border-top: 0 !important;
+  padding: 0 !important;
+}
+
+.projects-section > .agency-section-heading .section-kicker,
+.services-section .agency-services-shell > .agency-section-heading .section-kicker,
+.process-section .agency-process-shell > .agency-section-heading .section-kicker {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.projects-section > .agency-section-heading .section-heading-main,
+.services-section .agency-services-shell > .agency-section-heading .section-heading-main,
+.process-section .agency-process-shell > .agency-section-heading .section-heading-main {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.projects-section > .agency-section-heading .section-heading-main h2,
+.services-section .agency-services-shell > .agency-section-heading .section-heading-main h2,
+.process-section .agency-process-shell > .agency-section-heading .section-heading-main h2 {
+  width: 100% !important;
+  max-width: min(100%, 18ch) !important;
+  margin: 0 !important;
+}
+
+.projects-section > .agency-section-heading .section-heading-main p,
+.services-section .agency-services-shell > .agency-section-heading .section-heading-main p,
+.process-section .agency-process-shell > .agency-section-heading .section-heading-main p {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-left: 0 !important;
+  border-bottom: 1px solid color-mix(in oklch, var(--primary) 12%, transparent) !important;
+  padding: 0 0 16px !important;
+}
+
+.projects-section > .agency-projects,
+.services-section .agency-services-grid,
+.process-section .agency-process-list {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .projects-section > .agency-section-heading,
+  .services-section .agency-services-shell > .agency-section-heading,
+  .process-section .agency-process-shell > .agency-section-heading {
+    gap: 16px !important;
+    margin-bottom: 48px !important;
+  }
+
+  .contact-budget-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-budget-choice:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .contact-budget-choice span {
+    min-height: 48px;
+    padding-inline: 0.65rem;
+    font-size: 0.78rem;
   }
 }
