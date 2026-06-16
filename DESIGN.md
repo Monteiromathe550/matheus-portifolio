@@ -2,292 +2,127 @@
 
 ## 1. Visao Geral
 
-Este documento define o sistema visual do projeto com base em principios do Material Design, mantendo uma estetica moderna, elegante, limpa e premium.
+Este documento define o sistema visual do portfolio de Matheus Monteiro. A direcao atual e premium, escura, precisa e calma, com foco em leitura, prova visual e caminho claro para contato.
 
-O objetivo e criar uma interface consistente, responsiva e facil de manter, usando tokens de design para controlar tipografia, espacamento, cores, bordas, elevacao, movimento e componentes.
-
-A identidade visual deve transmitir modernidade, sofisticacao, clareza, boa leitura, consistencia, sensacao premium e design limpo.
+O site deve parecer autoral sem ficar barulhento. O hero pode concentrar o maior impacto; as secoes internas precisam sustentar confianca com ritmo, contraste, imagens reais dos projetos e formulários leves.
 
 ## 2. Principios Visuais
 
 1. Clareza antes de decoracao.
-2. Hierarquia visual bem definida.
-3. Tipografia elegante, sem excesso de peso.
-4. Espacamentos consistentes.
-5. Componentes reutilizaveis.
-6. Estados de interacao visiveis.
-7. Layout responsivo.
-8. Uso controlado de uppercase.
-9. Interface forte, mas nao agressiva.
-10. Visual alinhado a boas praticas de Material Design.
+2. Hero forte, secoes internas mais precisas.
+3. Prova visual deve aparecer cedo, especialmente em Projetos.
+4. Tipografia com personalidade, mas sem tracking apertado ou peso excessivo.
+5. Espacamento generoso no scroll natural e compacto em entradas por ancora.
+6. Estados de foco, hover, envio e erro sempre visiveis.
+7. Mobile sem overflow e com alvos de toque confortaveis.
+8. Uppercase apenas em labels curtos, navegacao, chips e botoes.
+9. Cards devem ter funcao clara; evitar cards decorativos ou repeticao sem informacao.
+10. O contato deve pedir o essencial e reduzir pressao comercial inicial.
 
 ## 3. Sistema Tipografico
 
-O projeto usa uma combinacao de fontes menos obvia, com contraste entre display e leitura:
+O projeto usa Chillax como voz principal da marca, com Inter e Segoe UI como fallback:
 
 ```css
---font-display: "Unbounded", "Onest", sans-serif;
---font-main: "Onest", sans-serif;
+--font-body: "Chillax", "Inter", "Segoe UI", sans-serif;
+--font-label: "Chillax", "Inter", "Segoe UI", sans-serif;
+--font-display-face: "Chillax", "Inter", "Segoe UI", sans-serif;
 ```
 
-Unbounded deve aparecer em hero, headlines e chamadas principais. Onest deve sustentar corpo de texto, navegacao, botoes, chips, labels, captions e campos de formulario.
+Chillax carrega display, corpo, navegacao, botoes, chips, labels e campos de formulario. A assinatura vem da escala, peso e composicao, nao de muitas familias tipograficas.
 
-## 4. Import da Fonte
-
-Usar este import no `code.html`:
-
-```html
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
-```
-
-Pesos utilizados:
+## 4. Pesos e Uso
 
 ```txt
-Unbounded 400-500: hero, headings e chamadas principais
-Unbounded 600-700: uso raro, apenas para impacto controlado
-Onest 400: body e textos comuns
-Onest 500: subtitulos, cards e textos de apoio
-Onest 600: labels, botoes e destaques
-Onest 700: uso pontual em marca, logo ou microdestaques
+Chillax 400: corpo, descricoes e textos de apoio
+Chillax 500: titulos internos, cards e destaques leves
+Chillax 600: hero, headings e chamadas principais
+Chillax 700: logo, navegacao, botoes e microdestaques pontuais
+Inter/Segoe UI: fallback tecnico quando Chillax nao carregar
 ```
 
-## 5. Direcao Tipografica
+Evitar `font-weight: 800`, uppercase em frases longas, subtitulos muito grandes em cards pequenos e repeticao de kickers quando a secao ja esta clara.
 
-A tipografia deve ser elegante, precisa e menos previsivel. Os headlines usam Unbounded com pesos controlados para ganhar assinatura sem parecer agressivos.
-
-O peso `700` deve ser reservado para elementos raros de maior impacto.
-
-Evitar o uso excessivo de `font-weight: 800`, uppercase em titulos longos, headlines muito grandes em blocos pequenos e tracking apertado em textos menores.
-
-## 6. Escala Tipografica
+## 5. Escala Tipografica
 
 | Style | Size | Line Height | Weight | Uso |
 | --- | ---: | ---: | ---: | --- |
-| Display 1 | 96px | 100px | 700 | Hero principal desktop |
-| Display 2 | 72px | 78px | 700 | Hero secundario |
-| Heading 1 | 56px | 64px | 600 | Titulo principal de pagina |
-| Heading 2 | 48px | 56px | 500 | Titulos principais de secao |
-| Heading 3 | 36px | 44px | 500 | Blocos internos / contato |
-| Heading 4 | 28px | 36px | 500 | Titulos de cards grandes |
-| Title | 24px | 32px | 500 | Cards, projetos e subtitulos |
-| Body Regular | 16px | 26px | 400 | Texto comum |
-| Body Medium | 16px | 26px | 500 | Destaques leves |
-| Small | 14px | 22px | 400 | Texto auxiliar |
-| Caption | 12px | 16px | 500 | Legendas e metadados |
-| Label | 12px | 12px | 600 | Navegacao, chips e tags |
-| Button | 12px | 16px | 600 | Botoes e CTAs |
+| Display 1 | clamp(2.9rem, 5.2vw, 4.6rem) | 1.02 | 600 | Hero principal |
+| Heading 1 | clamp(2.1rem, 4.1vw, 4.45rem) | 1.05 | 600 | Grandes chamadas |
+| Heading 2 | clamp(2rem, 3vw, 3.15rem) | 1.08 | 600 | Titulos de secao |
+| Heading 3 | clamp(1.35rem, 2vw, 2rem) | 1.12 | 500 | Blocos internos |
+| Title | 1.18rem a 1.45rem | 1.2 | 500 | Cards e projetos |
+| Body | 1rem | 1.6 a 1.75 | 400 | Texto comum |
+| Small | 0.84rem a 0.92rem | 1.45 | 400-500 | Ajuda, descricao e metadados |
+| Label | 0.68rem a 0.75rem | 1 | 700 | Navegacao, chips, field labels |
+| Button | 0.72rem a 0.78rem | 1 | 700 | CTAs |
 
-## 7. Tokens CSS Globais
+## 6. Tokens CSS Principais
 
 ```css
 :root {
-  --font-display: "Unbounded", "Onest", sans-serif;
-  --font-main: "Onest", sans-serif;
-
-  --display-1-size: 96px;
-  --display-1-line: 100px;
-  --display-1-weight: 700;
-
-  --display-2-size: 72px;
-  --display-2-line: 78px;
-  --display-2-weight: 700;
-
-  --heading-1-size: 56px;
-  --heading-1-line: 64px;
-  --heading-1-weight: 600;
-
-  --heading-2-size: 48px;
-  --heading-2-line: 56px;
-  --heading-2-weight: 500;
-
-  --heading-3-size: 36px;
-  --heading-3-line: 44px;
-  --heading-3-weight: 500;
-
-  --heading-4-size: 28px;
-  --heading-4-line: 36px;
-  --heading-4-weight: 500;
-
-  --title-size: 24px;
-  --title-line: 32px;
-  --title-weight: 500;
-
-  --body-size: 16px;
-  --body-line: 26px;
-  --body-weight: 400;
-  --body-medium-weight: 500;
-
-  --small-size: 14px;
-  --small-line: 22px;
-  --small-weight: 400;
-
-  --caption-size: 12px;
-  --caption-line: 16px;
-  --caption-weight: 500;
-
-  --label-size: 12px;
-  --label-line: 12px;
-  --label-weight: 600;
-
-  --button-size: 12px;
-  --button-line: 16px;
-  --button-weight: 600;
-
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-24: 96px;
-  --space-30: 120px;
-
-  --radius-xs: 6px;
-  --radius-sm: 8px;
-  --radius-md: 8px;
-  --radius-lg: 8px;
-  --radius-xl: 8px;
-  --radius-full: 999px;
-
-  --elevation-0: none;
-  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.08);
-  --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --elevation-3: 0 8px 24px rgba(0, 0, 0, 0.16);
-
-  --motion-fast: 120ms;
-  --motion-default: 180ms;
-  --motion-slow: 300ms;
-
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --background: oklch(0.055 0.004 95);
+  --foreground: oklch(0.955 0.012 88);
+  --primary: oklch(0.955 0.012 88);
+  --primary-foreground: oklch(0.055 0.004 95);
+  --secondary: oklch(0.74 0.057 91);
+  --muted-foreground: oklch(0.72 0.008 88);
+  --border: oklch(0.955 0.012 88 / 0.14);
+  --field-surface: oklch(0.075 0.005 95);
+  --field-border: oklch(0.955 0.012 88 / 0.3);
+  --ring: oklch(0.955 0.012 88 / 0.36);
 }
 ```
 
-## 8. Regras de Uppercase
+A paleta deve continuar escura e contida. O acento quente aparece como precisao, nao como gradiente dominante. Texto de corpo precisa manter contraste confortavel contra o fundo escuro.
 
-Uppercase pode ser usado em logo, botoes, chips, labels, navegacao, tags e microtextos.
-
-Evitar uppercase em titulos de secao, titulos de cards, blocos de contato, textos longos, subtitulos e descricoes.
-
-```css
-.heading-1,
-.heading-2,
-.heading-3,
-.heading-4,
-.title {
-  text-transform: none;
-}
-
-.label,
-.button-text,
-.chip,
-.nav-link {
-  text-transform: uppercase;
-}
-```
-
-## 9. Responsividade Tipografica
-
-```css
-@media (max-width: 768px) {
-  :root {
-    --display-1-size: 56px;
-    --display-1-line: 62px;
-    --display-2-size: 48px;
-    --display-2-line: 54px;
-    --heading-1-size: 40px;
-    --heading-1-line: 48px;
-    --heading-2-size: 32px;
-    --heading-2-line: 40px;
-    --heading-3-size: 28px;
-    --heading-3-line: 36px;
-    --heading-4-size: 24px;
-    --heading-4-line: 32px;
-    --title-size: 22px;
-    --title-line: 30px;
-    --label-size: 10px;
-    --label-line: 10px;
-  }
-}
-```
-
-## 10. Elementos
-
-### Logo
-
-Fonte Unbounded ou Onest, peso 600 a 700, tamanho 28px a 48px. Uppercase opcional.
+## 7. Regras de Componentes
 
 ### Hero
 
-Fonte Unbounded no primeiro impacto e Onest como contraponto quando houver segunda linha. Ate 96px no desktop e 56px no mobile. O hero e o unico lugar de maximo impacto tipografico.
+O hero e o ponto de maximo impacto. Deve preservar fundo escuro, shader sutil, headline central, CTA principal e link para trabalhos.
 
-### Titulos de Secao
+### Projetos
 
-Fonte Unbounded, peso 500, 48px desktop e 32px mobile. Nao usar uppercase por padrao.
-
-### Titulos Internos
-
-Fonte Unbounded ou Onest, peso 500, entre 28px e 36px. Nao usar uppercase por padrao.
-
-### Cards
-
-Fonte Onest ou Unbounded em uso pontual, peso 500, entre 24px e 28px. Cards devem priorizar clareza e padding consistente.
-
-### Corpo de Texto
-
-Fonte Onest, peso 400, 16px, line-height 26px.
-
-### Labels
-
-Fonte Onest, peso 600, 10px a 12px. Uppercase permitido.
-
-### Botoes
-
-Fonte Onest, peso 600, 12px, uppercase permitido e altura minima de 48px.
+Projetos devem mostrar prova visual rapidamente. Ao entrar por `#projetos`, o visitante precisa ver titulo, contexto e ao menos parte do primeiro card/imagem sem rolar muito.
 
 ### Contato
 
-O contato deve ser elegante, claro e menos pesado.
-
-```css
-.contact-title {
-  font-family: var(--font-main);
-  font-size: clamp(32px, 5vw, 48px);
-  line-height: 1.15;
-  font-weight: 500;
-  text-transform: none;
-}
-```
-
-## 11. Checklist de Qualidade
-
-- A hierarquia esta clara?
-- O hero e o unico elemento com maximo impacto?
-- Os headlines estao elegantes e sutis?
-- Ha excesso de uppercase?
-- Os cards tem padding consistente?
-- Os botoes tem no minimo 48px de altura?
-- O espacamento segue a escala?
-- Os textos estao confortaveis para leitura?
-- O mobile esta com titulos menores?
-- Os estados de hover, active e focus existem?
-- A interface parece premium, e nao pesada?
-
-## 12. Direcao Final
-
-A interface deve parecer moderna, elegante, sutil, premium, limpa, consistente, responsiva e forte sem agressividade visual.
-
-Regra principal:
+Contato deve pedir o essencial:
 
 ```txt
-O hero pode ter impacto.
-As secoes devem ter elegancia.
-Os cards devem ter clareza.
-O texto deve ter conforto.
-Os labels e botoes devem ter precisao.
+Nome
+E-mail
+Tipo de projeto
+Mensagem
+Orcamento opcional
+```
+
+Orcamento nao deve bloquear envio. A opcao "Ainda nao sei" reduz friccao e protege visitantes que ainda estao no primeiro contato.
+
+### Ancoras
+
+Entradas por navegacao fixa devem usar offset compacto. Nenhuma ancora deve abrir com resto cortado da secao anterior como primeiro foco visual.
+
+## 8. Checklist de Qualidade
+
+- O hero continua sendo a maior peca visual?
+- Projetos mostra trabalho real cedo?
+- As ancoras entram limpas em desktop e mobile?
+- O formulario evita escolhas demais ao mesmo tempo?
+- Orcamento esta opcional e sem pressao?
+- Chillax esta documentada como fonte real da marca?
+- Os textos mantem contraste no fundo escuro?
+- O mobile em 390px nao tem overflow horizontal?
+- Focus visible aparece em links, botoes, campos e controles?
+- O visual parece premium e preciso, sem parecer template generico?
+
+## 9. Direcao Final
+
+```txt
+O hero cria impacto.
+Projetos prova valor.
+Contato reduz atrito.
+As secoes internas mantem precisao.
+O sistema escuro deve parecer autoral, nao pesado.
 ```

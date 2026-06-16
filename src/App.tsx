@@ -79,9 +79,9 @@ const proofPoints = [
   ["Entrega publicável", "O resultado considera responsividade, estados, performance e o caminho para contato."],
 ]
 
-const projectTypeOptions = ["Site institucional", "Landing page", "E-commerce", "UX/UI de produto", "Branding digital"]
+const projectTypeOptions = ["Site institucional", "Landing page", "E-commerce", "UX/UI de produto"]
 
-const budgetOptions = ["Até R$ 1.500", "R$ 1.500 a R$ 3.000", "R$ 3.000 a R$ 6.000", "R$ 6.000 a R$ 10.000", "Acima de R$ 10.000"]
+const budgetOptions = ["Ainda não sei", "Até R$ 1.500", "R$ 1.500 a R$ 3.000", "R$ 3.000 a R$ 6.000", "Acima de R$ 6.000"]
 
 const navItems = [
   { id: "inicio", label: "Início" },
@@ -98,7 +98,7 @@ const fieldHelp = {
   name: "Use o nome que devo usar na resposta.",
   email: "Vou usar este e-mail para retornar com próximos passos.",
   projectType: "Escolha a opção mais próxima. Se tiver dúvida, selecione UX/UI de produto ou site institucional.",
-  budget: "Pode ser uma estimativa. Ela só ajuda a ajustar profundidade e prazo.",
+  budget: "Opcional. Se ainda estiver validando a ideia, deixe como Ainda não sei.",
   message: "Inclua objetivo, prazo ideal e o que precisa ficar pronto primeiro.",
 }
 
@@ -244,7 +244,7 @@ function useAnimePageMotion() {
 
     const headingGroups = Array.from(document.querySelectorAll<HTMLElement>(".agency-section-heading, .about-agency-panel, .contact-copy"))
     const revealGroups = Array.from(
-      document.querySelectorAll<HTMLElement>(".agency-project-card, .agency-service-card, .agency-process-step, .proof-card, .contact-form"),
+      document.querySelectorAll<HTMLElement>(".agency-project-card, .agency-service-card, .agency-process-step, .contact-form"),
     )
     const projectMedia = Array.from(document.querySelectorAll<HTMLElement>(".agency-project-media img"))
 
@@ -645,13 +645,18 @@ function Projects() {
   const [active, setActive] = useState<Project | null>(null)
 
   return (
-    <section id="projetos" className="projects-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20" aria-labelledby="projects-title">
+    <section
+      id="projetos"
+      className="projects-section section-spacing mx-auto max-w-[1440px] px-6 py-24 md:px-20"
+      aria-labelledby="projects-title"
+      data-focus-section="work-proof"
+    >
       <div className="section-heading agency-section-heading">
         <p className="section-kicker">Projetos</p>
         <div className="section-heading-main" data-reveal="heading">
-          <h2 id="projects-title">Projetos com imagem e conversão.</h2>
+          <h2 id="projects-title">Trabalhos prontos para comparar.</h2>
           <p>
-            Interfaces com contexto, hierarquia e ação clara para avançar.
+            Imagem, contexto e resultado aparecem juntos para avaliar clareza sem rodeio.
           </p>
         </div>
         <a href="#contato" className="section-action agency-link" data-reveal="heading" style={revealStyle(1)}>
@@ -1013,19 +1018,18 @@ function Contact() {
               <span id="project-type-help" className="contact-field-help">{fieldHelp.projectType}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Tipo de projeto" field="projectType" errors={state.errors} />
             </fieldset>
-            <fieldset className="contact-choice-group" aria-describedby="budget-help">
-              <legend className="contact-field-label">Orçamento previsto</legend>
-              <div className="contact-choice-list">
-                {budgetOptions.map((option, index) => (
-                  <label key={option} className="contact-choice">
-                    <input type="radio" name="budget" value={option} required={index === 0} />
-                    <span>{option}</span>
-                  </label>
+            <label className="contact-field contact-budget-field group">
+              <span className="contact-field-label">Orçamento previsto <span className="contact-optional-label">opcional</span></span>
+              <select className="contact-input contact-select" name="budget" defaultValue="Ainda não sei" aria-describedby="budget-help">
+                {budgetOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
                 ))}
-              </div>
+              </select>
               <span id="budget-help" className="contact-field-help">{fieldHelp.budget}</span>
               <ValidationError className="text-xs leading-5 text-destructive" prefix="Orçamento" field="budget" errors={state.errors} />
-            </fieldset>
+            </label>
             <label className="contact-field contact-field-message group">
               <span className="contact-field-label">Mensagem</span>
               <textarea
@@ -1095,7 +1099,6 @@ export default function App() {
         <Projects />
         <Services />
         <Process />
-        <Proof />
         <Contact />
       </main>
       <footer className="site-footer px-6 md:px-20">

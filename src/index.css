@@ -4366,3 +4366,116 @@ html.motion-ready .stack-card[data-reveal][data-reveal-visible="true"]:focus-vis
     padding-top: 0 !important;
   }
 }
+
+/* Premium precision pass: hash entries should land on useful content, not spacer. */
+html {
+  scroll-padding-top: 88px;
+}
+
+section,
+h2[id],
+main[id] {
+  scroll-margin-top: 88px;
+}
+
+.section-spacing:target {
+  scroll-margin-top: 0 !important;
+  padding-top: clamp(6.6rem, 9vw, 7.35rem) !important;
+}
+
+.section-spacing:target .section-heading-main,
+.section-spacing:target .contact-layout {
+  gap: clamp(0.8rem, 2vw, 1.35rem) !important;
+}
+
+.section-spacing:target .section-heading-main p {
+  padding-bottom: clamp(0.85rem, 1.4vw, 1.05rem) !important;
+}
+
+.projects-section[data-focus-section="work-proof"] .agency-section-heading {
+  max-width: 62rem !important;
+}
+
+.projects-section[data-focus-section="work-proof"] .section-heading-main h2 {
+  max-width: 16ch !important;
+}
+
+.projects-section[data-focus-section="work-proof"] .section-heading-main p {
+  max-width: 34rem !important;
+}
+
+.projects-section[data-focus-section="work-proof"] .agency-projects {
+  margin-top: clamp(1.1rem, 2.4vw, 1.6rem) !important;
+}
+
+.projects-section[data-focus-section="work-proof"]:target .agency-projects {
+  margin-top: clamp(0.9rem, 1.8vw, 1.25rem) !important;
+}
+
+.contact-budget-field {
+  max-width: min(100%, 28rem);
+}
+
+.contact-optional-label {
+  margin-left: 0.45rem;
+  color: color-mix(in oklch, var(--muted-foreground) 72%, transparent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+.contact-select {
+  appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--primary) 50%) right 1.15rem top calc(50% - 0.12rem) / 0.42rem 0.42rem no-repeat,
+    linear-gradient(135deg, var(--primary) 50%, transparent 50%) right 0.85rem top calc(50% - 0.12rem) / 0.42rem 0.42rem no-repeat,
+    var(--field-surface);
+  padding-right: 2.35rem;
+}
+
+.contact-select:focus-visible,
+.contact-field:focus-within .contact-select {
+  background:
+    linear-gradient(45deg, transparent 50%, var(--primary) 50%) right 1.15rem top calc(50% - 0.12rem) / 0.42rem 0.42rem no-repeat,
+    linear-gradient(135deg, var(--primary) 50%, transparent 50%) right 0.85rem top calc(50% - 0.12rem) / 0.42rem 0.42rem no-repeat,
+    var(--field-surface-active);
+}
+
+@media (min-width: 960px) {
+  .projects-section[data-focus-section="work-proof"]:target {
+    padding-top: clamp(6.4rem, 8vw, 7.25rem) !important;
+  }
+
+  .projects-section[data-focus-section="work-proof"] .agency-projects {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .contact-section:target .contact-shell {
+    padding-top: clamp(1.6rem, 2.4vw, 2.3rem) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 86px;
+  }
+
+  section,
+  h2[id],
+  main[id] {
+    scroll-margin-top: 86px;
+  }
+
+  .section-spacing:target {
+    scroll-margin-top: 0 !important;
+    padding-top: 6.75rem !important;
+  }
+
+  .projects-section[data-focus-section="work-proof"] .agency-projects {
+    margin-top: 1rem !important;
+  }
+
+  .contact-budget-field {
+    max-width: 100%;
+  }
+}
